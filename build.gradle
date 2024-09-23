@@ -1,0 +1,65 @@
+plugins {
+	// For runnable JARs
+	id 'application'
+ 	id 'distribution'
+}
+
+
+// Java project
+apply plugin: 'java'
+
+// Java version
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+
+// Repositories providers
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testImplementation "junit:junit:4.11" 	
+
+	//! Add your dependencies here    
+}
+
+// Add JARs in folder 'libs' as dependencies
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+
+// Project sources
+sourceSets {
+   main {
+      java {
+         srcDir 'src'               
+      }
+
+       resources {
+           srcDir 'src'
+       }
+
+   }
+	
+   test {
+      java {
+         srcDir 'test'
+      }
+	  
+	  resources {
+		srcDir 'test'
+	  }
+   }
+    
+}
+
+// Entry point of the program
+application {
+    mainClass.set('pt.up.fe.els2024.Main')
+}
+
