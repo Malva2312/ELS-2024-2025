@@ -24,7 +24,15 @@ repositories {
 dependencies {
     testImplementation "junit:junit:4.11" 	
 
-	//! Add your dependencies here    
+	//! Add your dependencies here
+
+    // SnakeYAML for YAML parsing
+    implementation 'org.yaml:snakeyaml:2.0'
+
+    // OpenCSV for CSV writing
+    implementation 'com.opencsv:opencsv:5.8'
+
+    //TODO:GSON for JSON parsing
 }
 
 // Add JARs in folder 'libs' as dependencies
