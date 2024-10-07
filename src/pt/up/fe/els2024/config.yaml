@@ -1,4 +1,12 @@
-sources:
-  - file: assignment1Files/decision_tree_1.yaml
-  - file: assignment1Files/decision_tree_2.yaml
-  - file: assignment1Files/decision_tree_3.yaml
+files:
+  - path: "assignment1Files/decision_tree_1.yaml"
+  - path: "assignment1Files/decision_tree_2.yaml"
+fields:
+  - source: "params.criterion"
+    target: "Criterion"
+  - source: "params.splitter"
+    target: "Splitter"
+  - source: "params.ccp_alpha"
+    target: "CPP Alpha"
+  - source: "params.min_samples_split"
+    target: "Min Samples Split"
