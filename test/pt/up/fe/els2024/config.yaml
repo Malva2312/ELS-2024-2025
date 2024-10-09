@@ -5,7 +5,11 @@
     - file:
         - path": assignment1Files/decision_tree_2.json"
         - as: "table2"
-    - type: "json"
+
+- load:
+    - file:
+        - path: "assignment1Files/decision_tree_3.yaml"
+        - as: "table3"
 
 - rename:
     - target : null
