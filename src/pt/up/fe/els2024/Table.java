@@ -3,14 +3,13 @@ package pt.up.fe.els2024;
 import org.apache.commons.collections4.map.ListOrderedMap;
 
 import java.util.List;
-import java.util.Map;
 
 public class Table {
 
     private final String[] columns; // Name of the columns
     private final ListOrderedMap<String, List<String>> rows; // Rows of the table
 
-    public Table(){
+    public Table() {
         this.columns = new String[0];
         this.rows = new ListOrderedMap<>();
     }
@@ -23,8 +22,9 @@ public class Table {
     public Table(Table table) {
         this.columns = new String[table.columns.length];
         System.arraycopy(table.columns, 0, this.columns, 0, table.columns.length);
-        this.rows = new ListOrderedMap<>(table.rows);
 
-
+        // Create a new ListOrderedMap and manually copy entries from the original table's rows
+        this.rows = new ListOrderedMap<>();
+        this.rows.putAll(table.rows);
     }
 }
