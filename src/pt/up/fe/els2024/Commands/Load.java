@@ -36,7 +36,6 @@ public class Load implements Command {
         try (InputStream inputStream = new FileInputStream(this.files.get(0))) {
             // Expecting a list of maps
             Map<String, Object> cmds = yaml.load(inputStream);
-            Table table = new Table();
             //= cmds.keySet().toString();
 
             List<String> row = new ArrayList<>();
@@ -44,17 +43,9 @@ public class Load implements Command {
             for (var command : cmds.entrySet()) {
                 // Get yaml keys
                 String key = command.getKey().toString();
-                //System.out.printf("\nKEY -> " + key);
                 table.addColumnDefault(key);
-                // Get corresponding values
-                table.addRowDefault(command.getValue().toString());
-
-                /*for (var value : command.getValue().toString().split(",")) {
-                    //String value = command.getValue().toString();
-                    System.out.printf("\nVALUE -> " + command.getValue().toString());
-                    table.addRow(value);
-                }*/
             }
+            table.addRowDefault((cmds.values().toString()));
 
             System.out.println("Load command executed");
         } catch (IOException e) {
