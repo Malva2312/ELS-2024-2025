@@ -19,22 +19,6 @@ public class Save implements Command {
     }
     @Override
     public void execute() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./assignment1Files/configurationFile.csv"))) {
-            // Write the header (column names)
-            writer.write(String.join(",", table.getColumns()));
-            writer.newLine();
-
-            // Write each row
-            for (var entry : table.getRows().entrySet()) {
-                String rowKey = entry.getKey();
-                List<String> rowValues = entry.getValue();
-                writer.write(rowKey + "," + String.join(",", rowValues));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         System.out.println("Save command executed");
     }
 }

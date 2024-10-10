@@ -37,7 +37,7 @@ public class Table {
         this.name = "";
     }
 
-    public void renameTable(Table table, String newName){
+    public void renameTable(String newName){
         this.name = newName;
     }
     

@@ -1,18 +1,11 @@
 - load:
-    - file:
-        - path: "assignment1Files/decision_tree_1.json"
-        - as: "table1"
-    - file:
-        - path": "assignment1Files/decision_tree_2.json"
-        - as: "table2"
-
-- load:
-    - file:
-        - path: "assignment1Files/decision_tree_3.yaml"
-        - as: "table3"
+    files:
+      - "assignment1Files/decision_tree_1.json"
+      - "assignment1Files/decision_tree_2.json"
+    as: "some_table"
 
 - rename:
-    - target : null
+      table: "some_table"
       columns:
         - criterion: "Criterion"
         - splitter: "Splitter"
@@ -20,5 +13,6 @@
         - min_samples_split: "Min Samples Split"
 
 - save:
+    table: "some_table"
     columns: ["Criterion", "Splitter", "CPP Alpha", "Min Samples Split"]
-    file: "resources/decision_tree_1.csv"
+    out: "resources/decision_tree_1.csv"

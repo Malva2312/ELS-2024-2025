@@ -9,29 +9,30 @@ public class Main {
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			System.out.println("Usage: els2024-9 <config.yaml>");
-			System.exit(0);
+			//System.exit(0);
 		}
 
 		// Load configuration
-		ConfigurationParser configurationParser = new ConfigurationParser(args[0]);
+		//ConfigurationParser configurationParser = new ConfigurationParser(args[0]);
+		ConfigurationParser configurationParser = new ConfigurationParser("./assignment1Files/config.yaml");
 		// Convert configuration file to instructions
 		List<Command> commands;
 		try {
 			commands = configurationParser.parseCommands();
-		}
-		catch (FileNotFoundException | IllegalArgumentException e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not find configuration: " + args[0]);
+			System.exit(0);
 			return;
 		}
 
-		// Execute instructions
-		commands.forEach(command -> {
-            try {
-                command.execute();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        });
+		for (Command command : commands) {
+			try {
+				command.execute();
+			} catch (FileNotFoundException e) {
+				System.out.println("Could not find file: " + e.getMessage());
+			}
+		}
 
-	}
+
+    }
 }

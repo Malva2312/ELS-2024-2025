@@ -10,15 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigurationParser {
-    private final File file;
+    private final File config;
 
     // Build the configuration parser
     public ConfigurationParser(File file) {
-        this.file = file;
+        this.config = file;
     }
 
     public ConfigurationParser(String filePath) {
-        this(new File(filePath));
+        System.out.println("File path: " + filePath);
+        this.config = new File(filePath);
     }
 
     // Run Load class
@@ -26,23 +27,22 @@ public class ConfigurationParser {
         List<Command> commands = new ArrayList<>();
         Yaml yaml = new Yaml();
 
-        try (InputStream inputStream = new FileInputStream(this.file)) {
-            Iterable<Object> yamlObjects = yaml.loadAll(inputStream);
+        try {
+            InputStream inputStream = new FileInputStream(config);
+            List<Map<String, Object>> data = yaml.load(inputStream);
 
-            // Load, rename, save
-            for (Object yamlObject : yamlObjects) {
-                for (Map<String, Object> command : (List<Map<String, Object>>) yamlObject) {
-                    String type = command.keySet().iterator().next();
-                    Map<String, Object> args = (Map<String, Object>) command.get(type);
-                    Command newCommand = CommandFactory.createCommand(type, args);
-                    commands.add(newCommand);
-                }
+            for (Map<String, Object> command : data) {
+                String type = command.keySet().iterator().next();
+                Map<String, Object> args = (Map<String, Object>) command.get(type);
+
+
+                Command newCommand = CommandFactory.createCommand(type, args);
+                commands.add(newCommand);
             }
-        }
-        catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found: " + this.file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Could not find configuration: " + config);
         }
 
         return commands;
