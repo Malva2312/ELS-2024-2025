@@ -3,24 +3,32 @@ package pt.up.fe.els2024.Commands;
 import pt.up.fe.els2024.Table;
 import pt.up.fe.specs.util.SpecsCollections;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class CommandFactory {
     private static final Table table = new Table();
+    private static String id = "";
+
+    public CommandFactory(String id) {
+        this.id = id;
+    }
 
     public static Command createCommand(String type, Map<String, Object> args) {
         switch (type) {
             case "load": {
                 Object filesObj = args.get("files");
                 Object columnsObj = args.getOrDefault("columns", Collections.emptyList());
-                List<String> files = SpecsCollections.cast((List<?>) filesObj, String.class);
+                List<File> files = SpecsCollections.cast((List<?>) filesObj, File.class);
                 List<String> columns = SpecsCollections.cast((List<?>) columnsObj, String.class);
-                return new Load(table, files, columns);
+                return new Load(id, table, files, columns);
             }
             case "rename": {
-                return new Rename(table);
+                Object newNameS = args.get("newName");
+                String newName = (String) newNameS;
+                return new Rename(table, newName);
             }
             case "save": {
                 Object fileObj = args.get("file");

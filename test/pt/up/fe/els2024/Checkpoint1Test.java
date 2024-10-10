@@ -15,6 +15,8 @@ public class Checkpoint1Test {
     @Test
     public void testTree(){
         // Run loadConfigs
+
+
     }
 
 }

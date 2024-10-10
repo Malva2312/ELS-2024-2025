@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			System.out.println("Usage: els2024-9 <config.yaml>");
-			System.exit(1);
+			System.exit(0);
 		}
 
 		// Load configuration
@@ -25,7 +25,13 @@ public class Main {
 		}
 
 		// Execute instructions
-		commands.forEach(Command::execute);
+		commands.forEach(command -> {
+            try {
+                command.execute();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
 	}
 }
