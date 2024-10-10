@@ -14,12 +14,12 @@ public class Load implements Command {
 
     private final Table table;
     private final List<File> files;
-    private final String name;
+    private final String id;
     private final List<String> columns;
     //private final Map<String, Data>
 
-    public Load(String name, Table table, List<File> files, List<String> columns) {
-        this.name = name;
+    public Load(String id, Table table, List<File> files, List<String> columns) {
+        this.id = id;
         this.table = table;
         this.columns = columns;
 
@@ -31,5 +31,34 @@ public class Load implements Command {
 
     @Override
     public void execute() throws FileNotFoundException {
+
+        Yaml yaml = new Yaml();
+        try (InputStream inputStream = new FileInputStream(this.files.get(0))) {
+            // Expecting a list of maps
+            Map<String, Object> cmds = yaml.load(inputStream);
+            Table table = new Table();
+            //= cmds.keySet().toString();
+
+            List<String> row = new ArrayList<>();
+            // Iterate over the list
+            for (var command : cmds.entrySet()) {
+                // Get yaml keys
+                String key = command.getKey().toString();
+                //System.out.printf("\nKEY -> " + key);
+                table.addColumnDefault(key);
+                // Get corresponding values
+                table.addRowDefault(command.getValue().toString());
+
+                /*for (var value : command.getValue().toString().split(",")) {
+                    //String value = command.getValue().toString();
+                    System.out.printf("\nVALUE -> " + command.getValue().toString());
+                    table.addRow(value);
+                }*/
+            }
+
+            System.out.println("Load command executed");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
