@@ -9,20 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The ConfigurationParser class is responsible for parsing configuration files and creating commands.
+ */
 public class ConfigurationParser {
+    // The configuration file to be parsed
     private final File config;
 
-    // Build the configuration parser
+    /**
+     * Constructs a ConfigurationParser with the specified configuration file.
+     *
+     * @param file The configuration file to be parsed.
+     */
     public ConfigurationParser(File file) {
         this.config = file;
     }
 
+    /**
+     * Constructs a ConfigurationParser with the specified file path.
+     *
+     * @param filePath The path to the configuration file to be parsed.
+     */
     public ConfigurationParser(String filePath) {
         System.out.println("File path: " + filePath);
         this.config = new File(filePath);
     }
 
-    // Run Load class
+    /**
+     * Parses the configuration file and creates a list of commands.
+     *
+     * @return A list of commands parsed from the configuration file.
+     * @throws FileNotFoundException if the configuration file cannot be found.
+     */
     public List<Command> parseCommands() throws FileNotFoundException {
         List<Command> commands = new ArrayList<>();
         Yaml yaml = new Yaml();
@@ -35,11 +53,9 @@ public class ConfigurationParser {
                 String type = command.keySet().iterator().next();
                 Map<String, Object> args = (Map<String, Object>) command.get(type);
 
-
                 Command newCommand = CommandFactory.createCommand(type, args);
                 commands.add(newCommand);
             }
-
 
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("Could not find configuration: " + config);
@@ -47,7 +63,4 @@ public class ConfigurationParser {
 
         return commands;
     }
-
-
 }
-

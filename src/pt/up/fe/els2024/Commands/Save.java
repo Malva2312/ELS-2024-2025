@@ -8,16 +8,33 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The Save class implements the Command interface and is responsible for saving data from a table to a file.
+ */
 public class Save implements Command {
+    // The table containing the data to be saved
     private final Table table;
+    // The file path where the data will be saved
     private final String file;
+    // The list of column names to be saved
     private final List<String> columns;
 
+    /**
+     * Constructs a Save command with the specified table, file path, and columns.
+     *
+     * @param table The table containing the data to be saved.
+     * @param filePath The file path where the data will be saved.
+     * @param columns The list of column names to be saved.
+     */
     public Save(Table table, String filePath, List<String> columns){
         this.table = table;
         this.file = filePath;
         this.columns = columns;
     }
+
+    /**
+     * Executes the Save command, saving data from the table to the specified file.
+     */
     @Override
     public void execute() {
         System.out.println(file);
