@@ -1,0 +1,19 @@
+- load:
+    files:
+      - "assignment1Files/decision_tree_1.yaml"
+      - "assignment1Files/decision_tree_2.yaml"
+    as: "some_table"
+
+- rename:
+      table: "some_table"
+      columns:
+        - max_depth: "Max Depth"
+        - criterion: "Criterion"
+        - splitter: "Splitter"
+        - ccp_alpha: "CPP Alpha"
+        - min_samples_split: "Min Samples Split"
+
+- save:
+    table: "some_table"
+    columns: ["Criterion", "Splitter", "CPP Alpha", "Min Samples Split", "Max Depth"]
+    out: "./output/configurationFile.csv"

@@ -49,6 +49,11 @@ public class ConfigurationParser {
             InputStream inputStream = new FileInputStream(config);
             List<Map<String, Object>> data = yaml.load(inputStream);
 
+            if (data == null) {
+                return commands;
+            }
+
+
             for (Map<String, Object> command : data) {
                 String type = command.keySet().iterator().next();
                 Map<String, Object> args = (Map<String, Object>) command.get(type);
