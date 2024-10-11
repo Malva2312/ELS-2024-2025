@@ -1,0 +1,2 @@
+criterion,ccp_alpha,min_impurity_split,max_depth,min_samples_split,min_impurity_decrease,min_weight_fraction_leaf,random_state,splitter,min_samples_leaf,max_features,max_leaf_nodes,class_weight
+best,0.03,,,4,0,0,,best,1,,,,
