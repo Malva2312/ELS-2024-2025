@@ -22,6 +22,12 @@ You can also see a test report by opening ``build/reports/tests/test/index.html`
 ---
 # Checkpoint 1
 
+## Running the program
+To run the program, use the following command:
+- On Linux: ``./gradlew run --args "./input/config.yaml"``- On Linux: ``./gradlew run --args "./input/config.yaml"``
+- On Windows: ``.\gradlew.bat run --args "./input/config.yaml"``.
+This will run the Main class with the provided configuration file as an argument.
+
 ## Implemented Features
 This project includes the following features:
 - **Load Command**: Extracts data from files and loads it into tables.
