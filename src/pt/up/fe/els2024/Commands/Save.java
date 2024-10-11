@@ -51,7 +51,7 @@ public class Save implements Command {
             writer.newLine();
 
             // Filter rows cell by columns
-            List<String> newColumns = null;
+            List<String> newColumns;
             for (int i = 0; i < Table.getNumberOfRows(table); i++) {
                 StringBuilder row = new StringBuilder();
                 if (columns == null || columns.isEmpty()) {
