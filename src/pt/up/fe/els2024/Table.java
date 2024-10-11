@@ -9,17 +9,14 @@ import java.util.Map;
 public class Table {
 
     private final ListOrderedMap<String, List<String>> columns; // Rows of the table
-    private String name;
 
     public Table() {
         this.columns = new ListOrderedMap<>();
-        this.name = "";
     }
 
     public Table(String name, List<String> columns) {
         this.columns = new ListOrderedMap<>();
         this.columns.put(name, columns);
-        this.name = name;
     }
 
     public Table(Table table) {
@@ -29,11 +26,6 @@ public class Table {
 
         this.columns = new ListOrderedMap<>();
         this.columns.putAll(table.columns);
-        this.name = "";
-    }
-
-    public void renameTable(String newName){
-        this.name = newName;
     }
     
     public static int getNumberOfRows(Table table) {

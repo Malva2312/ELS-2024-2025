@@ -34,9 +34,17 @@ public class Save implements Command {
             writer.newLine();
 
             // Filter rows cell by columns
+            List<String> newColumns = null;
             for (int i = 0; i < Table.getNumberOfRows(table); i++) {
                 StringBuilder row = new StringBuilder();
-                for (String column : columns) {
+                if (columns == null || columns.isEmpty()) {
+                    newColumns = table.getColumns();
+                }
+                else {
+                    newColumns = columns;
+                }
+
+                for (String column : newColumns) {
                     row.append(table.getCell(i, column)).append(",");
                 }
                 writer.write(row.toString());
@@ -44,7 +52,7 @@ public class Save implements Command {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error writing to file: " + e.getMessage());
         }
 
         System.out.println("Save command executed");
