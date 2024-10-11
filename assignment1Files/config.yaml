@@ -7,7 +7,7 @@
 - rename:
       table: "some_table"
       columns:
-        - criterion: "Criterion"
+        - classes_: "Classes"
         - splitter: "Splitter"
         - ccp_alpha: "CPP Alpha"
         - min_samples_split: "Min Samples Split"
