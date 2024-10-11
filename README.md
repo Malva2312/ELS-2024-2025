@@ -22,27 +22,62 @@ You can also see a test report by opening ``build/reports/tests/test/index.html`
 ---
 # Checkpoint 1
 
-## Features
-### Semantic Model:
+## Implemented Features
+This project includes the following features:
+- **Load Command**: Extracts data from files and loads it into tables.
+- **Rename Command**: Renames columns in the tables.
+- **Save Command**: Exports table data to a CSV file.
+- **Configuration Parsing**: Parses YAML configuration files to execute a series of commands.
+
+## Semantic Model
 - Represents tables (Table) and commands (Command) for file/table operations.
 - Configuration files parsed by ConfigurationParser.
 
-### Commands
-- Load: Extracts data from files.
-- Rename: Renames columns.
-- Save: Exports as CSV.
+### Table Representation
+The `Table` class represents a table with columns and rows. It provides methods to add columns, add rows, and rename columns. The table data can be manipulated through various commands.
 
-### YAML Configuration
+### Commands
+Commands are actions that can be performed on tables. Each command implements the `Command` interface and provides an `execute` method. The following commands are implemented:
+
+- **Load Command**: Loads data from specified files into a table.
+- **Rename Command**: Renames columns in a table based on a provided mapping.
+- **Save Command**: Saves the table data to a specified CSV file.
+
+## YAML Documentation
+The project uses YAML configuration files to define a sequence of commands to be executed. The `ConfigurationParser` class reads the YAML file and creates the corresponding command objects.
+
+### Load Command
+The `load` command extracts data from specified files and loads it into a table.
+#### YAML Syntax
+```yaml
 - Load:
-  - files: List of file paths.
-  - as: Name of the table created.
-- Rename:
-  - table: Name of the table.
-  - columns: Map of old to new column names.
-- Save:
-  - table: Name of the table.
-  - columns: List of columns to save.
-  - out: File path;
+    files: 
+      - "path/to/file1.yaml"
+      - "path/to/file2.yaml"
+    as: "table_name"
+```
+
+### Save Command
+The save command exports table data to a specified CSV file.
+#### YAML Syntax
+```yaml
+- save:
+    table: "table_name"
+    columns: ["Column1", "Column2", "Column3"]
+    file: "path/to/output.csv"
+```
+
+### Rename Command
+The rename command renames columns in a table based on a provided mapping.
+#### YAML Syntax
+```yaml
+- rename:
+    table: "table_name"
+    columns:
+    - old_name: "New Name"
+    - another_old_name: "Another New Name"
+```
+
 
 ### Example YAML
 ```yaml
@@ -66,6 +101,13 @@ You can also see a test report by opening ``build/reports/tests/test/index.html`
   out: "resources/configurationFile.csv"
 ```
 
+## Configuration File
+The configuration file is a YAML file that defines a sequence of commands to be executed. Each command is specified with its type and parameters. The `ConfigurationParser` class reads this file and creates the corresponding command objects to be executed.
+The decision to use a YAML configuration file was made for the following reasons:
+
+1. **Readability**: YAML is human-readable and easy to understand, making it simple for users to define and modify configurations.
+2. **Structure**: YAML supports complex data structures, which allows for a clear and organized representation of commands and their parameters.
+3. **Flexibility**: YAML's flexible syntax allows for the inclusion of various types of data, such as lists and maps, which are essential for defining commands with multiple parameters.
 
 ## Group
 
