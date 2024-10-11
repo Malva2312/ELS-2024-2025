@@ -14,7 +14,7 @@ public class Main {
 
 		// Load configuration
 		//ConfigurationParser configurationParser = new ConfigurationParser(args[0]);
-		ConfigurationParser configurationParser = new ConfigurationParser("./assignment1Files/config.yaml");
+		ConfigurationParser configurationParser = new ConfigurationParser("./input/config.yaml");
 		// Convert configuration file to instructions
 		List<Command> commands;
 		try {
