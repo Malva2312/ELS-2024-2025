@@ -19,3 +19,60 @@ When creating a Java executable, it is necessary to specify which class that con
 To test the program, run ``gradle test``. This will execute the build, and run the JUnit tests in the ``test`` folder. If you want to see output printed during the tests, use the flag ``-i`` (i.e., ``gradle test -i``).
 You can also see a test report by opening ``build/reports/tests/test/index.html``.
 
+---
+# Checkpoint 1
+
+## Features
+### Semantic Model:
+- Represents tables (Table) and commands (Command) for file/table operations.
+- Configuration files parsed by ConfigurationParser.
+
+### Commands
+- Load: Extracts data from files.
+- Rename: Renames columns.
+- Save: Exports as CSV.
+
+### YAML Configuration
+- Load:
+  - files: List of file paths.
+  - as: Name of the table created.
+- Rename:
+  - table: Name of the table.
+  - columns: Map of old to new column names.
+- Save:
+  - table: Name of the table.
+  - columns: List of columns to save.
+  - out: File path;
+
+### Example YAML
+```yaml
+- load:
+  files:
+  - "assignment1Files/decision_tree_1.yaml"
+  - "assignment1Files/decision_tree_2.yaml"
+  as: "some_table"
+
+- rename:
+  table: "some_table"
+  columns:
+  - classes_: "Classes"
+  - splitter: "Splitter"
+  - ccp_alpha: "CPP Alpha"
+  - min_samples_split: "Min Samples Split"
+
+- save:
+  table: "some_table"
+  columns: ["Criterion", "Splitter", "CPP Alpha", "Min Samples Split"]
+  out: "resources/configurationFile.csv"
+```
+
+
+## Group
+
+ELS2024-9
+
+|Student Number| Name                   |
+|----|------------------------|
+|201806629|Ana Sofia Oliveira Teixeira|
+|202006605|João António Maricato Malva|
+|202008867|João Tomás Marques Félix|

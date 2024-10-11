@@ -1,7 +1,7 @@
 - load:
     files:
-      - "assignment1Files/decision_tree_1.json"
-      - "assignment1Files/decision_tree_2.json"
+      - "assignment1Files/decision_tree_1.yaml"
+      - "assignment1Files/decision_tree_2.yaml"
     as: "some_table"
 
 - rename:
@@ -15,4 +15,4 @@
 - save:
     table: "some_table"
     columns: ["Criterion", "Splitter", "CPP Alpha", "Min Samples Split"]
-    out: "resources/decision_tree_1.csv"
+    out: "resources/configurationFile.csv"
