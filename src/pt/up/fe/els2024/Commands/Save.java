@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class Save implements Command {
     private final Table table;
@@ -19,18 +20,29 @@ public class Save implements Command {
     }
     @Override
     public void execute() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./assignment1Files/configurationFile.csv"))) {
-            // Write the header (column names)
-            writer.write(String.join(",", table.getColumns()));
+        System.out.println(file);
+        // create a new file or overwrite the existing file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            // Write the header (column names) if there are in columns
+            // if columns in null or empty, write all columns
+            if (columns == null || columns.isEmpty()) {
+                writer.write(String.join(",", table.getColumns()));
+            } else {
+                writer.write(String.join(",", columns));
+            }
+
             writer.newLine();
 
-            // Write each row
-            for (var entry : table.getRows().entrySet()) {
-                String rowKey = entry.getKey();
-                List<String> rowValues = entry.getValue();
-                writer.write(rowKey + "," + String.join(",", rowValues));
+            // Filter rows cell by columns
+            for (int i = 0; i < Table.getNumberOfRows(table); i++) {
+                StringBuilder row = new StringBuilder();
+                for (String column : columns) {
+                    row.append(table.getCell(i, column)).append(",");
+                }
+                writer.write(row.toString());
                 writer.newLine();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

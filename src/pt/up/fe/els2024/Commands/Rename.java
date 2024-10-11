@@ -15,6 +15,8 @@ public class Rename implements Command {
 
     @Override
     public void execute() {
+        System.out.println(columnsMap);
+
         for (Map.Entry<String, String> entry : columnsMap.entrySet()) {
             String oldName = entry.getKey();
             String newName = entry.getValue();
@@ -23,7 +25,7 @@ public class Rename implements Command {
                 table.renameColumn(oldName, newName);
                 System.out.println("Renamed column '" + oldName + "' to '" + newName + "'");
             } catch (IllegalArgumentException e){
-                System.err.println("Error renaming column: " + e.getMessage());
+                System.err.println("Error renaming column: " + oldName + e.getMessage()+ e.getMessage());
             }
         }
     }

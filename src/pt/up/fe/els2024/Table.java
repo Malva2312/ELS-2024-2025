@@ -4,22 +4,21 @@ import org.apache.commons.collections4.map.ListOrderedMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Table {
 
-    private final List<String> columns; // Name of the columns
-    private final ListOrderedMap<String, List<String>> rows; // Rows of the table
+    private final ListOrderedMap<String, List<String>> columns; // Rows of the table
     private String name;
 
     public Table() {
-        this.columns = new ArrayList<>();
-        this.rows = new ListOrderedMap<>();
+        this.columns = new ListOrderedMap<>();
         this.name = "";
     }
 
     public Table(String name, List<String> columns) {
-        this.columns = columns;
-        this.rows = new ListOrderedMap<>();
+        this.columns = new ListOrderedMap<>();
+        this.columns.put(name, columns);
         this.name = name;
     }
 
@@ -28,12 +27,8 @@ public class Table {
             throw new IllegalArgumentException("Table cannot be null");
         }
 
-        this.columns = new ArrayList<>();
-        this.columns.addAll(table.columns);
-
-        this.rows = new ListOrderedMap<>();
-        this.rows.putAll(table.rows);
-
+        this.columns = new ListOrderedMap<>();
+        this.columns.putAll(table.columns);
         this.name = "";
     }
 
@@ -42,134 +37,131 @@ public class Table {
     }
     
     public static int getNumberOfRows(Table table) {
-        return table.rows.size();
+        return table.columns.getValue(0).size();
     }
 
     public static int getNumberOfColumns(Table table) {
-        return table.columns.size();
+        return table.columns.keySet().size();
     }
 
     public void addColumnDefault(String column){
-        if (this.columns.contains(column)) {
+        if (this.columns.containsKey(column)) {
             throw new IllegalArgumentException("Column already exists");
         }
-        this.columns.add(column);
 
-        for (String row : this.rows.keySet()) {
-            this.rows.get(row).add("");
+        this.columns.put(column, new ArrayList<>());
+        for (String row : this.columns.keySet()) {
+            this.columns.get(row).add("");
         }
     }
 
     public void addColumn(String column, List<String> values){
-        if (this.columns.contains(column)) {
+        if (this.columns.containsKey(column)) {
             throw new IllegalArgumentException("Column already exists");
         }
-        this.columns.add(column);
 
-        for (String row : this.rows.keySet()) {
-            this.rows.get(row).add(values.get(this.columns.indexOf(column)));
+        this.columns.put(column, values);
+    }
+
+    public void addColumn(String column, Map<String, String> values){
+        if (this.columns.containsKey(column)) {
+            throw new IllegalArgumentException("Column already exists");
+        }
+
+        List<String> columnValues = new ArrayList<>();
+        for (String row : this.columns.keySet()) {
+            columnValues.add(values.get(row));
+        }
+
+        this.columns.put(column, columnValues);
+
+        // set empty values for rows that do not exist
+        for (String row : values.keySet()) {
+            if (!this.columns.containsKey(row)) {
+                this.columns.get(column).add("");
+            }
         }
     }
 
     public void addRowDefault(String row){
-        this.rows.put(row, new ArrayList<>());
+        if (this.columns.isEmpty()) {
+            throw new IllegalArgumentException("Table has no columns");
+        }
 
-        for (String column : this.columns) {
-            this.rows.get(row).add("");
+        for (String column : this.columns.keySet()) {
+            this.columns.get(column).add("");
         }
     }
 
     public List<String> getColumns() {
-        return columns;
+        return new ArrayList<>(this.columns.keySet());
     }
 
-    public ListOrderedMap<String, List<String>> getRows() {
-        return rows;
+    public List<String> getRowAt(int idx) {
+        List<String> row = new ArrayList<>();
+        for (String column : this.columns.keySet()) {
+            row.add(this.columns.get(column).get(idx));
+        }
+        return row;
     }
 
     public void renameColumn(String oldName, String newName) {
-        if (!this.columns.contains(oldName)) {
+        if (!this.columns.containsKey(oldName)) {
             throw new IllegalArgumentException("Column does not exist " + oldName);
         }
-        if (this.columns.contains(newName)) {
+
+        if (this.columns.containsKey(newName)) {
             throw new IllegalArgumentException("Column already exists " + newName);
         }
 
-        int index = this.columns.indexOf(oldName);
-        this.columns.set(index, newName);
-
-        for (List<String> row : this.rows.values()) {
-            row.set(index, row.get(index));
-        }
+        List<String> columnValues = this.columns.remove(oldName);
+        this.columns.put(newName, columnValues);
     }
 
     // Get column
     public List<String> getColumn(String column) {
-        if (!this.columns.contains(column)) {
+        if (!this.columns.containsKey(column)) {
             throw new IllegalArgumentException("Column does not exist " + column);
         }
 
-        List<String> columnValues = new ArrayList<>();
-        int index = this.columns.indexOf(column);
-
-        for (List<String> row : this.rows.values()) {
-            columnValues.add(row.get(index));
-        }
-
-        return columnValues;
+        return this.columns.get(column);
     }
 
-
-    public List<String> getRow(String row) {
-        if (!this.rows.containsKey(row)) {
-            throw new IllegalArgumentException("Row does not exist " + row);
-        }
-
-        return this.rows.get(row);
-    }
     public void removeColumn(String columnName){
-        if (!this.columns.contains(columnName)) {
+
+        if (!this.columns.containsKey(columnName)) {
             throw new IllegalArgumentException("Column does not exist " + columnName);
         }
 
-        int index = this.columns.indexOf(columnName);
-        this.columns.remove(index);
+        this.columns.remove(columnName);
+    }
 
-        for (List<String> row : this.rows.values()) {
-            row.remove(index);
+    public void removeRowAt(int rowKey){
+        for (String column : this.columns.keySet()) {
+            this.columns.get(column).remove(rowKey);
         }
     }
 
-    public void removeRow(String rowKey){
-        if (!this.rows.containsKey(rowKey)) {
-            throw new IllegalArgumentException("Row does not exist " + rowKey);
-        }
-
-        this.rows.remove(rowKey);
-    }
-
-    public void updateCell(String rowKey, String columnName, String newValue){
-        if (!this.rows.containsKey(rowKey)) {
-            throw new IllegalArgumentException("Row does not exist " + rowKey);
-        }
-        if (!this.columns.contains(columnName)) {
-            throw new IllegalArgumentException("Column does not exist " + columnName);
-        }
-
-        int columnIndex = this.columns.indexOf(columnName);
-        this.rows.get(rowKey).set(columnIndex, newValue);
-    }
     public void clearTable(){
         this.columns.clear();
-        this.rows.clear();
     }
-    public void printTable(){
-        System.out.println("Columns: " + this.columns);
-        for (var entry : this.rows.entrySet()) {
-            String rowKey = entry.getKey();
-            List<String> rowValues = entry.getValue();
-            System.out.println(rowKey + ": " + rowValues);
+
+    public void addRow(List<String> row) {
+        if (row.size() != this.columns.size()) {
+            throw new IllegalArgumentException("Row size does not match table size");
+        }
+
+        int i = 0;
+        for (String column : this.columns.keySet()) {
+            this.columns.get(column).add(row.get(i));
+            i++;
         }
     }
 
+    public String getCell(int row, String column) {
+        if (!this.columns.containsKey(column)) {
+            throw new IllegalArgumentException("Column does not exist " + column);
+        }
+        return this.columns.get(column).get(row);
+    }
 }

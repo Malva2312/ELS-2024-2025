@@ -7,7 +7,7 @@
 - rename:
       table: "some_table"
       columns:
-        - classes_: "Classes"
+        - criterion: "Criterion"
         - splitter: "Splitter"
         - ccp_alpha: "CPP Alpha"
         - min_samples_split: "Min Samples Split"
@@ -15,4 +15,4 @@
 - save:
     table: "some_table"
     columns: ["Criterion", "Splitter", "CPP Alpha", "Min Samples Split"]
-    out: "resources/configurationFile.csv"
+    out: "./configurationFile.csv"

@@ -5,9 +5,7 @@ import pt.up.fe.els2024.Table;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Load implements Command {
@@ -31,25 +29,59 @@ public class Load implements Command {
 
     @Override
     public void execute() throws FileNotFoundException {
+        Map<String, List<String>> data = new HashMap<>();
 
         Yaml yaml = new Yaml();
-        try (InputStream inputStream = new FileInputStream(this.files.get(0))) {
-            // Expecting a list of maps
-            Map<String, Object> cmds = yaml.load(inputStream);
-            //= cmds.keySet().toString();
+        for (File file : this.files) {
 
-            List<String> row = new ArrayList<>();
-            // Iterate over the list
-            for (var command : cmds.entrySet()) {
-                // Get yaml keys
-                String key = command.getKey().toString();
-                table.addColumnDefault(key);
+            try (InputStream inputStream = new FileInputStream(file)) {
+                // Expecting a list of maps
+                Map<String, Object> cmds = yaml.load(inputStream);
+
+                if (cmds == null) {
+                    throw new IllegalArgumentException("Invalid YAML file: " + file.getName());
+                }
+
+                // get params from yaml
+                Map<String, String> columns = (Map<String, String>) cmds.get("params");
+
+
+                for (Map.Entry<String, String> entry : columns.entrySet()) {
+                    String key = entry.getKey();
+
+                    // Get value and depending on the type, convert it to string
+                    Object value = entry.getValue();
+
+                    if (data.containsKey(key)) {
+                        data.get(key).add(Objects.requireNonNullElse(value, "").toString());
+                    } else {
+                        List<String> values = new ArrayList<>();
+                        values.add(Objects.requireNonNullElse(value, "").toString());
+                        data.put(key, values);
+                    }
+                }
+
+
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            table.addRowDefault((cmds.values().toString()));
-
-            System.out.println("Load command executed");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
+        // Add data to table
+        for (Map.Entry<String, List<String>> entry : data.entrySet()) {
+            String key = entry.getKey();
+            List<String> values = entry.getValue();
+
+            if (this.table.getColumns().contains(key)) {
+                throw new IllegalArgumentException("Column already exists: " + key);
+            }
+
+            this.table.addColumn(key, values);
+            System.out.println("Added column '" + key + "'");
+            System.out.println("Added values: " + values);
+        }
+
     }
 }
