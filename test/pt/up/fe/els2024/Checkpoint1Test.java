@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import pt.up.fe.specs.util.SpecsIo;
 
-import java.io.File;
-
 public class Checkpoint1Test {
     @Test
     public void exampleTest() {

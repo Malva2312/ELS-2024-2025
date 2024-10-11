@@ -6,7 +6,6 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Load implements Command {
 
@@ -65,7 +64,7 @@ public class Load implements Command {
 
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new FileNotFoundException("Error reading file: " + file.getName());
             }
         }
 
