@@ -28,4 +28,9 @@ public class Column {
     public boolean isNullable() {
         return nullable;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
