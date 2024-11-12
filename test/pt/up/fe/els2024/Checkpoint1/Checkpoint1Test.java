@@ -7,14 +7,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import pt.up.fe.els2024.Commands.Command;
-import pt.up.fe.els2024.Commands.Rename;
 import pt.up.fe.els2024.ConfigurationParser;
-import pt.up.fe.els2024.Table;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Checkpoint1Test {
 

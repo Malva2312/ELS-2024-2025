@@ -1,6 +1,6 @@
 package pt.up.fe.els2024.Commands;
 
-import pt.up.fe.els2024.Table;
+import pt.up.fe.els2024.Table.Table;
 
 import java.util.Map;
 

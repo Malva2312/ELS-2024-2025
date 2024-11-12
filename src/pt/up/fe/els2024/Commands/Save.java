@@ -1,12 +1,11 @@
 package pt.up.fe.els2024.Commands;
 
-import pt.up.fe.els2024.Table;
+import pt.up.fe.els2024.Table.Table;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The Save class implements the Command interface and is responsible for saving data from a table to a file.

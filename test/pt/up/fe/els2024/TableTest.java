@@ -3,6 +3,7 @@ package pt.up.fe.els2024;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import pt.up.fe.els2024.Table.Table;
 
 import java.util.Arrays;
 import java.util.List;

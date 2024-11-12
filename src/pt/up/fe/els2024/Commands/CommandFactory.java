@@ -1,6 +1,6 @@
 package pt.up.fe.els2024.Commands;
 
-import pt.up.fe.els2024.Table;
+import pt.up.fe.els2024.Table.Table;
 import pt.up.fe.specs.util.SpecsCollections;
 
 import java.io.File;
