@@ -24,8 +24,8 @@ public class CommandFactory {
      * @param tables A map of table names to Table objects.
      */
     public CommandFactory(String id, Map<String, Table> tables) {
-        this.id = id;
-        this.tables.putAll(tables);
+        CommandFactory.id = id;
+        CommandFactory.tables.putAll(tables);
     }
 
     /**
@@ -37,12 +37,50 @@ public class CommandFactory {
      * @throws IllegalArgumentException if the command type is invalid.
      */
     public static Command createCommand(String type, Map<String, Object> args) {
-        return switch (type) {
-            case "load" -> createLoadCommand(args);
-            case "save" -> createSaveCommand(args);
-            case "rename" -> createRenameCommand(args);
-            default -> throw new IllegalArgumentException("Invalid command type: " + type);
-        };
+        if ("load".equalsIgnoreCase(type)) {
+            return createLoadCommand(args);
+        } else if ("save".equalsIgnoreCase(type)) {
+            return createSaveCommand(args);
+        } else if ("rename".equalsIgnoreCase(type)) {
+            return createRenameCommand(args);
+        }
+        throw new IllegalArgumentException("Unknown command type: " + type);
+    }
+
+    /**
+     * Creates a Load command based on the provided arguments.
+     *
+     * @param args A map of arguments required to create the Load command.
+     *             Expected keys are:
+     *             - "files": A list of file paths to load data from.
+     *             - "as": The name to assign to the table.
+     *             - "columns": A list of column names to be loaded.
+     * @return The created Load command.
+     */
+    private static Command createLoadCommand(Map<String, Object> args) {
+        System.out.println("Creating load command");
+
+        // Extract arguments
+        String id = (String) args.get("id");
+        String path = (String) args.get("path");
+        String tableName = (String) args.get("as");
+        List<String> columns = (List<String>) args.get("columns");
+
+        // Convert file paths to File objects
+        List<File> filesList = SpecsCollections.newArrayList();
+        List<String> filePaths = (List<String>) args.get("files");
+        if (filePaths != null) {
+            for (String filePath : filePaths) {
+                filesList.add(new File(filePath));
+            }
+        }
+
+        // Get the table if it exists, or create a new one
+        Table table = tables.getOrDefault(tableName, new Table());
+        tables.putIfAbsent(tableName, table);
+
+        // Create and return the Load command
+        return new Load(id, path, table, filesList, tableName, columns);
     }
 
     /**
@@ -95,42 +133,5 @@ public class CommandFactory {
         List<String> columns = (List<String>) args.get("columns");
 
         return new Save(table, output, columns);
-    }
-
-
-    /**
-     * Creates a Load command based on the provided arguments.
-     *
-     * @param args A map of arguments required to create the Load command.
-     *             Expected keys are:
-     *             - "files": A list of file paths to load data from.
-     *             - "as": The name to assign to the table.
-     *             - "columns": A list of column names to be loaded.
-     * @return The created Load command.
-     */
-    private static Command createLoadCommand(Map<String, Object> args) {
-        System.out.println("Creating load command");
-
-        // Get the file paths
-        List<String> files = (List<String>) args.get("files");
-        String tableName = (String) args.get("as");
-
-        // Convert file paths to File objects
-        List<File> filesList = SpecsCollections.newArrayList();
-        for (String file : files) {
-            filesList.add(new File(file));
-        }
-
-        // Get the columns
-        List<String> columns = (List<String>) args.get("columns");
-
-        // Get the table if it exists, else create a new one
-        Table table = tables.get(tableName);
-        if (table == null) {
-            table = new Table();
-            tables.put(tableName, table);
-        }
-
-        return new Load(tableName, table, filesList, columns);
     }
 }

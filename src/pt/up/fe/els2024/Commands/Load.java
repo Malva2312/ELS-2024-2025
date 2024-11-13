@@ -1,103 +1,106 @@
 package pt.up.fe.els2024.Commands;
 
 import pt.up.fe.els2024.Table.Table;
+import pt.up.fe.els2024.Table.Column;
+import pt.up.fe.els2024.Utils.*;
 
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
-/**
- * The Load class implements the Command interface and is responsible for loading data from files into a table.
- */
 public class Load implements Command {
 
-    // The table to load data into
-    private final Table table;
-    // The list of files to load data from
-    private final List<File> files;
-    // The identifier for the load command
     private final String id;
-    // The list of column names to be loaded
-    private final List<String> columns;
+    private final String path; // Caminho para file ou pasta
+    private final String tableName; // Nome da tabela a ser registada
+    private final Table table;
+    private final List<String> attributes; // Lista de atributos a serem carregados
+    private final Map<String, FileDataExtractor> extractors; // Mapeia extensões de arquivos para extractors
+    private final List<File> files;
 
-    /**
-     * Constructs a Load command with the specified parameters.
-     *
-     * @param id      The identifier for the load command.
-     * @param table   The table to load data into.
-     * @param files   The list of files to load data from.
-     * @param columns The list of column names to be loaded.
-     * @throws IllegalArgumentException if no source files are specified.
-     */
-    public Load(String id, Table table, List<File> files, List<String> columns) {
+    // Construtor que inicializa os campos
+    public Load(String id, String path, Table table, List<File> files, String tableName, List<String> attributes) {
         this.id = id;
+        this.path = path;
         this.table = table;
-        this.columns = columns;
-
         this.files = new ArrayList<>(files);
-        if (files.isEmpty()) {
-            throw new IllegalArgumentException("Must specify at least one source file.");
+        this.tableName = tableName;
+        this.attributes = attributes != null ? attributes : new ArrayList<>();
+
+        // Inicializa os extractors para YAML, JSON e XML
+        this.extractors = new HashMap<>();
+        this.extractors.put("yaml", new YamlDataExtractor());
+        this.extractors.put("xml", new XmlDataExtractor());
+        this.extractors.put("json", new JsonDataExtractor());
+    }
+
+    @Override
+    public void execute() throws FileNotFoundException {
+        File fileOrDirectory = new File(path);
+        if (!fileOrDirectory.exists()) {
+            throw new FileNotFoundException("Path not found: " + path);
+        }
+
+        List<Map<String, Object>> allData = new ArrayList<>();
+        if (fileOrDirectory.isFile()) {
+            allData.add(loadFileData(fileOrDirectory));
+        } else if (fileOrDirectory.isDirectory()) {
+            for (File file : Objects.requireNonNull(fileOrDirectory.listFiles())) {
+                if (file.isFile()) {
+                    allData.add(loadFileData(file));
+                }
+            }
+        }
+
+        createAndPopulateTable(allData);
+    }
+
+    private Map<String, Object> loadFileData(File file) throws FileNotFoundException {
+        String extension = getFileExtension(file);
+        FileDataExtractor extractor = extractors.get(extension);
+
+        if (extractor == null) {
+            throw new IllegalArgumentException("Unsupported file format: " + extension);
+        }
+
+        try {
+            Map<String, Object> data = extractor.extractData(file);
+            if (!attributes.isEmpty()) {
+                data.keySet().retainAll(attributes);
+            }
+            return data;
+        } catch (IOException e) {
+            throw new FileNotFoundException("Error reading file: " + file.getName());
         }
     }
 
-    /**
-     * Executes the Load command, loading data from the specified files into the table.
-     *
-     * @throws FileNotFoundException if any of the specified files cannot be found or read.
-     */
-    @Override
-    public void execute() throws FileNotFoundException {
-        // Map to store the data to be loaded into the table
-        Map<String, List<String>> data = new HashMap<>();
+    private void createAndPopulateTable(List<Map<String, Object>> allData) {
+        List<Column> columns = new ArrayList<>();
+        Map<String, Object> firstRow = allData.get(0);
 
-        // Initialize YAML parser
-        Yaml yaml = new Yaml();
-        for (File file : this.files) {
-
-            try (InputStream inputStream = new FileInputStream(file)) {
-                // Load YAML content, expecting a list of maps
-                Map<String, Object> cmds = yaml.load(inputStream);
-
-                if (cmds == null) {
-                    throw new IllegalArgumentException("Invalid YAML file: " + file.getName());
-                }
-
-                // Get parameters from YAML
-                Map<String, String> columns = (Map<String, String>) cmds.get("params");
-
-                for (Map.Entry<String, String> entry : columns.entrySet()) {
-                    String key = entry.getKey();
-
-                    // Get value and convert it to string if necessary
-                    Object value = entry.getValue();
-
-                    if (data.containsKey(key)) {
-                        data.get(key).add(Objects.requireNonNullElse(value, "").toString());
-                    } else {
-                        List<String> values = new ArrayList<>();
-                        values.add(Objects.requireNonNullElse(value, "").toString());
-                        data.put(key, values);
-                    }
-                }
-
-            } catch (IOException e) {
-                throw new FileNotFoundException("Error reading file: " + file.getName());
-            }
+        for (String attribute : attributes.isEmpty() ? firstRow.keySet() : attributes) {
+            Object sampleValue = firstRow.get(attribute);
+            Class<?> columnType = sampleValue != null ? sampleValue.getClass() : String.class;
+            columns.add(new Column(attribute, columnType, null, true));
         }
 
-        // Add data to the table
-        for (Map.Entry<String, List<String>> entry : data.entrySet()) {
-            String key = entry.getKey();
-            List<String> values = entry.getValue();
-
-            if (this.table.getColumns().contains(key)) {
-                throw new IllegalArgumentException("Column already exists: " + key);
+        Table table = new Table(columns);
+        for (Map<String, Object> data : allData) {
+            Map<String, Object> rowValues = new HashMap<>();
+            for (Column column : columns) {
+                rowValues.put(column.getName(), data.getOrDefault(column.getName(), ""));
             }
-
-            this.table.addColumn(key, values);
-            System.out.println("Added column '" + key + "'");
-            System.out.println("Added values: " + values);
+            table.addRow(rowValues);
         }
+
+        TableRegistry.registerTable(tableName, table);
+        System.out.println("Table '" + tableName + "' loaded with data.");
+    }
+
+    private String getFileExtension(File file) {
+        String fileName = file.getName();
+        int lastIndex = fileName.lastIndexOf(".");
+        return (lastIndex == -1) ? "" : fileName.substring(lastIndex + 1).toLowerCase();
     }
 }

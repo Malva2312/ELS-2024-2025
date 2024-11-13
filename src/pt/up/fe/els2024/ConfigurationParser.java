@@ -45,14 +45,11 @@ public class ConfigurationParser {
         List<Command> commands = new ArrayList<>();
         Yaml yaml = new Yaml();
 
-        try {
-            InputStream inputStream = new FileInputStream(config);
+        try (InputStream inputStream = new FileInputStream(config)) {
             List<Map<String, Object>> data = yaml.load(inputStream);
-
             if (data == null) {
                 return commands;
             }
-
 
             for (Map<String, Object> command : data) {
                 String type = command.keySet().iterator().next();
@@ -64,6 +61,8 @@ public class ConfigurationParser {
 
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("Could not find configuration: " + config);
+        } catch (IOException e) {
+            System.out.println("Error reading configuration file: " + e.getMessage());
         }
 
         return commands;
