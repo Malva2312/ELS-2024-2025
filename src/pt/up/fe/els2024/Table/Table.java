@@ -3,10 +3,7 @@ package pt.up.fe.els2024.Table;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.map.ListOrderedMap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The Table class represents a table with rows and columns.
@@ -17,7 +14,7 @@ public class Table {
     private List<Row> rows;
 
     public Table(List<Column> columns){
-        this.columns = columns;
+        this.columns = new ArrayList<>(columns);
         this.rows = new ArrayList<>();
     }
 
@@ -25,9 +22,44 @@ public class Table {
         rows.add(row);
     }
 
-    public void addRow(Map<String, Object> values){
+
+    public void addRow(Map<String, Object> values) {
+        // Validate and set default values for missing columns
+        for (Column column : columns) {
+            if (!values.containsKey(column.getName())) {
+                values.put(column.getName(), column.getDefaultValue());
+            } else {
+                Object value = values.get(column.getName());
+                validateColumnType(column, value);
+            }
+        }
         Row row = new Row(values);
         rows.add(row);
+    }
+
+    public void updateRow(int rowIndex, Map<String, Object> updatedValues) {
+        if (rowIndex >= 0 && rowIndex < rows.size()) {
+            Row row = rows.get(rowIndex);
+            for (Map.Entry<String, Object> entry : updatedValues.entrySet()) {
+                Column column = getColumn(entry.getKey());
+                if (column != null) {
+                    validateColumnType(column, entry.getValue());
+                    row.setValue(entry.getKey(), entry.getValue());
+                } else {
+                    throw new IllegalArgumentException("Column " + entry.getKey() + " does not exist.");
+                }
+            }
+        } else {
+            throw new IndexOutOfBoundsException("Row index out of range: " + rowIndex);
+        }
+    }
+
+    public void deleteRow(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < rows.size()) {
+            rows.remove(rowIndex);
+        } else {
+            throw new IndexOutOfBoundsException("Row index out of range: " + rowIndex);
+        }
     }
 
     public List<Row> getRows(){
@@ -47,11 +79,16 @@ public class Table {
         columns.add(column);
     }
 
-    public void addColumn(String name, Class<?> type, Object defaultValue, boolean nullable){
+    public void addColumn(String name, Class<?> type, Object defaultValue, boolean nullable) {
+        if (getColumn(name) != null) {
+            throw new IllegalArgumentException("Column " + name + " already exists.");
+        }
+
         Column column = new Column(name, type, defaultValue, nullable);
         columns.add(column);
 
-        for (Row row : rows){
+        // Add the new column to each row with the default value
+        for (Row row : rows) {
             row.setValue(name, defaultValue);
         }
     }
@@ -76,6 +113,38 @@ public class Table {
         return newTable;
     }
 
+    public void renameColumn(String oldName, String newName) {
+        Column column = getColumn(oldName);
+        if (column != null) {
+            if (getColumn(newName) != null) {
+                throw new IllegalArgumentException("Column " + newName + " already exists.");
+            }
+
+            column.setName(newName);
+
+            // Update column names in all rows
+            for (Row row : rows) {
+                Object value = row.getValue(oldName);
+                row.setValue(newName, value);
+                row.getData().remove(oldName);
+            }
+        } else {
+            throw new NoSuchElementException("Column " + oldName + " not found.");
+        }
+    }
+
+    private void validateColumnType(Column column, Object value) {
+        if (value != null && !column.getType().isInstance(value)) {
+            throw new IllegalArgumentException("Invalid type for column " + column.getName() +
+                    ". Expected " + column.getType().getSimpleName() +
+                    " but got " + value.getClass().getSimpleName());
+        }
+
+        if (value == null && !column.isNullable()) {
+            throw new IllegalArgumentException("Column " + column.getName() + " cannot be null.");
+        }
+    }
+
     public Table filterdRows(Predicate<Row> condition) {
         Table filteredTable = new Table(columns);
         for (Row row : rows) {
@@ -84,12 +153,5 @@ public class Table {
             }
         }
         return filteredTable;
-    }
-
-    public void renameColumn(String oldName, String newName){
-        Column column = getColumn(oldName);
-        if (column != null){
-            column.setName(newName);
-        }
     }
 }

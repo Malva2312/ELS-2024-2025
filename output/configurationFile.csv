@@ -1,3 +1,0 @@
-Criterion,Splitter,CPP Alpha,Min Samples Split,Max Depth
-gini,best,0,2,,
-entropy,random,0.015,3,,
