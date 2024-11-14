@@ -22,7 +22,7 @@ public class LoadOperation extends OperationBuilder {
             case "yaml":
                 return new LoadYAMLOperation(getBuilder()).executeOperation();
             default:
-                throw new UnsupportedOperationException("Tipo de arquivo não suportado: " + fileType);
+                throw new UnsupportedOperationException("File type not supported: " + fileType);
         }
     }
 }
