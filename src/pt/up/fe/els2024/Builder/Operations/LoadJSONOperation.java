@@ -1,28 +1,28 @@
 package pt.up.fe.els2024.Builder.Operations;
 
+import pt.up.fe.els2024.Builder.DataBaseBuilder;
 import pt.up.fe.els2024.Builder.OperationBuilder;
 
 public class LoadJSONOperation extends OperationBuilder {
-    private String source;
-    private String targetName;
-    private String format;
-
-    public LoadJSONOperation(String table) {
-        super(table);
+    @Override
+    protected OperationBuilder executeOperation() {
+        return null;
     }
 
-    public LoadJSONOperation fromJSON(String source) {
-        this.source = source;
+    public LoadJSONOperation(DataBaseBuilder builder) {
+        super();
+    }
+
+    protected String filePath;
+    protected String tableName;
+
+    public LoadJSONOperation from(String filePath) {
+        this.filePath = filePath;
         return this;
     }
 
-    public LoadJSONOperation into(String targetName) {
-        this.targetName = targetName;
-        return this;
-    }
-
-    public LoadJSONOperation withFormat(String format) {
-        this.format = format;
+    public LoadJSONOperation into(String tableName) {
+        this.tableName = tableName;
         return this;
     }
 }
