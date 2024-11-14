@@ -26,4 +26,8 @@ public class DataBaseBuilder extends OperationBuilder {
 
         tables.put(targetName, table);
     }
+
+    public void addTable(String name, Table table) {
+        tables.put(name, table);
+    }
 }

@@ -1,7 +1,6 @@
 package pt.up.fe.els2024;
 
 import pt.up.fe.els2024.Builder.DataBaseBuilder;
-import pt.up.fe.els2024.Builder.OperationBuilder;
 
 public class Main {
 	public static void main(String[] args) {
@@ -10,6 +9,7 @@ public class Main {
 				.loadJSON()
 					.from("profiling.json")
 					.into("time")
+					.withAttributes("time", "date", "name")
 				.loadXML()
 				.loadYAML();
 	}
