@@ -8,8 +8,15 @@ public class Main {
 		DataBaseBuilder db = new DataBaseBuilder();
 		db
 			.load()
-				.from("data.csv")
-				.into("table1")
-				.withAttributes("name", "age", "city");
+				.fromXML("vitis-report.xml")
+				.extract("AreaEstimates", "Resources")
+				.into("Visits")
+			.load()
+				.fromYAML("decision_tree.yaml")
+				.extract("params")
+				.into("tree")
+			.load()
+				.fromJSON("profiling.json")
+				.extract("functions", )
 	}
 }

@@ -11,7 +11,7 @@ public abstract class OperationBuilder {
     }
 
     public LoadOperation load() {
-        var operation = executeOperation();
+        //var operation = executeOperation();
         //getBuilder().addOperation(operation);
         return new LoadOperation(getBuilder());
     }

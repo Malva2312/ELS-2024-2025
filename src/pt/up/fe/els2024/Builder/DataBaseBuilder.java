@@ -1,10 +1,9 @@
 package pt.up.fe.els2024.Builder;
 
-import jdk.dynalink.Operation;
 import org.apache.commons.collections4.map.ListOrderedMap;
 import pt.up.fe.els2024.Table.Table;
 
-import java.util.List;
+import java.util.Map;
 
 public class DataBaseBuilder extends OperationBuilder {
     // Tables from the Table class
@@ -19,4 +18,12 @@ public class DataBaseBuilder extends OperationBuilder {
         return null;
     }
 
+    public void addExtractedData(String targetName, Map<String, String> data) {
+        Table table = new Table();
+        for (var entry : data.entrySet()) {
+            table.addColumn(entry.getKey(), entry.getValue().getClass(), entry.getValue(), false);
+        }
+
+        tables.put(targetName, table);
+    }
 }
