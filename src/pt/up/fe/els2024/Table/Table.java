@@ -21,6 +21,11 @@ public class Table {
         this.rows = new ArrayList<>();
     }
 
+    public Table(){
+        this.columns = new ArrayList<>();
+        this.rows = new ArrayList<>();
+    }
+
     public void addRow(Row row){
         rows.add(row);
     }
