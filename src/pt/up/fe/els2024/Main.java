@@ -6,8 +6,8 @@ import pt.up.fe.els2024.Builder.OperationBuilder;
 public class Main {
 	public static void main(String[] args) {
 		DataBaseBuilder db = new DataBaseBuilder();
-		db.start()
-				.load()
+		db
+			.load()
 				.from("data.csv")
 				.into("table1")
 				.withAttributes("name", "age", "city");
