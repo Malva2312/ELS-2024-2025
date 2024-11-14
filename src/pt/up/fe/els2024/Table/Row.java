@@ -20,6 +20,4 @@ public class Row {
     public Map<String, Object> getData() {
         return data;
     }
-
-
 }

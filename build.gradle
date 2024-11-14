@@ -32,7 +32,8 @@ dependencies {
     // OpenCSV for CSV writing
     implementation 'com.opencsv:opencsv:5.8'
 
-    //TODO:GSON for JSON parsing
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
 }
 
 // Add JARs in folder 'libs' as dependencies
