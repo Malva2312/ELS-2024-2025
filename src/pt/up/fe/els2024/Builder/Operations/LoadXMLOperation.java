@@ -68,7 +68,6 @@ public class LoadXMLOperation extends OperationBuilder {
 
             // Processa todos os files XML
             for (File xmlFile : filesToProcess) {
-                System.out.println("Processing XML file: " + xmlFile.getAbsolutePath());
                 Map<String, Object> xmlData = xmlMapper.readValue(xmlFile, Map.class);
 
                 Map<String, Object> currentNode = xmlData;

@@ -6,22 +6,22 @@ public class Main {
 	public static void main(String[] args) {
 		DataBaseBuilder db = new DataBaseBuilder();
 		db
-				/*.loadJSON()
+				.loadJSON()
 				.from("jsonFiles")
 				.into("time")
-				.withAttributes("time%", "seconds", "name")*/
+				.withAttributes("time%", "seconds", "name")
 
 				.loadXML()
 				.from("assignment2Files/vitis-report.xml")
 				.into("vitis")
 				.nestedIn("AreaEstimates", "Resources")
 
-				/*.loadYAML()
+				.loadYAML()
 				.from("assignment2Files/decision_tree.yaml")
 				.into("decision_tree")
 
 				.loadYAML()
-				.from("assignment2Files/decision_tree.yaml")
+				.from("yamlFiles")
 				.into("decision_tree2")
 				.nestedIn("params")
 
@@ -31,7 +31,7 @@ public class Main {
 
 				.maxTimePercentagePerFile()
 				.fromPath("jsonFiles")
-				.toTable("max_time_summary")*/
+				.toTable("max_time_summary")
 
 				.printAll()
 		.end();
