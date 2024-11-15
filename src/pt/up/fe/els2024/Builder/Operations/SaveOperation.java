@@ -8,30 +8,63 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * SaveOperation class is responsible for saving database tables to various file formats.
+ */
 public class SaveOperation extends OperationBuilder {
     private String fileName;
     private String type;
     private List<String> tablesToSave;
 
+    /**
+     * Constructor for SaveOperation.
+     *
+     * @param db the DataBaseBuilder instance
+     */
     public SaveOperation(DataBaseBuilder db) {
         super(db);
     }
 
+    /**
+     * Specifies the tables to save.
+     *
+     * @param tables the names of the tables to save
+     * @return the current SaveOperation instance
+     */
     public SaveOperation tables(String... tables) {
         this.tablesToSave = List.of(tables);
         return this;
     }
 
+    /**
+     * Specifies the file name to save the tables to.
+     *
+     * @param fileName the name of the file
+     * @return the current SaveOperation instance
+     */
     public SaveOperation to(String fileName) {
         this.fileName = fileName;
         return this;
     }
 
+    /**
+     * Specifies the file type to save the tables as.
+     *
+     * @param type the type of the file (e.g., csv, xml, yaml, json, html)
+     * @return the current SaveOperation instance
+     */
     public SaveOperation as(String type) {
         this.type = type.toLowerCase(); // Ensure type is case-insensitive
         return this;
     }
 
+    /**
+     * Executes the save operation.
+     *
+     * @return the current SaveOperation instance
+     * @throws IllegalStateException if file name, type, or tables to save are not specified
+     * @throws RuntimeException if an I/O error occurs during saving
+     */
     @Override
     protected OperationBuilder executeOperation() {
         if (fileName == null || type == null || tablesToSave == null || tablesToSave.isEmpty()) {
@@ -73,6 +106,13 @@ public class SaveOperation extends OperationBuilder {
         return this;
     }
 
+    /**
+     * Writes the table data in CSV format.
+     *
+     * @param writer the FileWriter instance
+     * @param table the Table instance
+     * @throws IOException if an I/O error occurs
+     */
     private void writeCSV(FileWriter writer, Table table) throws IOException {
         // Write column headers
         writer.write(String.join(",", table.getColumns().stream().map(c -> c.getName()).toList()));
@@ -87,6 +127,13 @@ public class SaveOperation extends OperationBuilder {
         }
     }
 
+    /**
+     * Writes the table data in XML format.
+     *
+     * @param writer the FileWriter instance
+     * @param table the Table instance
+     * @throws IOException if an I/O error occurs
+     */
     private void writeXML(FileWriter writer, Table table) throws IOException {
         writer.write("<table>\n");
         for (var row : table.getRows()) {
@@ -100,6 +147,13 @@ public class SaveOperation extends OperationBuilder {
         writer.write("</table>\n");
     }
 
+    /**
+     * Writes the table data in YAML format.
+     *
+     * @param writer the FileWriter instance
+     * @param table the Table instance
+     * @throws IOException if an I/O error occurs
+     */
     private void writeYAML(FileWriter writer, Table table) throws IOException {
         for (var row : table.getRows()) {
             writer.write("-\n");
@@ -110,6 +164,13 @@ public class SaveOperation extends OperationBuilder {
         }
     }
 
+    /**
+     * Writes the table data in JSON format.
+     *
+     * @param writer the FileWriter instance
+     * @param table the Table instance
+     * @throws IOException if an I/O error occurs
+     */
     private void writeJSON(FileWriter writer, Table table) throws IOException {
         writer.write("[\n");
         for (int i = 0; i < table.getRows().size(); i++) {
@@ -133,6 +194,13 @@ public class SaveOperation extends OperationBuilder {
         writer.write("]\n");
     }
 
+    /**
+     * Writes the table data in HTML format.
+     *
+     * @param writer the FileWriter instance
+     * @param table the Table instance
+     * @throws IOException if an I/O error occurs
+     */
     private void writeHTML(FileWriter writer, Table table) throws IOException {
         writer.write("<table>\n");
         writer.write("  <thead>\n");

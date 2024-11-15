@@ -7,9 +7,10 @@ public class Main {
 		DataBaseBuilder db = new DataBaseBuilder();
 		db
 			.processFolders()
-			.folders("assignment2Files/run1", "assignment2Files/run2", "assignment2Files/run3") // Specify folders
+			.folders("assignment2Files/run1") // Specify folders
 			.operations(() -> { // Define reusable operation sequence
-				db.loadJSON()
+				db
+						.loadJSON()
 						.from("profiling.json")
 						.into("time")
 						.withAttributes("time%", "seconds", "name")
@@ -17,7 +18,7 @@ public class Main {
 						.loadXML()
 						.from("vitis-report.xml")
 						.into("vitis")
-						.nestedIn("AreaEstimates", "Resources")
+						.nestedIn("Device", "Resources")
 
 						.loadYAML()
 						.from("decision_tree.yaml")

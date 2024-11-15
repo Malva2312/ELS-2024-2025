@@ -4,21 +4,39 @@ import pt.up.fe.els2024.Builder.DataBaseBuilder;
 import pt.up.fe.els2024.Builder.OperationBuilder;
 import pt.up.fe.els2024.Table.Table;
 
+/**
+ * Represents an operation to drop a table from the database.
+ */
 public class DropOperation extends OperationBuilder {
 
     private String tableName;
 
-    // Constructor for the DropTableOperation
+    /**
+     * Constructor for the DropOperation.
+     *
+     * @param db the database builder instance
+     */
     public DropOperation(DataBaseBuilder db) {
         super(db);
     }
 
-    // Method to specify the table to be dropped
+    /**
+     * Specifies the table to be dropped.
+     *
+     * @param tableName the name of the table to drop
+     * @return the current DropOperation instance for chaining
+     */
     public DropOperation table(String tableName) {
         this.tableName = tableName;
         return this;
     }
 
+    /**
+     * Executes the drop table operation.
+     *
+     * @return the current OperationBuilder instance for chaining
+     * @throws IllegalArgumentException if the table does not exist
+     */
     @Override
     protected OperationBuilder executeOperation() {
         // Check if the table exists in the database
