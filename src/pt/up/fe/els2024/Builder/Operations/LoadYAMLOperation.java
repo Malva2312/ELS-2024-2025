@@ -18,6 +18,7 @@ public class LoadYAMLOperation extends OperationBuilder {
     private String filePath;
     private String tableName;
     private List<String> fields;
+    private List<String> nested;
 
     public LoadYAMLOperation(DataBaseBuilder builder) {
         super(builder);
@@ -35,6 +36,11 @@ public class LoadYAMLOperation extends OperationBuilder {
 
     public LoadYAMLOperation withAttributes(String... fields) {
         this.fields = fields.length > 0 ? List.of(fields) : null; // Add all columns if none are provided
+        return this;
+    }
+
+    public LoadYAMLOperation nestedIn(String... nested) {
+        this.nested = List.of(nested);
         return this;
     }
 
@@ -58,21 +64,36 @@ public class LoadYAMLOperation extends OperationBuilder {
                         rowValues.put(key, value);
                     }
                 }
+            }
 
-                // Extract from "params" object if it exists
-                if (key.equals("params") && value instanceof Map) {
-                    Map<String, Object> paramsMap = (Map<String, Object>) value;
-                    for (Map.Entry<String, Object> paramEntry : paramsMap.entrySet()) {
-                        String paramKey = paramEntry.getKey();
-                        Object paramValue = paramEntry.getValue();
+            // Navigate nested paths specified in the "nested" list
+            if (nested != null && !nested.isEmpty()) {
+                Map<String, Object> currentLevel = yamlData;
+                for (int i = 0; i < nested.size(); i++) {
+                    String currentKey = nested.get(i);
+                    Object nestedValue = currentLevel.get(currentKey);
 
-                        if (fields == null || fields.contains(paramKey)) {
-                            table.addColumn(new Column(paramKey, Object.class, null, true));
-                            rowValues.put(paramKey, paramValue);
+                    if (nestedValue instanceof Map && i < nested.size() - 1) {
+                        currentLevel = (Map<String, Object>) nestedValue; // Descend further
+                    } else if (i == nested.size() - 1 && nestedValue instanceof Map) {
+                        // Extract key-value pairs at the final level
+                        Map<String, Object> finalLevel = (Map<String, Object>) nestedValue;
+                        for (Map.Entry<String, Object> nestedEntry : finalLevel.entrySet()) {
+                            String nestedKey = nestedEntry.getKey();
+                            Object nestedValueEntry = nestedEntry.getValue();
+
+                            if (isNonComposite(nestedValueEntry) &&
+                                    (fields == null || fields.contains(nestedKey))) {
+                                table.addColumn(new Column(nestedKey, Object.class, null, true));
+                                rowValues.put(nestedKey, nestedValueEntry);
+                            }
                         }
+                    } else {
+                        break; // Invalid path or non-map value encountered
                     }
                 }
             }
+
 
             // Add a single row to the table
             table.addRow(new Row(rowValues));

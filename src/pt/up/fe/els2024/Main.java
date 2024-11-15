@@ -20,6 +20,11 @@ public class Main {
 				.from("assignment2Files/decision_tree.yaml")
 				.into("decision_tree")
 
+				.loadYAML()
+				.from("assignment2Files/decision_tree.yaml")
+				.into("decision_tree2")
+				.nestedIn("params")
+
 		.end();
 	}
 }
