@@ -9,9 +9,7 @@ public class Main {
 				.loadJSON()
 				.from("assignment2Files/profiling.json")
 				.into("time")
-				.withAttributes("time", "date", "name");
-
-		db.loadXML();
-		db.loadYAML();
+				.withAttributes("time%", "seconds", "name")
+		.end();
 	}
 }

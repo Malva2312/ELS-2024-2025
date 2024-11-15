@@ -18,6 +18,10 @@ public abstract class OperationBuilder {
         return db;
     }
 
+    public OperationBuilder end() {
+        return executeOperation();
+    }
+
     public LoadJSONOperation loadJSON() {
         executeOperation();
         return new LoadJSONOperation(getBuilder());

@@ -198,5 +198,21 @@ public class Table {
         return sortedTable;
     }
 
+    public void printTable() {
+        // Print column names
+        for (Column column : columns) {
+            System.out.print(column.getName() + "\t");
+        }
+        System.out.println();
+
+        // Print rows
+        for (Row row : rows) {
+            for (Column column : columns) {
+                System.out.print(row.getValue(column.getName()) + "\t");
+            }
+            System.out.println();
+        }
+    }
+
 
 }

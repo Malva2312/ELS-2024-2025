@@ -35,13 +35,17 @@ public class LoadJSONOperation extends OperationBuilder {
                 table.addColumn(new Column(field, Object.class, null, true));
             }
 
-            for (JsonNode node : root) {
-                Map<String, Object> rowValues = new HashMap<>();
-                for (String field : fields) {
-                    JsonNode fieldNode = node.get(field);
-                    rowValues.put(field, fieldNode != null ? fieldNode.asText() : null);
+            // Assume 'root' is the root JsonNode parsed from the JSON file
+            JsonNode functionsArray = root.get("functions");
+            if (functionsArray != null && functionsArray.isArray()) {
+                for (JsonNode node : functionsArray) {
+                    Map<String, Object> rowValues = new HashMap<>();
+                    for (String field : fields) {
+                        JsonNode fieldNode = node.get(field);
+                        rowValues.put(field, fieldNode != null ? fieldNode.asText() : null);
+                    }
+                    table.addRow(new Row(rowValues));
                 }
-                table.addRow(new Row(rowValues));
             }
 
             getBuilder().addTable(tableName, table);
