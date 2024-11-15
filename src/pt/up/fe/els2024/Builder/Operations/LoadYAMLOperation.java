@@ -27,7 +27,7 @@ public class LoadYAMLOperation extends OperationBuilder {
     }
 
     public LoadYAMLOperation from(String filePath) {
-        this.filePath = filePath;
+        this.filePath = db.resolvePath(filePath);
         return this;
     }
 

@@ -332,10 +332,12 @@ public class Table {
         return this;
     }
 
-
     public void insert(Table newTable) {
-        if (!columns.equals(newTable.getColumns())) {
-            throw new IllegalArgumentException("Tables must have the same columns to insert.");
+        // check if there is a column with different name
+        for (Column column : newTable.getColumns()) {
+            if (getColumn(column.getName()) == null) {
+                throw new IllegalArgumentException("Column " + column.getName() + " does not exist.");
+            }
         }
 
         rows.addAll(newTable.getRows());

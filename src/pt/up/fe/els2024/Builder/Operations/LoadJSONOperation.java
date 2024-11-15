@@ -80,7 +80,7 @@ public class LoadJSONOperation extends OperationBuilder {
     }
 
     public LoadJSONOperation from(String filePath) {
-        this.filePath = filePath;
+        this.filePath = db.resolvePath(filePath);
         return this;
     }
 

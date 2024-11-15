@@ -25,7 +25,7 @@ public class LoadXMLOperation extends OperationBuilder {
     }
 
     public LoadXMLOperation from(String filePath) {
-        this.filePath = filePath;
+        this.filePath = db.resolvePath(filePath);
         return this;
     }
 

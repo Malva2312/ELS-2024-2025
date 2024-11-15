@@ -46,4 +46,14 @@ public class DataBaseBuilder extends OperationBuilder {
     protected OperationBuilder executeOperation() {
         return null;
     }
+
+    private String currentFolder = "";
+
+    public void setCurrentFolder(String folder) {
+        this.currentFolder = folder;
+    }
+
+    public String resolvePath(String fileName) {
+        return currentFolder + "/" + fileName;
+    }
 }

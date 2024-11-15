@@ -92,4 +92,10 @@ public abstract class OperationBuilder {
         executeOperation();
         return new PrintTableOperation(getBuilder(), table);
     }
+
+
+    public ProcessFoldersOperation processFolders() {
+        executeOperation();
+        return new ProcessFoldersOperation(getBuilder());
+    }
 }
