@@ -15,16 +15,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class responsible for loading JSON data into a table.
+ */
 public class LoadJSONOperation extends OperationBuilder {
 
     private String filePath;
     private String tableName;
     private List<String> fields;
+    private List<String> nested;
 
+    /**
+     * Constructor for LoadJSONOperation.
+     *
+     * @param builder the DataBaseBuilder instance
+     */
     public LoadJSONOperation(DataBaseBuilder builder) {
         super(builder);
     }
 
+    /**
+     * Executes the operation to load JSON data into a table.
+     *
+     * @return the current instance of LoadJSONOperation
+     */
     @Override
     protected OperationBuilder executeOperation() {
         try {
@@ -32,31 +46,37 @@ public class LoadJSONOperation extends OperationBuilder {
 
             File file = new File(filePath);
             if (file.isDirectory()) {
-                // Adiciona todos os arquivos JSON da pasta
+                // Adds all JSON files from the directory
                 File[] jsonFiles = file.listFiles(f -> f.isFile() && f.getName().endsWith(".json"));
                 if (jsonFiles != null) {
                     filesToProcess.addAll(List.of(jsonFiles));
                 }
             } else if (file.isFile() && file.getName().endsWith(".json")) {
-                // Adiciona apenas o arquivo especificado
+                // Adds only the specified file
                 filesToProcess.add(file);
             }
 
-            // Inicializa a tabela
+            // Initializes the table
             Table table = new Table();
             for (String field : fields) {
                 table.addColumn(new Column(field, Object.class, null, true));
             }
 
-            // Processa todos os arquivos encontrados
+            // Processes all found files
             for (File jsonFile : filesToProcess) {
 
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode root = mapper.readTree(jsonFile);
 
-                JsonNode functionsArray = root.get("functions");
-                if (functionsArray != null && functionsArray.isArray()) {
-                    for (JsonNode node : functionsArray) {
+                if (nested != null) {
+                    for (String nestedField : nested) {
+                        root = root.get(nestedField);
+                    }
+                }
+
+                if (root != null && root.isArray()) {
+
+                    for (JsonNode node : root) {
                         Map<String, Object> rowValues = new HashMap<>();
 
                         for (String field : fields) {
@@ -69,7 +89,7 @@ public class LoadJSONOperation extends OperationBuilder {
                 }
             }
 
-            // Adiciona a tabela ao DataBaseBuilder
+            // Adds the table to the DataBaseBuilder
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
@@ -79,18 +99,47 @@ public class LoadJSONOperation extends OperationBuilder {
         return this;
     }
 
+    /**
+     * Sets the file path for the JSON file or directory.
+     *
+     * @param filePath the path to the JSON file or directory
+     * @return the current instance of LoadJSONOperation
+     */
     public LoadJSONOperation from(String filePath) {
         this.filePath = db.resolvePath(filePath);
         return this;
     }
 
+    /**
+     * Sets the table name where the JSON data will be loaded.
+     *
+     * @param tableName the name of the table
+     * @return the current instance of LoadJSONOperation
+     */
     public LoadJSONOperation into(String tableName) {
         this.tableName = tableName;
         return this;
     }
 
+    /**
+     * Sets the fields to be extracted from the JSON data.
+     *
+     * @param fields the fields to be extracted
+     * @return the current instance of LoadJSONOperation
+     */
     public LoadJSONOperation withAttributes(String... fields) {
         this.fields = List.of(fields);
+        return this;
+    }
+
+    /**
+     * Sets the nested fields to be extracted from the JSON data.
+     *
+     * @param nested the nested fields to be extracted
+     * @return the current instance of LoadJSONOperation
+     */
+    public LoadJSONOperation nestedIn(String... nested) {
+        this.nested = List.of(nested);
         return this;
     }
 }

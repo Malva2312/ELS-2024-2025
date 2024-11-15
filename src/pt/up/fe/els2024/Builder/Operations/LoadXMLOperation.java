@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * LoadXMLOperation is responsible for loading XML data into a table.
+ */
 public class LoadXMLOperation extends OperationBuilder {
 
     private String filePath;
@@ -20,30 +22,64 @@ public class LoadXMLOperation extends OperationBuilder {
     private List<String> fields;
     private List<String> nested;
 
+    /**
+     * Constructor for LoadXMLOperation.
+     *
+     * @param builder the DataBaseBuilder instance
+     */
     public LoadXMLOperation(DataBaseBuilder builder) {
         super(builder);
     }
 
+    /**
+     * Sets the file path for the XML file or directory.
+     *
+     * @param filePath the path to the XML file or directory
+     * @return the current LoadXMLOperation instance
+     */
     public LoadXMLOperation from(String filePath) {
         this.filePath = db.resolvePath(filePath);
         return this;
     }
 
+    /**
+     * Sets the table name where the XML data will be loaded.
+     *
+     * @param tableName the name of the table
+     * @return the current LoadXMLOperation instance
+     */
     public LoadXMLOperation into(String tableName) {
         this.tableName = tableName;
         return this;
     }
 
+    /**
+     * Specifies the attributes (fields) to be loaded from the XML.
+     *
+     * @param fields the attributes to be loaded
+     * @return the current LoadXMLOperation instance
+     */
     public LoadXMLOperation withAttributes(String... fields) {
         this.fields = List.of(fields);
         return this;
     }
 
+    /**
+     * Specifies the nested elements to be processed within the XML.
+     *
+     * @param nested the nested elements
+     * @return the current LoadXMLOperation instance
+     */
     public LoadXMLOperation nestedIn(String... nested) {
         this.nested = List.of(nested);
         return this;
     }
 
+    /**
+     * Executes the operation to load XML data into the table.
+     *
+     * @return the current LoadXMLOperation instance
+     */
     @Override
     protected OperationBuilder executeOperation() {
         try {
@@ -51,22 +87,22 @@ public class LoadXMLOperation extends OperationBuilder {
             File file = new File(filePath);
 
             if (file.isDirectory()) {
-                // Adiciona todos os arquivos XML da pasta
+                // Add all XML files from the directory
                 File[] xmlFiles = file.listFiles(f -> f.isFile() && f.getName().endsWith(".xml"));
                 if (xmlFiles != null) {
                     filesToProcess.addAll(List.of(xmlFiles));
                 }
             } else if (file.isFile() && file.getName().endsWith(".xml")) {
-                // Adiciona apenas o arquivo especificado
+                // Add only the specified file
                 filesToProcess.add(file);
             }
 
-            // Inicializa a tabela combinada
+            // Initialize the combined table
             Table table = new Table();
 
             XmlMapper xmlMapper = new XmlMapper();
 
-            // Processa todos os files XML
+            // Process all XML files
             for (File xmlFile : filesToProcess) {
                 Map<String, Object> xmlData = xmlMapper.readValue(xmlFile, Map.class);
 
@@ -82,19 +118,19 @@ public class LoadXMLOperation extends OperationBuilder {
 
                 Map<String, Object> resources = currentNode;
 
-                // Se `fields` for null, inicializa com todas as chaves disponíveis
+                // If `fields` is null, initialize with all available keys
                 if (fields == null) {
                     fields = new ArrayList<>(resources.keySet());
                 }
 
-                // Adiciona as colunas à tabela, verificando se já existem
+                // Add columns to the table, checking if they already exist
                 for (String field : fields) {
-                    if (table.getColumn(field) == null) { // Verifica se a coluna já existe
+                    if (table.getColumn(field) == null) { // Check if the column already exists
                         table.addColumn(new Column(field, Object.class, null, true));
                     }
                 }
 
-                // Preenche as linhas da tabela
+                // Fill the table rows
                 Map<String, Object> rowValues = new HashMap<>();
                 for (String field : fields) {
                     rowValues.put(field, resources.getOrDefault(field, null));
@@ -102,7 +138,7 @@ public class LoadXMLOperation extends OperationBuilder {
                 table.addRow(new Row(rowValues));
             }
 
-            // Adiciona a tabela combinada ao DataBaseBuilder
+            // Add the combined table to the DataBaseBuilder
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {

@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class responsible for loading YAML files and converting them into table rows.
+ */
 public class LoadYAMLOperation extends OperationBuilder {
 
     private String filePath;
@@ -22,30 +25,64 @@ public class LoadYAMLOperation extends OperationBuilder {
     private List<String> fields;
     private List<String> nested;
 
+    /**
+     * Constructor for LoadYAMLOperation.
+     *
+     * @param builder the DataBaseBuilder instance
+     */
     public LoadYAMLOperation(DataBaseBuilder builder) {
         super(builder);
     }
 
+    /**
+     * Sets the file path for the YAML file to be loaded.
+     *
+     * @param filePath the path to the YAML file
+     * @return the current LoadYAMLOperation instance
+     */
     public LoadYAMLOperation from(String filePath) {
         this.filePath = db.resolvePath(filePath);
         return this;
     }
 
+    /**
+     * Sets the table name where the data will be loaded.
+     *
+     * @param tableName the name of the table
+     * @return the current LoadYAMLOperation instance
+     */
     public LoadYAMLOperation into(String tableName) {
         this.tableName = tableName;
         return this;
     }
 
+    /**
+     * Specifies the attributes (fields) to be loaded from the YAML file.
+     *
+     * @param fields the attributes to be loaded
+     * @return the current LoadYAMLOperation instance
+     */
     public LoadYAMLOperation withAttributes(String... fields) {
         this.fields = fields.length > 0 ? List.of(fields) : null; // Add all columns if none are provided
         return this;
     }
 
+    /**
+     * Specifies the nested paths to be navigated in the YAML file.
+     *
+     * @param nested the nested paths
+     * @return the current LoadYAMLOperation instance
+     */
     public LoadYAMLOperation nestedIn(String... nested) {
         this.nested = List.of(nested);
         return this;
     }
 
+    /**
+     * Executes the operation to load the YAML file and convert it into table rows.
+     *
+     * @return the current LoadYAMLOperation instance
+     */
     @Override
     protected OperationBuilder executeOperation() {
         try {
@@ -53,17 +90,17 @@ public class LoadYAMLOperation extends OperationBuilder {
             File file = new File(filePath);
 
             if (file.isDirectory()) {
-                // Adiciona todos os arquivos YAML da pasta
+                // Add all YAML files from the directory
                 File[] yamlFiles = file.listFiles(f -> f.isFile() && f.getName().endsWith(".yaml"));
                 if (yamlFiles != null) {
                     filesToProcess.addAll(List.of(yamlFiles));
                 }
             } else if (file.isFile() && file.getName().endsWith(".yaml")) {
-                // Adiciona apenas o arquivo especificado
+                // Add only the specified file
                 filesToProcess.add(file);
             }
 
-            // Inicializa a tabela combinada
+            // Initialize the combined table
             Table table = new Table();
 
             Yaml yaml = new Yaml();
@@ -75,7 +112,7 @@ public class LoadYAMLOperation extends OperationBuilder {
 
                     Map<String, Object> rowValues = new HashMap<>();
 
-                    // Extrai pares chave-valor de nível raiz com tipos não compostos
+                    // Extract root-level key-value pairs with non-composite types
                     for (Map.Entry<String, Object> entry : yamlData.entrySet()) {
                         String key = entry.getKey();
                         Object value = entry.getValue();
@@ -90,7 +127,7 @@ public class LoadYAMLOperation extends OperationBuilder {
                         }
                     }
 
-                    // Navega nos caminhos, se especificado
+                    // Navigate nested paths, if specified
                     if (nested != null && !nested.isEmpty()) {
                         Map<String, Object> currentLevel = yamlData;
                         for (int i = 0; i < nested.size(); i++) {
@@ -98,9 +135,9 @@ public class LoadYAMLOperation extends OperationBuilder {
                             Object nestedValue = currentLevel.get(currentKey);
 
                             if (nestedValue instanceof Map && i < nested.size() - 1) {
-                                currentLevel = (Map<String, Object>) nestedValue; // Desce mais um nível
+                                currentLevel = (Map<String, Object>) nestedValue; // Go one level deeper
                             } else if (i == nested.size() - 1 && nestedValue instanceof Map) {
-                                // Extrai pares chave-valor no nível final
+                                // Extract key-value pairs at the final level
                                 Map<String, Object> finalLevel = (Map<String, Object>) nestedValue;
                                 for (Map.Entry<String, Object> nestedEntry : finalLevel.entrySet()) {
                                     String nestedKey = nestedEntry.getKey();
@@ -115,17 +152,17 @@ public class LoadYAMLOperation extends OperationBuilder {
                                     }
                                 }
                             } else {
-                                break; // Caminho inválido ou valor não mapeável encontrado
+                                break; // Invalid path or non-mappable value found
                             }
                         }
                     }
 
-                    // Adiciona uma linha para cada arquivo YAML processado
+                    // Add a row for each processed YAML file
                     table.addRow(new Row(rowValues));
                 }
             }
 
-            // Adiciona a tabela combinada ao DataBaseBuilder
+            // Add the combined table to the DataBaseBuilder
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
@@ -135,7 +172,12 @@ public class LoadYAMLOperation extends OperationBuilder {
         return this;
     }
 
-    // Helper method to check for non-composite types
+    /**
+     * Helper method to check for non-composite types.
+     *
+     * @param value the value to check
+     * @return true if the value is non-composite, false otherwise
+     */
     private boolean isNonComposite(Object value) {
         return value == null || value instanceof String || value instanceof Number || value instanceof Boolean;
     }
