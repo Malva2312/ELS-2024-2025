@@ -38,6 +38,8 @@ public class Main {
 					.from("time%")
 					.to("Time")
 
+				.drop()
+					.table("time")
 				.printAll()
 		.end();
 		//TODO: Filter and SelectColumns are not tested

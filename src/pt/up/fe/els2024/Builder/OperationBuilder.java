@@ -68,4 +68,9 @@ public abstract class OperationBuilder {
         executeOperation();
         return new RenameOperation(getBuilder());
     }
+
+    public DropOperation drop() {
+        executeOperation();
+        return new DropOperation(getBuilder());
+    }
 }
