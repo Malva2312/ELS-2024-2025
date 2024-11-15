@@ -63,4 +63,9 @@ public abstract class OperationBuilder {
         executeOperation();
         return new ConcatHorizontalOperation(getBuilder());
     }
+
+    public SaveOperation save() {
+        executeOperation();
+        return new SaveOperation(getBuilder());
+    }
 }
