@@ -33,23 +33,7 @@ public class Main {
 				.toTable("final")
 				.onTables("decision_tree", "decision_tree2", "time", "vitis")
 
-				.rename()
-					.table("time")
-					.from("time%")
-					.to("Time")
 
-				.loadJSON()
-				.from("assignment2Files/testLimitTable.json")
-				.into("testLimit")
-				.withAttributes("time%", "seconds", "name")
-
-				.limit()
-					.table("testLimit")
-					.from(5)
-					.to(10)
-
-				.drop()
-					.table("time")
 				.printAll()
 		.end();
 		//TODO: Filter and SelectColumns are not tested

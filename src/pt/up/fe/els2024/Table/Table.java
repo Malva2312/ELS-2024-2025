@@ -303,6 +303,22 @@ public class Table {
 
         return newTable;
     }
+
+    // Concat tables that have the same columns
+    public Table concatVertical(Table table2) {
+        if (!columns.equals(table2.getColumns())) {
+            throw new IllegalArgumentException("Tables must have the same columns to concatenate vertically.");
+        }
+
+        Table newTable = new Table(columns);
+        newTable.getRows().addAll(rows);
+        newTable.getRows().addAll(table2.getRows());
+        return newTable;
+    }
+
+    public Object getRowCount() {
+        return rows.size();
+    }
     public Table limit(int from, int to) {
         // Validate the index range
         if (from < 0 || to > rows.size() || from > to) {

@@ -64,6 +64,11 @@ public abstract class OperationBuilder {
         return new ConcatHorizontalOperation(getBuilder());
     }
 
+    public SaveOperation save() {
+        executeOperation();
+        return new SaveOperation(getBuilder());
+    }
+
     public RenameOperation rename() {
         executeOperation();
         return new RenameOperation(getBuilder());
