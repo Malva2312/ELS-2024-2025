@@ -74,6 +74,11 @@ public abstract class OperationBuilder {
         return new RenameOperation(getBuilder());
     }
 
+    public LimitOperation limit() {
+        executeOperation();
+        return new LimitOperation(getBuilder());
+    }
+
     public DropOperation drop() {
         executeOperation();
         return new DropOperation(getBuilder());
@@ -82,10 +87,6 @@ public abstract class OperationBuilder {
     public MaxTimePercentagePerFileOperation maxTimePercentagePerFile() {
         executeOperation();
         return new MaxTimePercentagePerFileOperation(getBuilder());
-    }
-    public LimitOperation limit() {
-        executeOperation();
-        return new LimitOperation(getBuilder());
     }
 
     public PrintTableOperation printTable(String table) {
