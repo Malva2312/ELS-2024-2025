@@ -31,7 +31,7 @@ public class Main {
 
 				.rename()
 					.table("time")
-					.from("time")
+					.from("time%")
 					.to("Time")
 
 				.printAll()

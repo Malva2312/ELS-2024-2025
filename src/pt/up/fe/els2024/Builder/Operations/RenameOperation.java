@@ -5,6 +5,8 @@ import pt.up.fe.els2024.Builder.OperationBuilder;
 import pt.up.fe.els2024.Table.Table;
 import pt.up.fe.els2024.Table.Column;
 
+import javax.xml.crypto.Data;
+
 public class RenameOperation extends OperationBuilder {
 
     private String tableName;
@@ -12,8 +14,8 @@ public class RenameOperation extends OperationBuilder {
     private String newName;
 
     // Constructor for the RenameOperation
-    public RenameOperation(DataBaseBuilder builder) {
-        super();
+    public RenameOperation(DataBaseBuilder db) {
+        super(db);
     }
 
     public RenameOperation table(String tableName) {
@@ -32,13 +34,8 @@ public class RenameOperation extends OperationBuilder {
     }
 
     protected OperationBuilder executeOperation() {
-
-        System.out.println("!!!!!!!!!!!Inside executeOperation\n\n\n");
-
-        System.out.println(getBuilder().getTables().toString());
-
         // Retrieve the table by name from the DataBaseBuilder
-        Table table = getBuilder().getTable(tableName);
+        Table table = db.getTable(tableName);
 
         if (table == null) {
             throw new IllegalArgumentException("Table '" + tableName + "' does not exist.");
@@ -54,6 +51,6 @@ public class RenameOperation extends OperationBuilder {
         column.setName(newName);  // Assuming Column has a `setName()` method to rename it
 
         // Return the builder for chaining
-        return getBuilder();
+        return this;
     }
 }
