@@ -18,9 +18,10 @@ public class LoadYAMLOperation extends OperationBuilder {
     private String filePath;
     private String tableName;
     private List<String> fields;
+    private List<String> nested;
 
     public LoadYAMLOperation(DataBaseBuilder builder) {
-        super();
+        super(builder);
     }
 
     public LoadYAMLOperation from(String filePath) {
@@ -34,43 +35,79 @@ public class LoadYAMLOperation extends OperationBuilder {
     }
 
     public LoadYAMLOperation withAttributes(String... fields) {
-        this.fields = List.of(fields);
+        this.fields = fields.length > 0 ? List.of(fields) : null; // Add all columns if none are provided
+        return this;
+    }
+
+    public LoadYAMLOperation nestedIn(String... nested) {
+        this.nested = List.of(nested);
         return this;
     }
 
     @Override
     protected OperationBuilder executeOperation() {
-        try {
-            // Create a Yaml instance to parse the file
+        try (InputStream inputStream = new FileInputStream(filePath)) {
             Yaml yaml = new Yaml();
-            InputStream inputStream = new FileInputStream(filePath);
-            Iterable<Object> yamlData = yaml.loadAll(inputStream);
+            Map<String, Object> yamlData = yaml.load(inputStream);
 
-            // Create a Table and add columns based on specified fields
             Table table = new Table();
-            for (String field : fields) {
-                table.addColumn(new Column(field, Object.class, null, true));
-            }
+            Map<String, Object> rowValues = new HashMap<>();
 
-            // Populate table rows with YAML data
-            for (Object data : yamlData) {
-                if (data instanceof Map) {
-                    Map<String, Object> dataMap = (Map<String, Object>) data;
-                    Map<String, Object> rowValues = new HashMap<>();
-                    for (String field : fields) {
-                        rowValues.put(field, dataMap.getOrDefault(field, null));
+            // Extract root-level key-value pairs with non-composite types
+            for (Map.Entry<String, Object> entry : yamlData.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+
+                if (isNonComposite(value)) {
+                    if (fields == null || fields.contains(key)) {
+                        table.addColumn(new Column(key, Object.class, null, true));
+                        rowValues.put(key, value);
                     }
-                    table.addRow(new Row(rowValues));
                 }
             }
 
-            // Add table to DataBaseBuilder
+            // Navigate nested paths specified in the "nested" list
+            if (nested != null && !nested.isEmpty()) {
+                Map<String, Object> currentLevel = yamlData;
+                for (int i = 0; i < nested.size(); i++) {
+                    String currentKey = nested.get(i);
+                    Object nestedValue = currentLevel.get(currentKey);
+
+                    if (nestedValue instanceof Map && i < nested.size() - 1) {
+                        currentLevel = (Map<String, Object>) nestedValue; // Descend further
+                    } else if (i == nested.size() - 1 && nestedValue instanceof Map) {
+                        // Extract key-value pairs at the final level
+                        Map<String, Object> finalLevel = (Map<String, Object>) nestedValue;
+                        for (Map.Entry<String, Object> nestedEntry : finalLevel.entrySet()) {
+                            String nestedKey = nestedEntry.getKey();
+                            Object nestedValueEntry = nestedEntry.getValue();
+
+                            if (isNonComposite(nestedValueEntry) &&
+                                    (fields == null || fields.contains(nestedKey))) {
+                                table.addColumn(new Column(nestedKey, Object.class, null, true));
+                                rowValues.put(nestedKey, nestedValueEntry);
+                            }
+                        }
+                    } else {
+                        break; // Invalid path or non-map value encountered
+                    }
+                }
+            }
+
+
+            // Add a single row to the table
+            table.addRow(new Row(rowValues));
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error when loading YAML: " + e.getMessage());
         }
 
-        return getBuilder();
+        return this;
+    }
+
+    // Helper method to check for non-composite types
+    private boolean isNonComposite(Object value) {
+        return value == null || value instanceof String || value instanceof Number || value instanceof Boolean;
     }
 }

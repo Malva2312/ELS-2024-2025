@@ -17,9 +17,10 @@ public class LoadXMLOperation extends OperationBuilder {
     private String filePath;
     private String tableName;
     private List<String> fields;
+    private List<String> nested;
 
     public LoadXMLOperation(DataBaseBuilder builder) {
-        super();
+        super(builder);
     }
 
     public LoadXMLOperation from(String filePath) {
@@ -37,27 +38,53 @@ public class LoadXMLOperation extends OperationBuilder {
         return this;
     }
 
+    public LoadXMLOperation nestedIn(String... nested) {
+        this.nested = List.of(nested);
+        return this;
+    }
+
     @Override
     protected OperationBuilder executeOperation() {
         try {
-            // Create an XmlMapper for parsing XML
+            // Initialize XmlMapper
             XmlMapper xmlMapper = new XmlMapper();
-            List<Map<String, Object>> data = xmlMapper.readValue(new File(filePath), List.class);
 
-            // Create a Table and add columns based on specified fields
-            Table table = new Table();
-            for (String field : fields) {
-                table.addColumn(new Column(field, Object.class, null, true));
-            }
+            // Read and parse the XML file
+            File file = new File(filePath);
+            Map<String, Object> xmlData = xmlMapper.readValue(file, Map.class);
 
-            // Populate table rows with XML data
-            for (Map<String, Object> entry : data) {
-                Map<String, Object> rowValues = new HashMap<>();
-                for (String field : fields) {
-                    rowValues.put(field, entry.getOrDefault(field, null));
+            // Navigate to the nested path provided
+            Map<String, Object> currentNode = xmlData;
+            for (String node : nested) {
+
+                currentNode = (Map<String, Object>) currentNode.get(node);
+                if (currentNode == null) {
+                    throw new IllegalArgumentException("No <" + node + "> element found under the specified path.");
                 }
-                table.addRow(new Row(rowValues));
             }
+
+            Map<String, Object> resources = (Map<String, Object>) currentNode;
+
+            // Create the table and add columns
+            Table table = new Table();
+            if (fields == null || fields.isEmpty()) {
+                // Add all columns if no specific fields are provided
+                for (String column : resources.keySet()) {
+                    table.addColumn(new Column(column, Object.class, null, true));
+                }
+            } else {
+                // Add only specified columns
+                for (String field : fields) {
+                    table.addColumn(new Column(field, Object.class, null, true));
+                }
+            }
+
+            // Populate the table with row data
+            Map<String, Object> rowValues = new HashMap<>();
+            for (String field : table.getRows().isEmpty() ? resources.keySet() : fields) {
+                rowValues.put(field, resources.getOrDefault(field, null));
+            }
+            table.addRow(new Row(rowValues));
 
             // Add table to DataBaseBuilder
             getBuilder().addTable(tableName, table);
@@ -66,6 +93,8 @@ public class LoadXMLOperation extends OperationBuilder {
             e.printStackTrace();
         }
 
-        return getBuilder();
+        return this;
     }
+
+
 }

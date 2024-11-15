@@ -7,14 +7,34 @@ public class Main {
 		DataBaseBuilder db = new DataBaseBuilder();
 		db
 				.loadJSON()
-					.from("profiling.json")
-					.into("time")
-					.withAttributes("time", "date", "name")
+				.from("assignment2Files/profiling.json")
+				.into("time")
+				.withAttributes("time%", "seconds", "name")
+
+				.loadXML()
+				.from("assignment2Files/vitis-report.xml")
+				.into("vitis")
+				.nestedIn("AreaEstimates", "Resources")
+
+				.loadYAML()
+				.from("assignment2Files/decision_tree.yaml")
+				.into("decision_tree")
+
+				.loadYAML()
+				.from("assignment2Files/decision_tree.yaml")
+				.into("decision_tree2")
+				.nestedIn("params")
+
+				.selectMax()
+					.onColumn("seconds")
+					.onTable("time")
+
 				.rename()
 					.table("time")
 					.from("time")
 					.to("Time")
-				.loadXML()
-				.loadYAML();
+
+				.printAll()
+		.end();
 	}
 }

@@ -3,16 +3,20 @@ package pt.up.fe.els2024.Builder;
 import pt.up.fe.els2024.Builder.Operations.*;
 
 public abstract class OperationBuilder {
-    protected DataBaseBuilder db;
+    protected final DataBaseBuilder db;
+
+    protected OperationBuilder(DataBaseBuilder db) {
+        this.db = db;
+    }
+
     protected abstract OperationBuilder executeOperation();
 
     protected DataBaseBuilder getBuilder() {
         return db;
     }
 
-    public LoadOperation load(String fileType) {
-        executeOperation();
-        return new LoadOperation(getBuilder(), fileType);
+    public OperationBuilder end() {
+        return executeOperation();
     }
 
     public LoadJSONOperation loadJSON() {
@@ -28,6 +32,21 @@ public abstract class OperationBuilder {
     public LoadYAMLOperation loadYAML() {
         executeOperation();
         return new LoadYAMLOperation(getBuilder());
+    }
+
+    public PrintAllOperation printAll() {
+        executeOperation();
+        return new PrintAllOperation(getBuilder());
+    }
+
+    public ArgMaxOperation selectMax() {
+        executeOperation();
+        return new ArgMaxOperation(getBuilder());
+    }
+
+    public ArgMinOperation selectMin() {
+        executeOperation();
+        return new ArgMinOperation(getBuilder());
     }
 
     public RenameOperation rename() {
