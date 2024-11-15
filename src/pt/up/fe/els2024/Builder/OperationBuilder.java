@@ -43,4 +43,9 @@ public abstract class OperationBuilder {
         executeOperation();
         return new ArgMaxOperation(getBuilder());
     }
+
+    public ArgMinOperation selectMin() {
+        executeOperation();
+        return new ArgMinOperation(getBuilder());
+    }
 }
