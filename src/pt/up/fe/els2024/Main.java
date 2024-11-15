@@ -26,8 +26,12 @@ public class Main {
 				.nestedIn("params")
 
 				.selectMax()
-					.onColumn("seconds")
+					.onColumn("time%")
 					.onTable("time")
+
+				.concactHorizontal()
+				.toTable("final")
+				.onTables("decision_tree", "decision_tree2", "time", "vitis")
 
 				.rename()
 					.table("time")
@@ -36,5 +40,6 @@ public class Main {
 
 				.printAll()
 		.end();
+		//TODO: Filter and SelectColumns are not tested
 	}
 }

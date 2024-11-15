@@ -49,6 +49,21 @@ public abstract class OperationBuilder {
         return new ArgMinOperation(getBuilder());
     }
 
+    public SelectColumnsOperation select() {
+        executeOperation();
+        return new SelectColumnsOperation(getBuilder());
+    }
+
+    public FilterOperation filter() {
+        executeOperation();
+        return new FilterOperation(getBuilder());
+    }
+
+    public ConcatHorizontalOperation concactHorizontal() {
+        executeOperation();
+        return new ConcatHorizontalOperation(getBuilder());
+    }
+
     public RenameOperation rename() {
         executeOperation();
         return new RenameOperation(getBuilder());
