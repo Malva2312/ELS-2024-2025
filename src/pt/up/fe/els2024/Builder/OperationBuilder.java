@@ -13,6 +13,11 @@ public abstract class OperationBuilder {
         return db;
     }
 
+    public LoadOperation load(String fileType) {
+        executeOperation();
+        return new LoadOperation(getBuilder(), fileType);
+    }
+
     public LoadJSONOperation loadJSON() {
         executeOperation();
         return new LoadJSONOperation(getBuilder());
