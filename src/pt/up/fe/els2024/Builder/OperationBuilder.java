@@ -68,4 +68,24 @@ public abstract class OperationBuilder {
         executeOperation();
         return new SaveOperation(getBuilder());
     }
+
+    public RenameOperation rename() {
+        executeOperation();
+        return new RenameOperation(getBuilder());
+    }
+
+    public DropOperation drop() {
+        executeOperation();
+        return new DropOperation(getBuilder());
+    }
+
+    public MaxTimePercentagePerFileOperation maxTimePercentagePerFile() {
+        executeOperation();
+        return new MaxTimePercentagePerFileOperation(getBuilder());
+    }
+    public LimitOperation limit() {
+        executeOperation();
+        return new LimitOperation(getBuilder());
+    }
+
 }

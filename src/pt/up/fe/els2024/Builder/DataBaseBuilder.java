@@ -47,4 +47,7 @@ public class DataBaseBuilder {
     public LoadYAMLOperation loadYAML() {
         return new LoadYAMLOperation(this);
     }
+    public void dropTable(String tableName) {
+        tables.remove(tableName);
+    }
 }

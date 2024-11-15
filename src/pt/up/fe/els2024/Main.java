@@ -33,13 +33,8 @@ public class Main {
 				.toTable("final")
 				.onTables("decision_tree", "decision_tree2", "time", "vitis")
 
-				.save()// HTML, CSV, XML, YAML, JSON
-				.to("assignment2Files/final.json")
-				.as("JSON")
-				.tables("final")
 
 				.printAll()
-
 		.end();
 		//TODO: Filter and SelectColumns are not tested
 	}

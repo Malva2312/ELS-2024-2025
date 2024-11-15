@@ -8,6 +8,7 @@ import pt.up.fe.els2024.Table.Table;
 import pt.up.fe.els2024.Table.Column;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,47 +47,62 @@ public class LoadXMLOperation extends OperationBuilder {
     @Override
     protected OperationBuilder executeOperation() {
         try {
-            // Initialize XmlMapper
+            List<File> filesToProcess = new ArrayList<>();
+            File file = new File(filePath);
+
+            if (file.isDirectory()) {
+                // Adiciona todos os arquivos XML da pasta
+                File[] xmlFiles = file.listFiles(f -> f.isFile() && f.getName().endsWith(".xml"));
+                if (xmlFiles != null) {
+                    filesToProcess.addAll(List.of(xmlFiles));
+                }
+            } else if (file.isFile() && file.getName().endsWith(".xml")) {
+                // Adiciona apenas o arquivo especificado
+                filesToProcess.add(file);
+            }
+
+            // Inicializa a tabela combinada
+            Table table = new Table();
+
             XmlMapper xmlMapper = new XmlMapper();
 
-            // Read and parse the XML file
-            File file = new File(filePath);
-            Map<String, Object> xmlData = xmlMapper.readValue(file, Map.class);
+            // Processa todos os files XML
+            for (File xmlFile : filesToProcess) {
+                Map<String, Object> xmlData = xmlMapper.readValue(xmlFile, Map.class);
 
-            // Navigate to the nested path provided
-            Map<String, Object> currentNode = xmlData;
-            for (String node : nested) {
-
-                currentNode = (Map<String, Object>) currentNode.get(node);
-                if (currentNode == null) {
-                    throw new IllegalArgumentException("No <" + node + "> element found under the specified path.");
+                Map<String, Object> currentNode = xmlData;
+                if (nested != null) {
+                    for (String node : nested) {
+                        currentNode = (Map<String, Object>) currentNode.get(node);
+                        if (currentNode == null) {
+                            throw new IllegalArgumentException("No <" + node + "> element found in file: " + xmlFile.getName());
+                        }
+                    }
                 }
-            }
 
-            Map<String, Object> resources = (Map<String, Object>) currentNode;
+                Map<String, Object> resources = currentNode;
 
-            // Create the table and add columns
-            Table table = new Table();
-            if (fields == null || fields.isEmpty()) {
-                // Add all columns if no specific fields are provided
-                for (String column : resources.keySet()) {
-                    table.addColumn(new Column(column, Object.class, null, true));
+                // Se `fields` for null, inicializa com todas as chaves disponíveis
+                if (fields == null) {
+                    fields = new ArrayList<>(resources.keySet());
                 }
-            } else {
-                // Add only specified columns
+
+                // Adiciona as colunas à tabela, verificando se já existem
                 for (String field : fields) {
-                    table.addColumn(new Column(field, Object.class, null, true));
+                    if (table.getColumn(field) == null) { // Verifica se a coluna já existe
+                        table.addColumn(new Column(field, Object.class, null, true));
+                    }
                 }
+
+                // Preenche as linhas da tabela
+                Map<String, Object> rowValues = new HashMap<>();
+                for (String field : fields) {
+                    rowValues.put(field, resources.getOrDefault(field, null));
+                }
+                table.addRow(new Row(rowValues));
             }
 
-            // Populate the table with row data
-            Map<String, Object> rowValues = new HashMap<>();
-            for (String field : table.getRows().isEmpty() ? resources.keySet() : fields) {
-                rowValues.put(field, resources.getOrDefault(field, null));
-            }
-            table.addRow(new Row(rowValues));
-
-            // Add table to DataBaseBuilder
+            // Adiciona a tabela combinada ao DataBaseBuilder
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
@@ -95,6 +111,4 @@ public class LoadXMLOperation extends OperationBuilder {
 
         return this;
     }
-
-
 }
