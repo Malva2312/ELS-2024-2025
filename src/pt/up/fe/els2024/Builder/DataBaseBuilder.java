@@ -30,4 +30,8 @@ public class DataBaseBuilder extends OperationBuilder {
     public void addTable(String name, Table table) {
         tables.put(name, table);
     }
+    public ListOrderedMap<String, Table> getTables() {return tables;}
+    public Table getTable(String tableName) {
+        return tables.get(tableName);
+    }
 }

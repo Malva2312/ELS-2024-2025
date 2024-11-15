@@ -1,9 +1,6 @@
 package pt.up.fe.els2024.Builder;
 
-import pt.up.fe.els2024.Builder.Operations.LoadJSONOperation;
-import pt.up.fe.els2024.Builder.Operations.LoadOperation;
-import pt.up.fe.els2024.Builder.Operations.LoadXMLOperation;
-import pt.up.fe.els2024.Builder.Operations.LoadYAMLOperation;
+import pt.up.fe.els2024.Builder.Operations.*;
 
 public abstract class OperationBuilder {
     protected DataBaseBuilder db;
@@ -33,4 +30,8 @@ public abstract class OperationBuilder {
         return new LoadYAMLOperation(getBuilder());
     }
 
+    public RenameOperation rename() {
+        executeOperation();
+        return new RenameOperation(getBuilder());
+    }
 }

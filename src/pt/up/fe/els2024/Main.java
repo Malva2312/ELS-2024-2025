@@ -10,6 +10,10 @@ public class Main {
 					.from("profiling.json")
 					.into("time")
 					.withAttributes("time", "date", "name")
+				.rename()
+					.table("time")
+					.from("time")
+					.to("Time")
 				.loadXML()
 				.loadYAML();
 	}
