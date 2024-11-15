@@ -215,4 +215,7 @@ public class Table {
     }
 
 
+    public List<Column> getColumns() {
+        return columns;
+    }
 }

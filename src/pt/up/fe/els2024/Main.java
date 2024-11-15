@@ -25,6 +25,10 @@ public class Main {
 				.into("decision_tree2")
 				.nestedIn("params")
 
+				.selectMax()
+					.onColumn("time%")
+					.onTable("time")
+
 				.printAll()
 		.end();
 	}
