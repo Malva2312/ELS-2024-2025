@@ -8,7 +8,7 @@ public class LoadOperation extends OperationBuilder {
     private final String fileType;
 
     public LoadOperation(DataBaseBuilder builder, String fileType) {
-        super();
+        super(builder);
         this.fileType = fileType;
     }
 

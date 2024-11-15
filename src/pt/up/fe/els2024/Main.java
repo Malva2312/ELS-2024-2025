@@ -7,10 +7,11 @@ public class Main {
 		DataBaseBuilder db = new DataBaseBuilder();
 		db
 				.loadJSON()
-					.from("profiling.json")
-					.into("time")
-					.withAttributes("time", "date", "name")
-				.loadXML()
-				.loadYAML();
+				.from("assignment2Files/profiling.json")
+				.into("time")
+				.withAttributes("time", "date", "name");
+
+		db.loadXML();
+		db.loadYAML();
 	}
 }

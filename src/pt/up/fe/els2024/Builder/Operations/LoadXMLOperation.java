@@ -19,7 +19,7 @@ public class LoadXMLOperation extends OperationBuilder {
     private List<String> fields;
 
     public LoadXMLOperation(DataBaseBuilder builder) {
-        super();
+        super(builder);
     }
 
     public LoadXMLOperation from(String filePath) {
@@ -40,17 +40,14 @@ public class LoadXMLOperation extends OperationBuilder {
     @Override
     protected OperationBuilder executeOperation() {
         try {
-            // Create an XmlMapper for parsing XML
             XmlMapper xmlMapper = new XmlMapper();
             List<Map<String, Object>> data = xmlMapper.readValue(new File(filePath), List.class);
 
-            // Create a Table and add columns based on specified fields
             Table table = new Table();
             for (String field : fields) {
                 table.addColumn(new Column(field, Object.class, null, true));
             }
 
-            // Populate table rows with XML data
             for (Map<String, Object> entry : data) {
                 Map<String, Object> rowValues = new HashMap<>();
                 for (String field : fields) {
@@ -59,13 +56,12 @@ public class LoadXMLOperation extends OperationBuilder {
                 table.addRow(new Row(rowValues));
             }
 
-            // Add table to DataBaseBuilder
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return getBuilder();
+        return this;
     }
 }

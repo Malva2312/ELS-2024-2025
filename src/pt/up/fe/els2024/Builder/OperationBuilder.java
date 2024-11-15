@@ -6,16 +6,16 @@ import pt.up.fe.els2024.Builder.Operations.LoadXMLOperation;
 import pt.up.fe.els2024.Builder.Operations.LoadYAMLOperation;
 
 public abstract class OperationBuilder {
-    protected DataBaseBuilder db;
+    protected final DataBaseBuilder db;
+
+    protected OperationBuilder(DataBaseBuilder db) {
+        this.db = db;
+    }
+
     protected abstract OperationBuilder executeOperation();
 
     protected DataBaseBuilder getBuilder() {
         return db;
-    }
-
-    public LoadOperation load(String fileType) {
-        executeOperation();
-        return new LoadOperation(getBuilder(), fileType);
     }
 
     public LoadJSONOperation loadJSON() {
@@ -33,4 +33,8 @@ public abstract class OperationBuilder {
         return new LoadYAMLOperation(getBuilder());
     }
 
+    public LoadOperation load(String fileType) {
+        executeOperation();
+        return new LoadOperation(getBuilder(), fileType);
+    }
 }
