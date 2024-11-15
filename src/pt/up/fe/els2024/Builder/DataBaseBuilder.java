@@ -120,6 +120,9 @@ public class DataBaseBuilder extends OperationBuilder {
      * @return the resolved path
      */
     public String resolvePath(String fileName) {
+        if (currentFolder.isEmpty()) {
+            return fileName;
+        }
         return currentFolder + "/" + fileName;
     }
 }

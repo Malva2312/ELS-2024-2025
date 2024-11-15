@@ -115,7 +115,240 @@ The decision to use a YAML configuration file was made for the following reasons
 2. **Structure**: YAML supports complex data structures, which allows for a clear and organized representation of commands and their parameters.
 3. **Flexibility**: YAML's flexible syntax allows for the inclusion of various types of data, such as lists and maps, which are essential for defining commands with multiple parameters.
 
-## Group
+---
+# Checkpoint 2
+
+## Running the program
+To run the program, use the following command:
+- On Linux: ``./gradlew run "``- On Linux: ``./gradlew run"``
+- On Windows: ``.\gradlew.bat run``.
+  This will run the Main class with no arguments since we discarded the configuration file.
+
+## Builder Package and DSL Implementation
+The Builder package implements a internal DSL for constructing and executing operations on tables.
+The Main class demonstrates how to use this DSL to perform various operations and obtain the result needed for this assignment.
+
+## Example Usage in Main Class
+The Main class demonstrates the use of the DSL to perform the basic operations required for this assignment.
+The following operations are executed:
+```java
+DataBaseBuilder db = new DataBaseBuilder();
+db
+    .loadJSON()
+    .from("assignment2Files/run1/profiling.json")
+    .into("time")
+    .withAttributes("time%", "seconds", "name")
+    .nestedIn("functions")
+
+    .loadXML()
+    .from("assignment2Files/run1/vitis-report.xml")
+    .into("vitis")
+    .nestedIn("Device", "Resources")
+
+    .loadYAML()
+    .from("assignment2Files/run1/decision_tree.yaml")
+    .into("decision_tree")
+
+    .loadYAML()
+    .from("assignment2Files/run1/decision_tree.yaml")
+    .into("decision_tree2")
+    .nestedIn("params")
+
+    .selectMax()
+    .onColumn("time%")
+    .onTable("time")
+
+    .concactHorizontal()
+    .toTable("final")
+    .onTables("decision_tree", "decision_tree2", "time", "vitis")
+
+    .save()
+    .tables("final")
+    .to("assignment2Files/output.html")
+    .as("html")
+
+    .end();
+```
+
+Alternatively, it is possible to encapsulate part of the process to repeat for each folder being analyzed.
+`processFolders()` method allows to specify a list of folders to process and a sequence of operations to be executed for each folder.
+
+```java
+db
+    .processFolders()
+    .folders("assignment2Files/run1", "assignment2Files/run2", "assignment2Files/run3") // Specify folders
+    .operations(() -> { // Define reusable operation sequence
+        db
+                .loadJSON()
+                .from("profiling.json")
+                .into("time")
+                .withAttributes("time%", "seconds", "name")
+                .nestedIn("functions")
+
+                .loadXML()
+                .from("vitis-report.xml")
+                .into("vitis")
+                .nestedIn("Device", "Resources")
+
+                .loadYAML()
+                .from("decision_tree.yaml")
+                .into("decision_tree")
+
+                .loadYAML()
+                .from("decision_tree.yaml")
+                .into("decision_tree2")
+                .nestedIn("params")
+
+                .selectMax()
+                .onColumn("time%")
+                .onTable("time")
+
+                .concactHorizontal()
+                .toTable("final")
+                .onTables("decision_tree", "decision_tree2", "time", "vitis")
+
+                .end();
+        })
+        .save()
+        .tables("final")
+        .to("assignment2Files/output.html")
+        .as("html")
+
+        .end();
+```
+
+## Table Representation
+The `Table`, `Column`, and `Row` classes interact to represent and manipulate tabular data.
+The `Table` class manages a collection of `Column` objects, which define the structure of the table, and `Row` objects, which hold the actual data.
+The `Table` class provides methods to add, update, delete, and query rows, as well as to manipulate columns.
+Each `Row` object contains a map of column names to values, allowing for easy access and modification of data.
+The `Column` class defines the properties of a column, such as its name, type, default value, and nullability, ensuring that the data in each row adheres to the table's schema.
+Together, these classes enable the creation, modification, and querying of table data in a structured and consistent manner.
+
+## Operations Basis
+1. **DataBaseBuilder Class**
+is responsible for creating and managing database tables. It extends the ``OperationBuilder`` class and provides methods to add, retrieve, and remove tables. It also includes methods to set the current directory and resolve file paths. The class maintains a collection of tables using a ``ListOrderedMap``.  
+2. **OperationBuilder Class**
+is an abstract class that represents a builder for various operations. It provides methods to execute different types of operations, such as loading JSON, XML, and YAML files, selecting maximum and minimum values, filtering data, concatenating tables horizontally, and saving data. Each operation returns a new instance of the corresponding operation class, allowing for a fluent API. The class also includes an ``end`` method to finalize the last operation.
+
+## Operations
+1. **ConcatHorizontalOperation**
+   Usage Explanation: This class is used to concatenate multiple tables horizontally, meaning it combines the columns of the specified tables into a single table.  Example:
+```java
+    .concactHorizontal()
+    .toTable("final")
+    .onTables("decision_tree", "decision_tree2", "time", "vitis")
+```
+
+2. **DropOperation**
+   Usage Explanation: This class is used to drop a column from a table. Example:
+```java
+    .drop()
+    .table("table_name")
+```
+
+3. **FilterOperation**
+    Usage Explanation: This class is used to filter rows in a table based on a specified condition and store the result in a target table.
+```java
+    .filter()
+    .table("table_name")
+    .where("column_name", "condition", "value")
+    .toTable("target_table")
+```
+
+4. **LoadJSONOperation**
+    Usage Explanation: This class is used to load data from a JSON file into a table. Example:
+```java
+    .loadJSON()
+    .from("file_path")
+    .into("table_name")
+    .withAttributes("attribute1", "attribute2", "attribute3")
+    .nestedIn("nested_attribute1", "nested_attribute2")
+```
+
+5. **LoadXMLOperation**
+    Usage Explanation: This class is used to load data from an XML file into a table. Example:
+```java
+    .loadXML()
+    .from("file_path")
+    .into("table_name")
+    .nestedIn("nested_element1", "nested_element2")
+```
+  If no `withAttributes` method is called, the operation will load all attributes from the XML file. 
+
+6. **LoadYAMLOperation**
+    Usage Explanation: This class is used to load data from a YAML file into a table. Example:
+```java
+    .loadYAML()
+    .from("file_path")
+    .into("table_name")
+    .nestedIn("nested_element1", "nested_element2")
+```
+  If no `withAttributes` method is called, the operation will load all attributes from the YAML file.
+
+7. **SaveOperation**
+    Usage Explanation: This class is used to save the data from a table to a file. Example:
+```java
+    .save()
+    .tables("table_name")
+    .to("file_path")
+    .as("format")
+```
+
+8. **SelectMaxOperation**
+    Usage Explanation: This class is used to select the row with the maximum value in a specified column. Example:
+```java
+    .selectMax()
+    .onColumn("column_name")
+    .onTable("table_name")
+```
+
+9. **SelectMinOperation**
+    Usage Explanation: This class is used to select the row with the minimum value in a specified column. Example:
+```java
+    .selectMin()
+    .onColumn("column_name")
+    .onTable("table_name")
+```
+
+10. **RenameOperation**
+    Usage Explanation: This class is used to rename a column in a table. Example:
+```java
+    .rename()
+    .table("table_name")
+    .from("column_old_name")
+    .to("column_new_name")
+```
+
+11. **ProcessFoldersOperation**
+    Usage Explanation: This class is used to process multiple folders and execute a sequence of operations for each folder. Example:
+```java
+    .processFolders()
+    .folders("folder1", "folder2", "folder3")
+    .operations(() -> {
+        // Define operations for each folder
+    })
+```
+
+12. **EndOperation**
+    Usage Explanation: This class is used to finalize the sequence of operations. Example:
+```java
+    .end();
+```
+
+13. **JoinOperation**
+    Usage Explanation: This class is used to join two tables based on a common column. Example:
+```java
+    .join()
+    .tables("table1", "table2")
+    .on("column_name")
+    .toTable("target_table")
+```
+    It may still have some bugs.
+
+
+
+# Group
 
 ELS2024-9
 
