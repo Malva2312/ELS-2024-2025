@@ -38,7 +38,7 @@ public class LoadXMLOperation extends OperationBuilder {
         return this;
     }
 
-    public LoadXMLOperation in(String... nested) {
+    public LoadXMLOperation nestedIn(String... nested) {
         this.nested = List.of(nested);
         return this;
     }

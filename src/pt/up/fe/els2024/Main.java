@@ -14,7 +14,12 @@ public class Main {
 				.loadXML()
 				.from("assignment2Files/vitis-report.xml")
 				.into("vitis")
-				.in("AreaEstimates", "Resources")
+				.nestedIn("AreaEstimates", "Resources")
+
+				.loadYAML()
+				.from("assignment2Files/decision_tree.yaml")
+				.into("decision_tree")
+
 		.end();
 	}
 }

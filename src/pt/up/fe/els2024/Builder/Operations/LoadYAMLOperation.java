@@ -34,7 +34,7 @@ public class LoadYAMLOperation extends OperationBuilder {
     }
 
     public LoadYAMLOperation withAttributes(String... fields) {
-        this.fields = List.of(fields);
+        this.fields = fields.length > 0 ? List.of(fields) : null; // Add all columns if none are provided
         return this;
     }
 
@@ -42,30 +42,54 @@ public class LoadYAMLOperation extends OperationBuilder {
     protected OperationBuilder executeOperation() {
         try (InputStream inputStream = new FileInputStream(filePath)) {
             Yaml yaml = new Yaml();
-            Iterable<Object> yamlData = yaml.loadAll(inputStream);
+            Map<String, Object> yamlData = yaml.load(inputStream);
 
             Table table = new Table();
-            for (String field : fields) {
-                table.addColumn(new Column(field, Object.class, null, true));
-            }
+            Map<String, Object> rowValues = new HashMap<>();
 
-            for (Object data : yamlData) {
-                if (data instanceof Map) {
-                    Map<String, Object> dataMap = (Map<String, Object>) data;
-                    Map<String, Object> rowValues = new HashMap<>();
-                    for (String field : fields) {
-                        rowValues.put(field, dataMap.getOrDefault(field, null));
+            // Extract root-level key-value pairs with non-composite types
+            for (Map.Entry<String, Object> entry : yamlData.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+
+                if (isNonComposite(value)) {
+                    if (fields == null || fields.contains(key)) {
+                        table.addColumn(new Column(key, Object.class, null, true));
+                        rowValues.put(key, value);
                     }
-                    table.addRow(new Row(rowValues));
+                }
+
+                // Extract from "params" object if it exists
+                if (key.equals("params") && value instanceof Map) {
+                    Map<String, Object> paramsMap = (Map<String, Object>) value;
+                    for (Map.Entry<String, Object> paramEntry : paramsMap.entrySet()) {
+                        String paramKey = paramEntry.getKey();
+                        Object paramValue = paramEntry.getValue();
+
+                        if (fields == null || fields.contains(paramKey)) {
+                            table.addColumn(new Column(paramKey, Object.class, null, true));
+                            rowValues.put(paramKey, paramValue);
+                        }
+                    }
                 }
             }
 
+            // Add a single row to the table
+            table.addRow(new Row(rowValues));
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
             System.err.println("Error when loading YAML: " + e.getMessage());
         }
 
+        System.out.println("Table: " + tableName);
+        getBuilder().getTable(tableName).printTable();
+
         return this;
+    }
+
+    // Helper method to check for non-composite types
+    private boolean isNonComposite(Object value) {
+        return value == null || value instanceof String || value instanceof Number || value instanceof Boolean;
     }
 }
