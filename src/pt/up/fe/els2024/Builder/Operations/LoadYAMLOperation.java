@@ -63,7 +63,7 @@ public class LoadYAMLOperation extends OperationBuilder {
             getBuilder().addTable(tableName, table);
 
         } catch (Exception e) {
-            System.err.println("Erro ao executar operação de carga YAML: " + e.getMessage());
+            System.err.println("Error when loading YAML: " + e.getMessage());
         }
 
         return this;
