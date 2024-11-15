@@ -342,4 +342,47 @@ public class Table {
 
         rows.addAll(newTable.getRows());
     }
+
+    public Table join(Table table2, String targetColumn1, String targetColumn2) {
+        // if not null join on the target column
+        // otherwise compile all combinations
+
+        List<Column> newColumns = new ArrayList<>(columns);
+        newColumns.addAll(table2.getColumns());
+        Table newTable = new Table(newColumns);
+
+        //if targetColumn1 and targetColumn2 are not null, join on the target column
+
+        if (targetColumn1 != null && targetColumn2 != null) {
+            for (Row row1 : rows) {
+                for (Row row2 : table2.getRows()) {
+                    if (row1.getValue(targetColumn1).equals(row2.getValue(targetColumn2))) {
+                        Map<String, Object> values = new HashMap<>();
+                        for (Column column : columns) {
+                            values.put(column.getName(), row1.getValue(column.getName()));
+                        }
+                        for (Column column : table2.getColumns()) {
+                            values.put(column.getName(), row2.getValue(column.getName()));
+                        }
+                        newTable.addRow(values);
+                    }
+                }
+            }
+        } else {
+            for (Row row1 : rows) {
+                for (Row row2 : table2.getRows()) {
+                    Map<String, Object> values = new HashMap<>();
+                    for (Column column : columns) {
+                        values.put(column.getName(), row1.getValue(column.getName()));
+                    }
+                    for (Column column : table2.getColumns()) {
+                        values.put(column.getName(), row2.getValue(column.getName()));
+                    }
+                    newTable.addRow(values);
+                }
+            }
+        }
+
+        return newTable;
+    }
 }

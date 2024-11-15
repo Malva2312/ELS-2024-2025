@@ -53,6 +53,10 @@ public class DataBaseBuilder extends OperationBuilder {
         this.currentFolder = folder;
     }
 
+    public DataBaseBuilder setDirectory(String folder) {
+        this.currentFolder = folder;
+        return this;
+    }
     public String resolvePath(String fileName) {
         return currentFolder + "/" + fileName;
     }

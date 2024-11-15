@@ -84,11 +84,6 @@ public abstract class OperationBuilder {
         return new DropOperation(getBuilder());
     }
 
-    public MaxTimePercentagePerFileOperation maxTimePercentagePerFile() {
-        executeOperation();
-        return new MaxTimePercentagePerFileOperation(getBuilder());
-    }
-
     public PrintTableOperation printTable(String table) {
         executeOperation();
         return new PrintTableOperation(getBuilder(), table);
@@ -98,5 +93,10 @@ public abstract class OperationBuilder {
     public ProcessFoldersOperation processFolders() {
         executeOperation();
         return new ProcessFoldersOperation(getBuilder());
+    }
+
+    public JoinOperation joinTables(String table1, String table2) {
+        executeOperation();
+        return new JoinOperation(getBuilder(), table1, table2);
     }
 }
