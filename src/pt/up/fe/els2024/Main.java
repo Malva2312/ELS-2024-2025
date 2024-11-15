@@ -10,6 +10,11 @@ public class Main {
 				.from("assignment2Files/profiling.json")
 				.into("time")
 				.withAttributes("time%", "seconds", "name")
+
+				.loadXML()
+				.from("assignment2Files/vitis-report.xml")
+				.into("vitis")
+				.in("AreaEstimates", "Resources")
 		.end();
 	}
 }
