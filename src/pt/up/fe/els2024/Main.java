@@ -6,7 +6,8 @@ public class Main {
 	public static void main(String[] args) {
 		DataBaseBuilder db = new DataBaseBuilder();
 		try {
-			db.processFolders()
+			db
+					.processFolders()
 					.folders("assignment2Files/run1", "assignment2Files/run2", "assignment2Files/run3") // Specify folders
 					.operations(() -> { // Define reusable operation sequence
 						db.loadJSON()
@@ -36,15 +37,13 @@ public class Main {
 								.toTable("final")
 								.onTables("decision_tree", "decision_tree2", "time", "vitis")
 
-
 								.end();
 					})
-					.printAll()
+					.printTable("final")
 					.end();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-		//TODO: Filter and SelectColumns are not tested
 	}
 }
