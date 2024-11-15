@@ -74,8 +74,13 @@ public abstract class OperationBuilder {
         return new DropOperation(getBuilder());
     }
 
+    public MaxTimePercentagePerFileOperation maxTimePercentagePerFile() {
+        executeOperation();
+        return new MaxTimePercentagePerFileOperation(getBuilder());
+    }
     public LimitOperation limit() {
         executeOperation();
         return new LimitOperation(getBuilder());
     }
+
 }
