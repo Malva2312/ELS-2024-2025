@@ -1,7 +1,6 @@
 package pt.up.fe.els2024.Table;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.map.ListOrderedMap;
 
 import java.util.*;
 
@@ -244,5 +243,64 @@ public class Table {
         }
 
         return sum / count;
+    }
+
+    public Table filter(String column, String condition, String value) {
+        Predicate<Row> predicate = row -> {
+            Object rowValue = row.getValue(column);
+            if (rowValue == null) {
+                return false;
+            }
+
+            switch (condition) {
+                case "=":
+                    return rowValue.equals(value);
+                case "!=":
+                    return !rowValue.equals(value);
+                case "<":
+                    return ((Comparable<Object>) rowValue).compareTo(value) < 0;
+                case "<=":
+                    return ((Comparable<Object>) rowValue).compareTo(value) <= 0;
+                case ">":
+                    return ((Comparable<Object>) rowValue).compareTo(value) > 0;
+                case ">=":
+                    return ((Comparable<Object>) rowValue).compareTo(value) >= 0;
+                default:
+                    throw new IllegalArgumentException("Invalid condition: " + condition);
+            }
+        };
+
+        return filterRows(predicate);
+    }
+
+    public Table concatHorizontal(Table table2) {
+        // First row in table 1 is concatenated with first row in table 2
+        // In case of different number of rows, complete with null values
+        List<Column> newColumns = new ArrayList<>(columns);
+        newColumns.addAll(table2.getColumns());
+
+        Table newTable = new Table(newColumns);
+        int numRows = Math.max(rows.size(), table2.getRows().size());
+
+        for (int i = 0; i < numRows; i++) {
+            Map<String, Object> values = new HashMap<>();
+            for (Column column : columns) {
+                Object value = null;
+                if (i < rows.size()) {
+                    value = rows.get(i).getValue(column.getName());
+                }
+                values.put(column.getName(), value);
+            }
+            for (Column column : table2.getColumns()) {
+                Object value = null;
+                if (i < table2.getRows().size()) {
+                    value = table2.getRows().get(i).getValue(column.getName());
+                }
+                values.put(column.getName(), value);
+            }
+            newTable.addRow(values);
+        }
+
+        return newTable;
     }
 }

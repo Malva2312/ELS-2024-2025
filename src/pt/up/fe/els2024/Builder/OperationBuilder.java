@@ -48,4 +48,19 @@ public abstract class OperationBuilder {
         executeOperation();
         return new ArgMinOperation(getBuilder());
     }
+
+    public SelectColumnsOperation select() {
+        executeOperation();
+        return new SelectColumnsOperation(getBuilder());
+    }
+
+    public FilterOperation filter() {
+        executeOperation();
+        return new FilterOperation(getBuilder());
+    }
+
+    public ConcatHorizontalOperation concactHorizontal() {
+        executeOperation();
+        return new ConcatHorizontalOperation(getBuilder());
+    }
 }
