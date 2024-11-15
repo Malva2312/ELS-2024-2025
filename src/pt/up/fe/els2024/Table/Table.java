@@ -218,4 +218,31 @@ public class Table {
     public List<Column> getColumns() {
         return columns;
     }
+
+    public Double getColumnMean(String column) {
+        Column col = getColumn(column);
+        if (col == null) {
+            throw new IllegalArgumentException("Column " + column + " does not exist.");
+        }
+
+        if (col.getType() != Integer.class && col.getType() != Double.class) {
+            throw new IllegalArgumentException("Column " + column + " must be of type Integer or Double.");
+        }
+
+        double sum = 0;
+        int count = 0;
+        for (Row row : rows) {
+            Object value = row.getValue(column);
+            if (value != null) {
+                sum += (double) value;
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            throw new IllegalArgumentException("Column " + column + " has no numeric values.");
+        }
+
+        return sum / count;
+    }
 }

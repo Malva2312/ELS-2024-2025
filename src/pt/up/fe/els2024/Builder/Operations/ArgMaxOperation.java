@@ -12,6 +12,7 @@ public class ArgMaxOperation extends OperationBuilder {
     private String columnName;
     private Table resultTable;
     private String sourceTable;
+    private String targetName;
 
     public ArgMaxOperation(DataBaseBuilder db) {
         super(db);
@@ -25,6 +26,11 @@ public class ArgMaxOperation extends OperationBuilder {
     public ArgMaxOperation onTable(String tableName) {
         this.resultTable = db.getTable(tableName);
         this.sourceTable = tableName;
+        return this;
+    }
+
+    public ArgMaxOperation toTable(String targetName) {
+        this.targetName = targetName;
         return this;
     }
 
@@ -60,7 +66,11 @@ public class ArgMaxOperation extends OperationBuilder {
         resultTable = new Table(resultTable.getColumns());
         resultTable.addRow(maxRow.getData());
 
-        db.addTable(sourceTable , resultTable);
+        if (targetName != null) {
+            db.addTable(targetName, resultTable);
+        } else {
+            db.addTable(sourceTable , resultTable);
+        }
 
 
         return this;

@@ -12,6 +12,7 @@ public class ArgMinOperation extends OperationBuilder {
     private String columnName;
     private Table resultTable;
     private String sourceTable;
+    private String targetName;
 
     public ArgMinOperation(DataBaseBuilder db) {
         super(db);
@@ -25,6 +26,11 @@ public class ArgMinOperation extends OperationBuilder {
     public ArgMinOperation onTable(String tableName) {
         this.resultTable = db.getTable(tableName);
         this.sourceTable = tableName;
+        return this;
+    }
+
+    public ArgMinOperation toTable(String targetName) {
+        this.targetName = targetName;
         return this;
     }
 
@@ -60,8 +66,11 @@ public class ArgMinOperation extends OperationBuilder {
         resultTable = new Table(resultTable.getColumns());
         resultTable.addRow(minRow.getData());
 
-        db.addTable(sourceTable , resultTable);
-
+        if (targetName != null) {
+            db.addTable(targetName, resultTable);
+        } else {
+            db.addTable(sourceTable , resultTable);
+        }
 
         return this;
     }

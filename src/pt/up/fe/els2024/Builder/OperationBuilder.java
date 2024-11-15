@@ -48,4 +48,9 @@ public abstract class OperationBuilder {
         executeOperation();
         return new ArgMinOperation(getBuilder());
     }
+
+    public ColumnMeanOperation selectMean() {
+        executeOperation();
+        return new ColumnMeanOperation(getBuilder());
+    }
 }
