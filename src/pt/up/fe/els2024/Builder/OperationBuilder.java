@@ -73,4 +73,9 @@ public abstract class OperationBuilder {
         executeOperation();
         return new DropOperation(getBuilder());
     }
+
+    public LimitOperation limit() {
+        executeOperation();
+        return new LimitOperation(getBuilder());
+    }
 }

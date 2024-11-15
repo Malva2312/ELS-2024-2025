@@ -303,4 +303,18 @@ public class Table {
 
         return newTable;
     }
+    public Table limit(int from, int to) {
+        // Validate the index range
+        if (from < 0 || to > rows.size() || from > to) {
+            throw new IllegalArgumentException("Invalid range: 'from' should be >= 0, 'to' should be <= number of rows, and 'from' should be <= 'to'.");
+        }
+
+        // Retain only the rows within the index range
+        rows = rows.subList(from, to);
+
+        // Return the current table after modification
+        return this;
+    }
+
+
 }

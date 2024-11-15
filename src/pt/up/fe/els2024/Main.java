@@ -38,6 +38,16 @@ public class Main {
 					.from("time%")
 					.to("Time")
 
+				.loadJSON()
+				.from("assignment2Files/testLimitTable.json")
+				.into("testLimit")
+				.withAttributes("time%", "seconds", "name")
+
+				.limit()
+					.table("testLimit")
+					.from(5)
+					.to(10)
+
 				.drop()
 					.table("time")
 				.printAll()

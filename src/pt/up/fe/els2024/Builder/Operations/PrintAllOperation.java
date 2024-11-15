@@ -13,8 +13,9 @@ public class PrintAllOperation extends OperationBuilder {
         System.out.println("Printing all tables...");
 
         for (var entry : db.getTables().entrySet()) {
-            System.out.println("Table: " + entry.getKey());
+            System.out.println("Table: " + entry.getKey() + "\n");
             entry.getValue().printTable();
+            System.out.println("______________________________");
         }
         return this;
     }
