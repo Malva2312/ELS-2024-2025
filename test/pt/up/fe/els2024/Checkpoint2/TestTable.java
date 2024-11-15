@@ -22,12 +22,10 @@ public class TestTable {
 
     @Before
     public void setUp() {
-        if (table == null) {
-            // Only initialize if table is null to maintain state across tests
-            Column col1 = new Column("ID", Integer.class, 0, false);
-            Column col2 = new Column("Name", String.class, "", false);
-            table = new Table(Arrays.asList(col1, col2));
-        }
+        table = new Table(Arrays.asList(
+                new Column("ID", Integer.class, 0, false),
+                new Column("Name", String.class, "", false)
+        ));
     }
 
     @Test
@@ -53,22 +51,22 @@ public class TestTable {
         Row row = new Row(rowData);
         table.addRow(row);
 
-        assertEquals(2, table.getRows().size());
-        assertEquals("Bob", table.getRows().get(1).getValue("Name"));
+        assertEquals(1, table.getRows().size());
+        assertEquals("Bob", table.getRows().get(0).getValue("Name"));
     }
 
     @Test
     public void test3_SelectColumns() {
-        // Add some rows for selection testing
         table.addRow(createRow(3, "Charlie"));
 
         List<String> columnsToSelect = List.of("ID");
         Table selectedTable = table.selectColumns(columnsToSelect);
 
-        assertEquals(3, selectedTable.getRows().size());
-        assertEquals(1, selectedTable.getRows().getFirst().getValue("ID"));
+        assertEquals(1, selectedTable.getRows().size());  // Only one row was added
+        assertEquals(3, selectedTable.getRows().getFirst().getValue("ID"));
         assertNull(selectedTable.getRows().getFirst().getValue("Name"));
     }
+
 
     @Test
     public void test4_RenameColumn() {
@@ -91,20 +89,36 @@ public class TestTable {
 
     @Test
     public void test6_UpdateRow() {
+        // First, add a row to the table
+        Map<String, Object> rowData = new HashMap<>();
+        rowData.put("ID", 1);
+        rowData.put("Name", "Alice");
+
+        Row row = new Row(rowData);
+        table.addRow(row);
+
         Map<String, Object> updatedData = new HashMap<>();
-        updatedData.put("FullName", "Alice Updated");
+        updatedData.put("Name", "Alice Updated");  // Updating the "Name" column
+
         table.updateRow(0, updatedData);
 
-        Row row = table.getRows().getFirst();
-        assertEquals("Alice Updated", row.getValue("FullName"));
+        Row updatedRow = table.getRows().getFirst();
+        assertEquals("Alice Updated", updatedRow.getValue("Name"));
     }
+
 
     @Test
     public void test7_DeleteRow() {
-        table.deleteRow(1);  // Deletes the second row
+        // Add two rows to the table before attempting to delete
+        table.addRow(createRow(1, "Alice"));
+        table.addRow(createRow(2, "Bob"));
 
-        assertEquals(2, table.getRows().size());
-        assertNull(table.getRows().stream().filter(r -> "Bob".equals(r.getValue("FullName"))).findFirst().orElse(null));
+        table.deleteRow(1);
+
+        assertEquals(1, table.getRows().size());
+        assertNull(table.getRows().stream().filter(r -> "Bob".equals(r.getValue("Name"))).findFirst().orElse(null));
+        // row with "Alice" still exists
+        assertNotNull(table.getRows().stream().filter(r -> "Alice".equals(r.getValue("Name"))).findFirst().orElse(null));
     }
 
     @Test
@@ -112,7 +126,7 @@ public class TestTable {
         table.addRow(createRow(4, "David"));
         table.addRow(createRow(5, "Eve"));
 
-        Table filteredTable = table.filterdRows(row -> ((Integer) row.getValue("ID")) > 3);
+        Table filteredTable = table.filterRows(row -> ((Integer) row.getValue("ID")) > 3);
         assertEquals(2, filteredTable.getRows().size());
         assertEquals("David", filteredTable.getRows().get(0).getValue("Name"));
         assertEquals("Eve", filteredTable.getRows().get(1).getValue("Name"));
@@ -143,6 +157,73 @@ public class TestTable {
         }
 
         assertTrue("IndexOutOfBoundsException should be thrown for non-existing row", exceptionThrown);
+    }
+    @Test
+    public void test11_FilterRowsByCondition() {
+        table.addRow(createRow(6, "Alice"));
+        table.addRow(createRow(7, "Bob"));
+        table.addRow(createRow(8, "Charlie"));
+
+        // Filter rows where ID > 6
+        Table filteredTable = table.filterRows(row -> ((Integer) row.getValue("ID")) > 6);
+
+        assertEquals(2, filteredTable.getRows().size());  // Two rows should be returned (ID 7, 8)
+        assertEquals("Bob", filteredTable.getRows().get(0).getValue("Name"));
+        assertEquals("Charlie", filteredTable.getRows().get(1).getValue("Name"));
+    }
+
+    @Test
+    public void test12_SearchRowsByColumnValue() {
+        table.addRow(createRow(9, "David"));
+        table.addRow(createRow(10, "Eve"));
+        table.addRow(createRow(11, "Alice"));
+
+        // Search for rows where Name = "Eve"
+        Table searchResult = table.searchRows("Name", "Eve");
+
+        assertEquals(1, searchResult.getRows().size());  // Only one row with Name = "Eve"
+        assertEquals("Eve", searchResult.getRows().get(0).getValue("Name"));
+    }
+
+    @Test
+    public void test13_SearchRowsByNonExistingValue() {
+        table.addRow(createRow(12, "George"));
+        table.addRow(createRow(13, "Hannah"));
+
+        // Search for rows where Name = "Zoe" (non-existing)
+        Table searchResult = table.searchRows("Name", "Zoe");
+
+        assertEquals(0, searchResult.getRows().size());  // No rows should match
+    }
+
+    @Test
+    public void test14_SortRowsByColumnAscending() {
+        table.addRow(createRow(14, "Alice"));
+        table.addRow(createRow(15, "Bob"));
+        table.addRow(createRow(16, "Charlie"));
+
+        // Sort by ID in ascending order
+        Table sortedTable = table.sortRows("ID", true);
+
+        assertEquals(3, sortedTable.getRows().size());
+        assertEquals("Alice", sortedTable.getRows().get(0).getValue("Name"));
+        assertEquals("Bob", sortedTable.getRows().get(1).getValue("Name"));
+        assertEquals("Charlie", sortedTable.getRows().get(2).getValue("Name"));
+    }
+
+    @Test
+    public void test15_SortRowsByColumnDescending() {
+        table.addRow(createRow(17, "Alice"));
+        table.addRow(createRow(18, "Bob"));
+        table.addRow(createRow(19, "Charlie"));
+
+        // Sort by ID in descending order
+        Table sortedTable = table.sortRows("ID", false);
+
+        assertEquals(3, sortedTable.getRows().size());
+        assertEquals("Charlie", sortedTable.getRows().get(0).getValue("Name"));
+        assertEquals("Bob", sortedTable.getRows().get(1).getValue("Name"));
+        assertEquals("Alice", sortedTable.getRows().get(2).getValue("Name"));
     }
 
     private Map<String, Object> createRow(int id, String name) {

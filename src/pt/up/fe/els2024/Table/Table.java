@@ -150,7 +150,7 @@ public class Table {
         }
     }
 
-    public Table filterdRows(Predicate<Row> condition) {
+    public Table filterRows(Predicate<Row> condition) {
         Table filteredTable = new Table(columns);
         for (Row row : rows) {
             if (condition.evaluate(row)) {
@@ -159,4 +159,44 @@ public class Table {
         }
         return filteredTable;
     }
+
+    public Table searchRows(String columnName, Object value) {
+        Table searchResult = new Table(columns);
+        for (Row row : rows) {
+            Object columnValue = row.getValue(columnName);
+            if (columnValue != null && columnValue.equals(value)) {
+                searchResult.addRow(row.getData());
+            }
+        }
+        return searchResult;
+    }
+
+    public Table sortRows(String columnName, boolean ascending) {
+        List<Row> sortedRows = new ArrayList<>(rows);
+        Column column = getColumn(columnName);
+
+        if (column == null) {
+            throw new IllegalArgumentException("Column " + columnName + " does not exist.");
+        }
+
+        Comparator<Row> comparator = (row1, row2) -> {
+            Comparable<Object> value1 = (Comparable<Object>) row1.getValue(columnName);
+            Comparable<Object> value2 = (Comparable<Object>) row2.getValue(columnName);
+            return value1.compareTo(value2);
+        };
+
+        if (!ascending) {
+            comparator = comparator.reversed();  // Reverse for descending order
+        }
+
+        sortedRows.sort(comparator);
+
+        Table sortedTable = new Table(columns);
+        for (Row row : sortedRows) {
+            sortedTable.addRow(row.getData());
+        }
+        return sortedTable;
+    }
+
+
 }
