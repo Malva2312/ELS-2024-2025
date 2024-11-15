@@ -31,7 +31,13 @@ public class ConcatHorizontalOperation extends OperationBuilder {
             for (int i = 1; i < tablesToConcat.size(); i++) {
                 newTable = newTable.concatHorizontal(db.getTable(tablesToConcat.get(i)));
             }
-            db.addTable(this.targetName, newTable);
+            //if table already exists, try to insert in the existing table
+            if (db.getTable(targetName) != null) {
+                db.getTable(targetName).insert(newTable);
+            } else {
+                db.addTable(targetName, newTable);
+            }
+
         } else {
             throw new IllegalArgumentException("Tables and target name must be specified.");
         }

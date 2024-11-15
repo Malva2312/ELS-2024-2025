@@ -1,21 +1,22 @@
 package pt.up.fe.els2024.Builder;
-
-import pt.up.fe.els2024.Builder.Operations.LoadJSONOperation;
-import pt.up.fe.els2024.Builder.Operations.LoadXMLOperation;
-import pt.up.fe.els2024.Builder.Operations.LoadYAMLOperation;
 import pt.up.fe.els2024.Table.Table;
 
 import org.apache.commons.collections4.map.ListOrderedMap;
 import java.util.Map;
 
-public class DataBaseBuilder {
+public class DataBaseBuilder extends OperationBuilder {
 
     private final ListOrderedMap<String, Table> tables;
 
     public DataBaseBuilder() {
+        super(null);
         this.tables = new ListOrderedMap<>();
     }
 
+    @Override
+    protected DataBaseBuilder getBuilder() {
+        return this;
+    }
     public void addExtractedData(String targetName, Map<String, String> data) {
         Table table = new Table();
         for (var entry : data.entrySet()) {
@@ -32,22 +33,17 @@ public class DataBaseBuilder {
         return tables.get(name);
     }
 
-    public LoadJSONOperation loadJSON() {
-        return new LoadJSONOperation(this);
-    }
-
     public ListOrderedMap<String, Table> getTables() {
         return tables;
     }
 
-    public LoadXMLOperation loadXML() {
-        return new LoadXMLOperation(this);
-    }
 
-    public LoadYAMLOperation loadYAML() {
-        return new LoadYAMLOperation(this);
-    }
     public void dropTable(String tableName) {
         tables.remove(tableName);
+    }
+
+    @Override
+    protected OperationBuilder executeOperation() {
+        return null;
     }
 }

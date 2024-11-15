@@ -333,4 +333,11 @@ public class Table {
     }
 
 
+    public void insert(Table newTable) {
+        if (!columns.equals(newTable.getColumns())) {
+            throw new IllegalArgumentException("Tables must have the same columns to insert.");
+        }
+
+        rows.addAll(newTable.getRows());
+    }
 }

@@ -88,4 +88,8 @@ public abstract class OperationBuilder {
         return new LimitOperation(getBuilder());
     }
 
+    public PrintTableOperation printTable(String table) {
+        executeOperation();
+        return new PrintTableOperation(getBuilder(), table);
+    }
 }
