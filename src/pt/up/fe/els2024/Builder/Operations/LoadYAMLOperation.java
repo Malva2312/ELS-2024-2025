@@ -103,9 +103,6 @@ public class LoadYAMLOperation extends OperationBuilder {
             System.err.println("Error when loading YAML: " + e.getMessage());
         }
 
-        System.out.println("Table: " + tableName);
-        getBuilder().getTable(tableName).printTable();
-
         return this;
     }
 

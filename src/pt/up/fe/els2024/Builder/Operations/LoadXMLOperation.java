@@ -89,10 +89,6 @@ public class LoadXMLOperation extends OperationBuilder {
             // Add table to DataBaseBuilder
             getBuilder().addTable(tableName, table);
 
-            // Print imported data
-            System.out.println("Table: " + tableName);
-            table.printTable();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

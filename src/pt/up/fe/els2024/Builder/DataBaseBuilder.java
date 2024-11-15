@@ -36,6 +36,10 @@ public class DataBaseBuilder {
         return new LoadJSONOperation(this);
     }
 
+    public ListOrderedMap<String, Table> getTables() {
+        return tables;
+    }
+
     public LoadXMLOperation loadXML() {
         return new LoadXMLOperation(this);
     }
