@@ -7,7 +7,7 @@ public class Main {
 		DataBaseBuilder db = new DataBaseBuilder();
 		db
 				.loadJSON()
-				.from("jsonFiles")
+				.from("assignment2Files/profiling.json")
 				.into("time")
 				.withAttributes("time%", "seconds", "name")
 
@@ -21,19 +21,37 @@ public class Main {
 				.into("decision_tree")
 
 				.loadYAML()
-				.from("yamlFiles")
+				.from("assignment2Files/decision_tree.yaml")
 				.into("decision_tree2")
 				.nestedIn("params")
 
 				.selectMax()
-					.onColumn("seconds")
+					.onColumn("time%")
 					.onTable("time")
 
-				.maxTimePercentagePerFile()
-				.fromPath("jsonFiles")
-				.toTable("max_time_summary")
+				.concactHorizontal()
+				.toTable("final")
+				.onTables("decision_tree", "decision_tree2", "time", "vitis")
 
+				.rename()
+					.table("time")
+					.from("time%")
+					.to("Time")
+
+				.loadJSON()
+				.from("assignment2Files/testLimitTable.json")
+				.into("testLimit")
+				.withAttributes("time%", "seconds", "name")
+
+				.limit()
+					.table("testLimit")
+					.from(5)
+					.to(10)
+
+				.drop()
+					.table("time")
 				.printAll()
 		.end();
+		//TODO: Filter and SelectColumns are not tested
 	}
 }

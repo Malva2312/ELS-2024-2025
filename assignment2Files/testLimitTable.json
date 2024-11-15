@@ -1,0 +1,123 @@
+{
+  "functions": [
+    {
+      "time%": 0.61,
+      "name": "__chkstk_ms",
+      "seconds": 0.01
+    },
+    {
+      "time%": 0.00,
+      "name": "copy_alloc_d",
+      "seconds": 0.00,
+      "calls": 9
+    },
+    {
+      "time%": 99.39,
+      "name": "matrix_mulv3_tdtdptd",
+      "seconds": 1.62,
+      "calls": 8
+    },
+    {
+      "time%": 0.00,
+      "name": "new_array_helper_d",
+      "seconds": 0.00,
+      "calls": 19
+    },
+    {
+      "time%": 0.00,
+      "name": "zeros_d2",
+      "seconds": 0.00,
+      "calls": 9
+    },
+    {
+      "time%": 1.50,
+      "name": "vector_add",
+      "seconds": 0.03,
+      "calls": 10
+    },
+    {
+      "time%": 3.20,
+      "name": "matrix_inverse",
+      "seconds": 0.05,
+      "calls": 2
+    },
+    {
+      "time%": 0.75,
+      "name": "init_matrix",
+      "seconds": 0.02,
+      "calls": 5
+    },
+    {
+      "time%": 2.10,
+      "name": "matrix_transform",
+      "seconds": 0.03,
+      "calls": 4
+    },
+    {
+      "time%": 0.30,
+      "name": "matrix_copy",
+      "seconds": 0.01,
+      "calls": 6
+    },
+    {
+      "time%": 4.25,
+      "name": "solve_equation",
+      "seconds": 0.07,
+      "calls": 3
+    },
+    {
+      "time%": 0.40,
+      "name": "log_stats",
+      "seconds": 0.01,
+      "calls": 12
+    },
+    {
+      "time%": 1.05,
+      "name": "cache_clear",
+      "seconds": 0.02,
+      "calls": 15
+    },
+    {
+      "time%": 0.50,
+      "name": "prepare_data",
+      "seconds": 0.01,
+      "calls": 7
+    },
+    {
+      "time%": 8.15,
+      "name": "fft_compute",
+      "seconds": 0.13,
+      "calls": 4
+    },
+    {
+      "time%": 6.70,
+      "name": "reduce_array",
+      "seconds": 0.11,
+      "calls": 5
+    },
+    {
+      "time%": 5.00,
+      "name": "matrix_sum",
+      "seconds": 0.08,
+      "calls": 14
+    },
+    {
+      "time%": 0.00,
+      "name": "memory_alloc_d",
+      "seconds": 0.00,
+      "calls": 10
+    },
+    {
+      "time%": 7.25,
+      "name": "data_normalize",
+      "seconds": 0.12,
+      "calls": 11
+    },
+    {
+      "time%": 3.50,
+      "name": "vector_multiply",
+      "seconds": 0.06,
+      "calls": 8
+    }
+  ]
+}
