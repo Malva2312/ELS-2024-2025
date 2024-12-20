@@ -34,6 +34,9 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
+
+    // Xtext
+    implementation group: 'org.eclipse.xtext', name: 'org.eclipse.xtext', version: '2.37.0'
 }
 
 // Add JARs in folder 'libs' as dependencies
