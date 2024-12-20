@@ -5,24 +5,24 @@ package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.xtext.example.mydsl.myDsl.DataType;
+import org.xtext.example.mydsl.myDsl.LoadYAML;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Data Type</b></em>'.
+ * An implementation of the model object '<em><b>Load YAML</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class DataTypeImpl extends TypeImpl implements DataType
+public class LoadYAMLImpl extends LoadOperationImpl implements LoadYAML
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DataTypeImpl()
+  protected LoadYAMLImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class DataTypeImpl extends TypeImpl implements DataType
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.DATA_TYPE;
+    return MyDslPackage.Literals.LOAD_YAML;
   }
 
-} //DataTypeImpl
+} //LoadYAMLImpl

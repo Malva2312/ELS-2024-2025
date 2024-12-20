@@ -58,455 +58,1288 @@ public interface MyDslPackage extends EPackage
   MyDslPackage eINSTANCE = org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.DomainmodelImpl <em>Domainmodel</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl <em>Model</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.DomainmodelImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDomainmodel()
+   * @see org.xtext.example.mydsl.myDsl.impl.ModelImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getModel()
    * @generated
    */
-  int DOMAINMODEL = 0;
+  int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Operations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DOMAINMODEL__ELEMENTS = 0;
+  int MODEL__OPERATIONS = 0;
 
   /**
-   * The number of structural features of the '<em>Domainmodel</em>' class.
+   * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DOMAINMODEL_FEATURE_COUNT = 1;
+  int MODEL_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.TopLevelOperationImpl <em>Top Level Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractElement()
+   * @see org.xtext.example.mydsl.myDsl.impl.TopLevelOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTopLevelOperation()
    * @generated
    */
-  int ABSTRACT_ELEMENT = 2;
+  int TOP_LEVEL_OPERATION = 1;
 
   /**
-   * The number of structural features of the '<em>Abstract Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPackageDeclaration()
-   * @generated
-   */
-  int PACKAGE_DECLARATION = 1;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The number of structural features of the '<em>Top Level Operation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int TOP_LEVEL_OPERATION_FEATURE_COUNT = 0;
 
   /**
-   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadOperationImpl <em>Load Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.LoadOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadOperation()
+   * @generated
+   */
+  int LOAD_OPERATION = 2;
+
+  /**
+   * The feature id for the '<em><b>File</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int LOAD_OPERATION__FILE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Package Declaration</em>' class.
+   * The feature id for the '<em><b>Table</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+  int LOAD_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl <em>Import</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.ImportImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getImport()
-   * @generated
-   */
-  int IMPORT = 3;
-
-  /**
-   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+   * The feature id for the '<em><b>Nested</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT__IMPORTED_NAMESPACE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int LOAD_OPERATION__NESTED = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>Import</em>' class.
+   * The number of structural features of the '<em>Load Operation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int LOAD_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.TypeImpl <em>Type</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadJSONImpl <em>Load JSON</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.TypeImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getType()
+   * @see org.xtext.example.mydsl.myDsl.impl.LoadJSONImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadJSON()
    * @generated
    */
-  int TYPE = 4;
+  int LOAD_JSON = 3;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type</em>' class.
+   * The feature id for the '<em><b>File</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int LOAD_JSON__FILE = LOAD_OPERATION__FILE;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.DataTypeImpl <em>Data Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.DataTypeImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDataType()
-   * @generated
-   */
-  int DATA_TYPE = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Table</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_TYPE__NAME = TYPE__NAME;
+  int LOAD_JSON__TABLE = LOAD_OPERATION__TABLE;
 
   /**
-   * The number of structural features of the '<em>Data Type</em>' class.
+   * The feature id for the '<em><b>Nested</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+  int LOAD_JSON__NESTED = LOAD_OPERATION__NESTED;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl <em>Entity</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.EntityImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEntity()
-   * @generated
-   */
-  int ENTITY = 6;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Attributes</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__NAME = TYPE__NAME;
+  int LOAD_JSON__ATTRIBUTES = LOAD_OPERATION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The number of structural features of the '<em>Load JSON</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__SUPER_TYPE = TYPE_FEATURE_COUNT + 0;
+  int LOAD_JSON_FEATURE_COUNT = LOAD_OPERATION_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Features</b></em>' containment reference list.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadXMLImpl <em>Load XML</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.LoadXMLImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadXML()
+   * @generated
+   */
+  int LOAD_XML = 4;
+
+  /**
+   * The feature id for the '<em><b>File</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__FEATURES = TYPE_FEATURE_COUNT + 1;
+  int LOAD_XML__FILE = LOAD_OPERATION__FILE;
 
   /**
-   * The number of structural features of the '<em>Entity</em>' class.
+   * The feature id for the '<em><b>Table</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+  int LOAD_XML__TABLE = LOAD_OPERATION__TABLE;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.FeatureImpl <em>Feature</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.FeatureImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFeature()
-   * @generated
-   */
-  int FEATURE = 7;
-
-  /**
-   * The feature id for the '<em><b>Many</b></em>' attribute.
+   * The feature id for the '<em><b>Nested</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__MANY = 0;
+  int LOAD_XML__NESTED = LOAD_OPERATION__NESTED;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The number of structural features of the '<em>Load XML</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__NAME = 1;
+  int LOAD_XML_FEATURE_COUNT = LOAD_OPERATION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadYAMLImpl <em>Load YAML</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.LoadYAMLImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadYAML()
+   * @generated
+   */
+  int LOAD_YAML = 5;
+
+  /**
+   * The feature id for the '<em><b>File</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__TYPE = 2;
+  int LOAD_YAML__FILE = LOAD_OPERATION__FILE;
 
   /**
-   * The number of structural features of the '<em>Feature</em>' class.
+   * The feature id for the '<em><b>Table</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE_FEATURE_COUNT = 3;
+  int LOAD_YAML__TABLE = LOAD_OPERATION__TABLE;
+
+  /**
+   * The feature id for the '<em><b>Nested</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOAD_YAML__NESTED = LOAD_OPERATION__NESTED;
+
+  /**
+   * The number of structural features of the '<em>Load YAML</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOAD_YAML_FEATURE_COUNT = LOAD_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl <em>Select Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSelectOperation()
+   * @generated
+   */
+  int SELECT_OPERATION = 6;
+
+  /**
+   * The feature id for the '<em><b>Columns</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION__COLUMNS = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Select Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ConcatOperationImpl <em>Concat Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ConcatOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getConcatOperation()
+   * @generated
+   */
+  int CONCAT_OPERATION = 7;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONCAT_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Tables</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONCAT_OPERATION__TABLES = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Concat Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONCAT_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.FilterOperationImpl <em>Filter Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.FilterOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFilterOperation()
+   * @generated
+   */
+  int FILTER_OPERATION = 8;
+
+  /**
+   * The feature id for the '<em><b>Column</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILTER_OPERATION__COLUMN = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILTER_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Condition</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILTER_OPERATION__CONDITION = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILTER_OPERATION__VALUE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILTER_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 4;
+
+  /**
+   * The number of structural features of the '<em>Filter Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILTER_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SaveOperationImpl <em>Save Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.SaveOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSaveOperation()
+   * @generated
+   */
+  int SAVE_OPERATION = 9;
+
+  /**
+   * The feature id for the '<em><b>Tables</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SAVE_OPERATION__TABLES = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>File</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SAVE_OPERATION__FILE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Format</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SAVE_OPERATION__FORMAT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Save Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SAVE_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.PrintOperationImpl <em>Print Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.PrintOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrintOperation()
+   * @generated
+   */
+  int PRINT_OPERATION = 10;
+
+  /**
+   * The number of structural features of the '<em>Print Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRINT_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.PrintTableImpl <em>Print Table</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.PrintTableImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrintTable()
+   * @generated
+   */
+  int PRINT_TABLE = 11;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRINT_TABLE__TABLE = PRINT_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Print Table</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRINT_TABLE_FEATURE_COUNT = PRINT_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.RenameOperationImpl <em>Rename Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.RenameOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRenameOperation()
+   * @generated
+   */
+  int RENAME_OPERATION = 12;
+
+  /**
+   * The feature id for the '<em><b>Original</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RENAME_OPERATION__ORIGINAL = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Renamed</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RENAME_OPERATION__RENAMED = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RENAME_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Rename Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RENAME_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.LimitOperationImpl <em>Limit Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.LimitOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLimitOperation()
+   * @generated
+   */
+  int LIMIT_OPERATION = 13;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIMIT_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Start</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIMIT_OPERATION__START = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>End</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIMIT_OPERATION__END = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Limit Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIMIT_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ArgMaxOperationImpl <em>Arg Max Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ArgMaxOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArgMaxOperation()
+   * @generated
+   */
+  int ARG_MAX_OPERATION = 14;
+
+  /**
+   * The feature id for the '<em><b>Column</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MAX_OPERATION__COLUMN = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MAX_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MAX_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Arg Max Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MAX_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ArgMinOperationImpl <em>Arg Min Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ArgMinOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArgMinOperation()
+   * @generated
+   */
+  int ARG_MIN_OPERATION = 15;
+
+  /**
+   * The feature id for the '<em><b>Column</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MIN_OPERATION__COLUMN = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MIN_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MIN_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Arg Min Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARG_MIN_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.DropOperationImpl <em>Drop Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.DropOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDropOperation()
+   * @generated
+   */
+  int DROP_OPERATION = 16;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DROP_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Drop Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DROP_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ProcessFoldersOperationImpl <em>Process Folders Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ProcessFoldersOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getProcessFoldersOperation()
+   * @generated
+   */
+  int PROCESS_FOLDERS_OPERATION = 17;
+
+  /**
+   * The feature id for the '<em><b>Folders</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCESS_FOLDERS_OPERATION__FOLDERS = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Folder Operations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCESS_FOLDERS_OPERATION__FOLDER_OPERATIONS = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Process Folders Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCESS_FOLDERS_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
 
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Domainmodel <em>Domainmodel</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Model <em>Model</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Domainmodel</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Domainmodel
+   * @return the meta object for class '<em>Model</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Model
    * @generated
    */
-  EClass getDomainmodel();
+  EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Domainmodel#getElements <em>Elements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Model#getOperations <em>Operations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Domainmodel#getElements()
-   * @see #getDomainmodel()
+   * @return the meta object for the containment reference list '<em>Operations</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Model#getOperations()
+   * @see #getModel()
    * @generated
    */
-  EReference getDomainmodel_Elements();
+  EReference getModel_Operations();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.PackageDeclaration <em>Package Declaration</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.TopLevelOperation <em>Top Level Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Package Declaration</em>'.
-   * @see org.xtext.example.mydsl.myDsl.PackageDeclaration
+   * @return the meta object for class '<em>Top Level Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.TopLevelOperation
    * @generated
    */
-  EClass getPackageDeclaration();
+  EClass getTopLevelOperation();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.PackageDeclaration#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.LoadOperation <em>Load Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.example.mydsl.myDsl.PackageDeclaration#getName()
-   * @see #getPackageDeclaration()
+   * @return the meta object for class '<em>Load Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadOperation
    * @generated
    */
-  EAttribute getPackageDeclaration_Name();
+  EClass getLoadOperation();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.PackageDeclaration#getElements <em>Elements</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.LoadOperation#getFile <em>File</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.xtext.example.mydsl.myDsl.PackageDeclaration#getElements()
-   * @see #getPackageDeclaration()
+   * @return the meta object for the attribute '<em>File</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadOperation#getFile()
+   * @see #getLoadOperation()
    * @generated
    */
-  EReference getPackageDeclaration_Elements();
+  EAttribute getLoadOperation_File();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.AbstractElement <em>Abstract Element</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.LoadOperation#getTable <em>Table</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Abstract Element</em>'.
-   * @see org.xtext.example.mydsl.myDsl.AbstractElement
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadOperation#getTable()
+   * @see #getLoadOperation()
    * @generated
    */
-  EClass getAbstractElement();
+  EAttribute getLoadOperation_Table();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Import <em>Import</em>}'.
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.LoadOperation#getNested <em>Nested</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Import
+   * @return the meta object for the attribute list '<em>Nested</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadOperation#getNested()
+   * @see #getLoadOperation()
    * @generated
    */
-  EClass getImport();
+  EAttribute getLoadOperation_Nested();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.LoadJSON <em>Load JSON</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Import#getImportedNamespace()
-   * @see #getImport()
+   * @return the meta object for class '<em>Load JSON</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadJSON
    * @generated
    */
-  EAttribute getImport_ImportedNamespace();
+  EClass getLoadJSON();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Type <em>Type</em>}'.
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.LoadJSON#getAttributes <em>Attributes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Type
+   * @return the meta object for the attribute list '<em>Attributes</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadJSON#getAttributes()
+   * @see #getLoadJSON()
    * @generated
    */
-  EClass getType();
+  EAttribute getLoadJSON_Attributes();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Type#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.LoadXML <em>Load XML</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Type#getName()
-   * @see #getType()
+   * @return the meta object for class '<em>Load XML</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadXML
    * @generated
    */
-  EAttribute getType_Name();
+  EClass getLoadXML();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.DataType <em>Data Type</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.LoadYAML <em>Load YAML</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Data Type</em>'.
-   * @see org.xtext.example.mydsl.myDsl.DataType
+   * @return the meta object for class '<em>Load YAML</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LoadYAML
    * @generated
    */
-  EClass getDataType();
+  EClass getLoadYAML();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Entity <em>Entity</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SelectOperation <em>Select Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Entity</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Entity
+   * @return the meta object for class '<em>Select Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation
    * @generated
    */
-  EClass getEntity();
+  EClass getSelectOperation();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.Entity#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getColumns <em>Columns</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Entity#getSuperType()
-   * @see #getEntity()
+   * @return the meta object for the attribute list '<em>Columns</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getColumns()
+   * @see #getSelectOperation()
    * @generated
    */
-  EReference getEntity_SuperType();
+  EAttribute getSelectOperation_Columns();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Entity#getFeatures <em>Features</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getTable <em>Table</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Features</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Entity#getFeatures()
-   * @see #getEntity()
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getTable()
+   * @see #getSelectOperation()
    * @generated
    */
-  EReference getEntity_Features();
+  EAttribute getSelectOperation_Table();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Feature <em>Feature</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Feature</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Feature
+   * @return the meta object for the attribute '<em>Target</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getTarget()
+   * @see #getSelectOperation()
    * @generated
    */
-  EClass getFeature();
+  EAttribute getSelectOperation_Target();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Feature#isMany <em>Many</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ConcatOperation <em>Concat Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Many</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Feature#isMany()
-   * @see #getFeature()
+   * @return the meta object for class '<em>Concat Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ConcatOperation
    * @generated
    */
-  EAttribute getFeature_Many();
+  EClass getConcatOperation();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Feature#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ConcatOperation#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Feature#getName()
-   * @see #getFeature()
+   * @return the meta object for the attribute '<em>Target</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ConcatOperation#getTarget()
+   * @see #getConcatOperation()
    * @generated
    */
-  EAttribute getFeature_Name();
+  EAttribute getConcatOperation_Target();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.Feature#getType <em>Type</em>}'.
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.ConcatOperation#getTables <em>Tables</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Feature#getType()
-   * @see #getFeature()
+   * @return the meta object for the attribute list '<em>Tables</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ConcatOperation#getTables()
+   * @see #getConcatOperation()
    * @generated
    */
-  EReference getFeature_Type();
+  EAttribute getConcatOperation_Tables();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.FilterOperation <em>Filter Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Filter Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FilterOperation
+   * @generated
+   */
+  EClass getFilterOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.FilterOperation#getColumn <em>Column</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Column</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FilterOperation#getColumn()
+   * @see #getFilterOperation()
+   * @generated
+   */
+  EAttribute getFilterOperation_Column();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.FilterOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FilterOperation#getTable()
+   * @see #getFilterOperation()
+   * @generated
+   */
+  EAttribute getFilterOperation_Table();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.FilterOperation#getCondition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Condition</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FilterOperation#getCondition()
+   * @see #getFilterOperation()
+   * @generated
+   */
+  EAttribute getFilterOperation_Condition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.FilterOperation#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FilterOperation#getValue()
+   * @see #getFilterOperation()
+   * @generated
+   */
+  EAttribute getFilterOperation_Value();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.FilterOperation#getTarget <em>Target</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Target</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FilterOperation#getTarget()
+   * @see #getFilterOperation()
+   * @generated
+   */
+  EAttribute getFilterOperation_Target();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SaveOperation <em>Save Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Save Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SaveOperation
+   * @generated
+   */
+  EClass getSaveOperation();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.SaveOperation#getTables <em>Tables</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Tables</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SaveOperation#getTables()
+   * @see #getSaveOperation()
+   * @generated
+   */
+  EAttribute getSaveOperation_Tables();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SaveOperation#getFile <em>File</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>File</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SaveOperation#getFile()
+   * @see #getSaveOperation()
+   * @generated
+   */
+  EAttribute getSaveOperation_File();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SaveOperation#getFormat <em>Format</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Format</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SaveOperation#getFormat()
+   * @see #getSaveOperation()
+   * @generated
+   */
+  EAttribute getSaveOperation_Format();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.PrintOperation <em>Print Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Print Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.PrintOperation
+   * @generated
+   */
+  EClass getPrintOperation();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.PrintTable <em>Print Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Print Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.PrintTable
+   * @generated
+   */
+  EClass getPrintTable();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.PrintTable#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.PrintTable#getTable()
+   * @see #getPrintTable()
+   * @generated
+   */
+  EAttribute getPrintTable_Table();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.RenameOperation <em>Rename Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rename Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.RenameOperation
+   * @generated
+   */
+  EClass getRenameOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.RenameOperation#getOriginal <em>Original</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Original</em>'.
+   * @see org.xtext.example.mydsl.myDsl.RenameOperation#getOriginal()
+   * @see #getRenameOperation()
+   * @generated
+   */
+  EAttribute getRenameOperation_Original();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.RenameOperation#getRenamed <em>Renamed</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Renamed</em>'.
+   * @see org.xtext.example.mydsl.myDsl.RenameOperation#getRenamed()
+   * @see #getRenameOperation()
+   * @generated
+   */
+  EAttribute getRenameOperation_Renamed();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.RenameOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.RenameOperation#getTable()
+   * @see #getRenameOperation()
+   * @generated
+   */
+  EAttribute getRenameOperation_Table();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.LimitOperation <em>Limit Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Limit Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LimitOperation
+   * @generated
+   */
+  EClass getLimitOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.LimitOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LimitOperation#getTable()
+   * @see #getLimitOperation()
+   * @generated
+   */
+  EAttribute getLimitOperation_Table();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.LimitOperation#getStart <em>Start</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Start</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LimitOperation#getStart()
+   * @see #getLimitOperation()
+   * @generated
+   */
+  EAttribute getLimitOperation_Start();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.LimitOperation#getEnd <em>End</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>End</em>'.
+   * @see org.xtext.example.mydsl.myDsl.LimitOperation#getEnd()
+   * @see #getLimitOperation()
+   * @generated
+   */
+  EAttribute getLimitOperation_End();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ArgMaxOperation <em>Arg Max Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arg Max Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMaxOperation
+   * @generated
+   */
+  EClass getArgMaxOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ArgMaxOperation#getColumn <em>Column</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Column</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMaxOperation#getColumn()
+   * @see #getArgMaxOperation()
+   * @generated
+   */
+  EAttribute getArgMaxOperation_Column();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ArgMaxOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMaxOperation#getTable()
+   * @see #getArgMaxOperation()
+   * @generated
+   */
+  EAttribute getArgMaxOperation_Table();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ArgMaxOperation#getTarget <em>Target</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Target</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMaxOperation#getTarget()
+   * @see #getArgMaxOperation()
+   * @generated
+   */
+  EAttribute getArgMaxOperation_Target();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ArgMinOperation <em>Arg Min Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Arg Min Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMinOperation
+   * @generated
+   */
+  EClass getArgMinOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ArgMinOperation#getColumn <em>Column</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Column</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMinOperation#getColumn()
+   * @see #getArgMinOperation()
+   * @generated
+   */
+  EAttribute getArgMinOperation_Column();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ArgMinOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMinOperation#getTable()
+   * @see #getArgMinOperation()
+   * @generated
+   */
+  EAttribute getArgMinOperation_Table();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ArgMinOperation#getTarget <em>Target</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Target</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ArgMinOperation#getTarget()
+   * @see #getArgMinOperation()
+   * @generated
+   */
+  EAttribute getArgMinOperation_Target();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.DropOperation <em>Drop Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Drop Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.DropOperation
+   * @generated
+   */
+  EClass getDropOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.DropOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.DropOperation#getTable()
+   * @see #getDropOperation()
+   * @generated
+   */
+  EAttribute getDropOperation_Table();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ProcessFoldersOperation <em>Process Folders Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Process Folders Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ProcessFoldersOperation
+   * @generated
+   */
+  EClass getProcessFoldersOperation();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.ProcessFoldersOperation#getFolders <em>Folders</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Folders</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ProcessFoldersOperation#getFolders()
+   * @see #getProcessFoldersOperation()
+   * @generated
+   */
+  EAttribute getProcessFoldersOperation_Folders();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.ProcessFoldersOperation#getFolderOperations <em>Folder Operations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Folder Operations</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ProcessFoldersOperation#getFolderOperations()
+   * @see #getProcessFoldersOperation()
+   * @generated
+   */
+  EReference getProcessFoldersOperation_FolderOperations();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -532,164 +1365,456 @@ public interface MyDslPackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.DomainmodelImpl <em>Domainmodel</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl <em>Model</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.DomainmodelImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDomainmodel()
+     * @see org.xtext.example.mydsl.myDsl.impl.ModelImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getModel()
      * @generated
      */
-    EClass DOMAINMODEL = eINSTANCE.getDomainmodel();
+    EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DOMAINMODEL__ELEMENTS = eINSTANCE.getDomainmodel_Elements();
+    EReference MODEL__OPERATIONS = eINSTANCE.getModel_Operations();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.TopLevelOperationImpl <em>Top Level Operation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPackageDeclaration()
+     * @see org.xtext.example.mydsl.myDsl.impl.TopLevelOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTopLevelOperation()
      * @generated
      */
-    EClass PACKAGE_DECLARATION = eINSTANCE.getPackageDeclaration();
+    EClass TOP_LEVEL_OPERATION = eINSTANCE.getTopLevelOperation();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadOperationImpl <em>Load Operation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.LoadOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadOperation()
      * @generated
      */
-    EAttribute PACKAGE_DECLARATION__NAME = eINSTANCE.getPackageDeclaration_Name();
+    EClass LOAD_OPERATION = eINSTANCE.getLoadOperation();
 
     /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>File</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PACKAGE_DECLARATION__ELEMENTS = eINSTANCE.getPackageDeclaration_Elements();
+    EAttribute LOAD_OPERATION__FILE = eINSTANCE.getLoadOperation_File();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractElement()
      * @generated
      */
-    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
+    EAttribute LOAD_OPERATION__TABLE = eINSTANCE.getLoadOperation_Table();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl <em>Import</em>}' class.
+     * The meta object literal for the '<em><b>Nested</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.ImportImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getImport()
      * @generated
      */
-    EClass IMPORT = eINSTANCE.getImport();
+    EAttribute LOAD_OPERATION__NESTED = eINSTANCE.getLoadOperation_Nested();
 
     /**
-     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadJSONImpl <em>Load JSON</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.LoadJSONImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadJSON()
      * @generated
      */
-    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+    EClass LOAD_JSON = eINSTANCE.getLoadJSON();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.TypeImpl <em>Type</em>}' class.
+     * The meta object literal for the '<em><b>Attributes</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.TypeImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getType()
      * @generated
      */
-    EClass TYPE = eINSTANCE.getType();
+    EAttribute LOAD_JSON__ATTRIBUTES = eINSTANCE.getLoadJSON_Attributes();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadXMLImpl <em>Load XML</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.LoadXMLImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadXML()
      * @generated
      */
-    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
+    EClass LOAD_XML = eINSTANCE.getLoadXML();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.DataTypeImpl <em>Data Type</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.LoadYAMLImpl <em>Load YAML</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.DataTypeImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDataType()
+     * @see org.xtext.example.mydsl.myDsl.impl.LoadYAMLImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLoadYAML()
      * @generated
      */
-    EClass DATA_TYPE = eINSTANCE.getDataType();
+    EClass LOAD_YAML = eINSTANCE.getLoadYAML();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl <em>Entity</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl <em>Select Operation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.EntityImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEntity()
+     * @see org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSelectOperation()
      * @generated
      */
-    EClass ENTITY = eINSTANCE.getEntity();
+    EClass SELECT_OPERATION = eINSTANCE.getSelectOperation();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Columns</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENTITY__SUPER_TYPE = eINSTANCE.getEntity_SuperType();
+    EAttribute SELECT_OPERATION__COLUMNS = eINSTANCE.getSelectOperation_Columns();
 
     /**
-     * The meta object literal for the '<em><b>Features</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENTITY__FEATURES = eINSTANCE.getEntity_Features();
+    EAttribute SELECT_OPERATION__TABLE = eINSTANCE.getSelectOperation_Table();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.FeatureImpl <em>Feature</em>}' class.
+     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.FeatureImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFeature()
      * @generated
      */
-    EClass FEATURE = eINSTANCE.getFeature();
+    EAttribute SELECT_OPERATION__TARGET = eINSTANCE.getSelectOperation_Target();
 
     /**
-     * The meta object literal for the '<em><b>Many</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ConcatOperationImpl <em>Concat Operation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ConcatOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getConcatOperation()
      * @generated
      */
-    EAttribute FEATURE__MANY = eINSTANCE.getFeature_Many();
+    EClass CONCAT_OPERATION = eINSTANCE.getConcatOperation();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FEATURE__NAME = eINSTANCE.getFeature_Name();
+    EAttribute CONCAT_OPERATION__TARGET = eINSTANCE.getConcatOperation_Target();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Tables</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FEATURE__TYPE = eINSTANCE.getFeature_Type();
+    EAttribute CONCAT_OPERATION__TABLES = eINSTANCE.getConcatOperation_Tables();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.FilterOperationImpl <em>Filter Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.FilterOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFilterOperation()
+     * @generated
+     */
+    EClass FILTER_OPERATION = eINSTANCE.getFilterOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Column</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FILTER_OPERATION__COLUMN = eINSTANCE.getFilterOperation_Column();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FILTER_OPERATION__TABLE = eINSTANCE.getFilterOperation_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Condition</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FILTER_OPERATION__CONDITION = eINSTANCE.getFilterOperation_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FILTER_OPERATION__VALUE = eINSTANCE.getFilterOperation_Value();
+
+    /**
+     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FILTER_OPERATION__TARGET = eINSTANCE.getFilterOperation_Target();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SaveOperationImpl <em>Save Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.SaveOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSaveOperation()
+     * @generated
+     */
+    EClass SAVE_OPERATION = eINSTANCE.getSaveOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Tables</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SAVE_OPERATION__TABLES = eINSTANCE.getSaveOperation_Tables();
+
+    /**
+     * The meta object literal for the '<em><b>File</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SAVE_OPERATION__FILE = eINSTANCE.getSaveOperation_File();
+
+    /**
+     * The meta object literal for the '<em><b>Format</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SAVE_OPERATION__FORMAT = eINSTANCE.getSaveOperation_Format();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.PrintOperationImpl <em>Print Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.PrintOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrintOperation()
+     * @generated
+     */
+    EClass PRINT_OPERATION = eINSTANCE.getPrintOperation();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.PrintTableImpl <em>Print Table</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.PrintTableImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrintTable()
+     * @generated
+     */
+    EClass PRINT_TABLE = eINSTANCE.getPrintTable();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PRINT_TABLE__TABLE = eINSTANCE.getPrintTable_Table();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.RenameOperationImpl <em>Rename Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.RenameOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRenameOperation()
+     * @generated
+     */
+    EClass RENAME_OPERATION = eINSTANCE.getRenameOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Original</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RENAME_OPERATION__ORIGINAL = eINSTANCE.getRenameOperation_Original();
+
+    /**
+     * The meta object literal for the '<em><b>Renamed</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RENAME_OPERATION__RENAMED = eINSTANCE.getRenameOperation_Renamed();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RENAME_OPERATION__TABLE = eINSTANCE.getRenameOperation_Table();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.LimitOperationImpl <em>Limit Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.LimitOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLimitOperation()
+     * @generated
+     */
+    EClass LIMIT_OPERATION = eINSTANCE.getLimitOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIMIT_OPERATION__TABLE = eINSTANCE.getLimitOperation_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIMIT_OPERATION__START = eINSTANCE.getLimitOperation_Start();
+
+    /**
+     * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIMIT_OPERATION__END = eINSTANCE.getLimitOperation_End();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ArgMaxOperationImpl <em>Arg Max Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ArgMaxOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArgMaxOperation()
+     * @generated
+     */
+    EClass ARG_MAX_OPERATION = eINSTANCE.getArgMaxOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Column</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARG_MAX_OPERATION__COLUMN = eINSTANCE.getArgMaxOperation_Column();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARG_MAX_OPERATION__TABLE = eINSTANCE.getArgMaxOperation_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARG_MAX_OPERATION__TARGET = eINSTANCE.getArgMaxOperation_Target();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ArgMinOperationImpl <em>Arg Min Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ArgMinOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArgMinOperation()
+     * @generated
+     */
+    EClass ARG_MIN_OPERATION = eINSTANCE.getArgMinOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Column</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARG_MIN_OPERATION__COLUMN = eINSTANCE.getArgMinOperation_Column();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARG_MIN_OPERATION__TABLE = eINSTANCE.getArgMinOperation_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARG_MIN_OPERATION__TARGET = eINSTANCE.getArgMinOperation_Target();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.DropOperationImpl <em>Drop Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.DropOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDropOperation()
+     * @generated
+     */
+    EClass DROP_OPERATION = eINSTANCE.getDropOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DROP_OPERATION__TABLE = eINSTANCE.getDropOperation_Table();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ProcessFoldersOperationImpl <em>Process Folders Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ProcessFoldersOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getProcessFoldersOperation()
+     * @generated
+     */
+    EClass PROCESS_FOLDERS_OPERATION = eINSTANCE.getProcessFoldersOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Folders</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROCESS_FOLDERS_OPERATION__FOLDERS = eINSTANCE.getProcessFoldersOperation_Folders();
+
+    /**
+     * The meta object literal for the '<em><b>Folder Operations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCESS_FOLDERS_OPERATION__FOLDER_OPERATIONS = eINSTANCE.getProcessFoldersOperation_FolderOperations();
 
   }
 

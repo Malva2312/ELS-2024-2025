@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.parser.IParser;
 import org.xtext.example.mydsl.MyDslStandaloneSetup;
-import org.xtext.example.mydsl.myDsl.Entity;
 import pt.up.fe.els2024.Builder.DataBaseBuilder;
 
 import java.io.IOException;
@@ -48,14 +47,14 @@ public class Main {
 
 		while(treeIterator.hasNext()) {
 			var element = treeIterator.next();
-
+/*
 			if (element instanceof Entity entity){
 				System.out.println("Entity: " + entity.getName());
 
 				if (entity.getSuperType() != null) {
 					System.out.println("Entity extends: " + entity.getSuperType().getName());
 				}
-			}
+			}*/
 /*
 			// Find Entity instances
 			if (element instanceof Entity entity) {
@@ -79,7 +78,7 @@ public class Main {
 
 		new Main().parse("example.mydsl");
 
-		DataBaseBuilder db = new DataBaseBuilder();
+		/*DataBaseBuilder db = new DataBaseBuilder();
 		db
 			.loadJSON()
 			.from("assignment2Files/run1/profiling.json")
@@ -115,6 +114,6 @@ public class Main {
 			.as("html")
 
 			.end();
-
+*/
 }
 }

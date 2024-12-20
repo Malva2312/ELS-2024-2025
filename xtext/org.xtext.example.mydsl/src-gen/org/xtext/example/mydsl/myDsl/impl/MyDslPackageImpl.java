@@ -10,16 +10,26 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.xtext.example.mydsl.myDsl.AbstractElement;
-import org.xtext.example.mydsl.myDsl.DataType;
-import org.xtext.example.mydsl.myDsl.Domainmodel;
-import org.xtext.example.mydsl.myDsl.Entity;
-import org.xtext.example.mydsl.myDsl.Feature;
-import org.xtext.example.mydsl.myDsl.Import;
+import org.xtext.example.mydsl.myDsl.ArgMaxOperation;
+import org.xtext.example.mydsl.myDsl.ArgMinOperation;
+import org.xtext.example.mydsl.myDsl.ConcatOperation;
+import org.xtext.example.mydsl.myDsl.DropOperation;
+import org.xtext.example.mydsl.myDsl.FilterOperation;
+import org.xtext.example.mydsl.myDsl.LimitOperation;
+import org.xtext.example.mydsl.myDsl.LoadJSON;
+import org.xtext.example.mydsl.myDsl.LoadOperation;
+import org.xtext.example.mydsl.myDsl.LoadXML;
+import org.xtext.example.mydsl.myDsl.LoadYAML;
+import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.PackageDeclaration;
-import org.xtext.example.mydsl.myDsl.Type;
+import org.xtext.example.mydsl.myDsl.PrintOperation;
+import org.xtext.example.mydsl.myDsl.PrintTable;
+import org.xtext.example.mydsl.myDsl.ProcessFoldersOperation;
+import org.xtext.example.mydsl.myDsl.RenameOperation;
+import org.xtext.example.mydsl.myDsl.SaveOperation;
+import org.xtext.example.mydsl.myDsl.SelectOperation;
+import org.xtext.example.mydsl.myDsl.TopLevelOperation;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,56 +44,126 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass domainmodelEClass = null;
+  private EClass modelEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass packageDeclarationEClass = null;
+  private EClass topLevelOperationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass abstractElementEClass = null;
+  private EClass loadOperationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass importEClass = null;
+  private EClass loadJSONEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass typeEClass = null;
+  private EClass loadXMLEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass dataTypeEClass = null;
+  private EClass loadYAMLEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass entityEClass = null;
+  private EClass selectOperationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass featureEClass = null;
+  private EClass concatOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass filterOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass saveOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass printOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass printTableEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass renameOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass limitOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass argMaxOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass argMinOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dropOperationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass processFoldersOperationEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -153,9 +233,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getDomainmodel()
+  public EClass getModel()
   {
-    return domainmodelEClass;
+    return modelEClass;
   }
 
   /**
@@ -164,9 +244,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getDomainmodel_Elements()
+  public EReference getModel_Operations()
   {
-    return (EReference)domainmodelEClass.getEStructuralFeatures().get(0);
+    return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -175,9 +255,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getPackageDeclaration()
+  public EClass getTopLevelOperation()
   {
-    return packageDeclarationEClass;
+    return topLevelOperationEClass;
   }
 
   /**
@@ -186,9 +266,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getPackageDeclaration_Name()
+  public EClass getLoadOperation()
   {
-    return (EAttribute)packageDeclarationEClass.getEStructuralFeatures().get(0);
+    return loadOperationEClass;
   }
 
   /**
@@ -197,9 +277,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getPackageDeclaration_Elements()
+  public EAttribute getLoadOperation_File()
   {
-    return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)loadOperationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -208,9 +288,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getAbstractElement()
+  public EAttribute getLoadOperation_Table()
   {
-    return abstractElementEClass;
+    return (EAttribute)loadOperationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -219,9 +299,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getImport()
+  public EAttribute getLoadOperation_Nested()
   {
-    return importEClass;
+    return (EAttribute)loadOperationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -230,9 +310,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getImport_ImportedNamespace()
+  public EClass getLoadJSON()
   {
-    return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+    return loadJSONEClass;
   }
 
   /**
@@ -241,9 +321,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getType()
+  public EAttribute getLoadJSON_Attributes()
   {
-    return typeEClass;
+    return (EAttribute)loadJSONEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -252,9 +332,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getType_Name()
+  public EClass getLoadXML()
   {
-    return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
+    return loadXMLEClass;
   }
 
   /**
@@ -263,9 +343,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getDataType()
+  public EClass getLoadYAML()
   {
-    return dataTypeEClass;
+    return loadYAMLEClass;
   }
 
   /**
@@ -274,9 +354,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getEntity()
+  public EClass getSelectOperation()
   {
-    return entityEClass;
+    return selectOperationEClass;
   }
 
   /**
@@ -285,9 +365,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getEntity_SuperType()
+  public EAttribute getSelectOperation_Columns()
   {
-    return (EReference)entityEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)selectOperationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -296,9 +376,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getEntity_Features()
+  public EAttribute getSelectOperation_Table()
   {
-    return (EReference)entityEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)selectOperationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -307,9 +387,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getFeature()
+  public EAttribute getSelectOperation_Target()
   {
-    return featureEClass;
+    return (EAttribute)selectOperationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -318,9 +398,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getFeature_Many()
+  public EClass getConcatOperation()
   {
-    return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
+    return concatOperationEClass;
   }
 
   /**
@@ -329,9 +409,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getFeature_Name()
+  public EAttribute getConcatOperation_Target()
   {
-    return (EAttribute)featureEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)concatOperationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -340,9 +420,383 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Type()
+  public EAttribute getConcatOperation_Tables()
   {
-    return (EReference)featureEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)concatOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getFilterOperation()
+  {
+    return filterOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getFilterOperation_Column()
+  {
+    return (EAttribute)filterOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getFilterOperation_Table()
+  {
+    return (EAttribute)filterOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getFilterOperation_Condition()
+  {
+    return (EAttribute)filterOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getFilterOperation_Value()
+  {
+    return (EAttribute)filterOperationEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getFilterOperation_Target()
+  {
+    return (EAttribute)filterOperationEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getSaveOperation()
+  {
+    return saveOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getSaveOperation_Tables()
+  {
+    return (EAttribute)saveOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getSaveOperation_File()
+  {
+    return (EAttribute)saveOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getSaveOperation_Format()
+  {
+    return (EAttribute)saveOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getPrintOperation()
+  {
+    return printOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getPrintTable()
+  {
+    return printTableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getPrintTable_Table()
+  {
+    return (EAttribute)printTableEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getRenameOperation()
+  {
+    return renameOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getRenameOperation_Original()
+  {
+    return (EAttribute)renameOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getRenameOperation_Renamed()
+  {
+    return (EAttribute)renameOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getRenameOperation_Table()
+  {
+    return (EAttribute)renameOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getLimitOperation()
+  {
+    return limitOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLimitOperation_Table()
+  {
+    return (EAttribute)limitOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLimitOperation_Start()
+  {
+    return (EAttribute)limitOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getLimitOperation_End()
+  {
+    return (EAttribute)limitOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getArgMaxOperation()
+  {
+    return argMaxOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getArgMaxOperation_Column()
+  {
+    return (EAttribute)argMaxOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getArgMaxOperation_Table()
+  {
+    return (EAttribute)argMaxOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getArgMaxOperation_Target()
+  {
+    return (EAttribute)argMaxOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getArgMinOperation()
+  {
+    return argMinOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getArgMinOperation_Column()
+  {
+    return (EAttribute)argMinOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getArgMinOperation_Table()
+  {
+    return (EAttribute)argMinOperationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getArgMinOperation_Target()
+  {
+    return (EAttribute)argMinOperationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDropOperation()
+  {
+    return dropOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDropOperation_Table()
+  {
+    return (EAttribute)dropOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getProcessFoldersOperation()
+  {
+    return processFoldersOperationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getProcessFoldersOperation_Folders()
+  {
+    return (EAttribute)processFoldersOperationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getProcessFoldersOperation_FolderOperations()
+  {
+    return (EReference)processFoldersOperationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -376,31 +830,75 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     isCreated = true;
 
     // Create classes and their features
-    domainmodelEClass = createEClass(DOMAINMODEL);
-    createEReference(domainmodelEClass, DOMAINMODEL__ELEMENTS);
+    modelEClass = createEClass(MODEL);
+    createEReference(modelEClass, MODEL__OPERATIONS);
 
-    packageDeclarationEClass = createEClass(PACKAGE_DECLARATION);
-    createEAttribute(packageDeclarationEClass, PACKAGE_DECLARATION__NAME);
-    createEReference(packageDeclarationEClass, PACKAGE_DECLARATION__ELEMENTS);
+    topLevelOperationEClass = createEClass(TOP_LEVEL_OPERATION);
 
-    abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+    loadOperationEClass = createEClass(LOAD_OPERATION);
+    createEAttribute(loadOperationEClass, LOAD_OPERATION__FILE);
+    createEAttribute(loadOperationEClass, LOAD_OPERATION__TABLE);
+    createEAttribute(loadOperationEClass, LOAD_OPERATION__NESTED);
 
-    importEClass = createEClass(IMPORT);
-    createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
+    loadJSONEClass = createEClass(LOAD_JSON);
+    createEAttribute(loadJSONEClass, LOAD_JSON__ATTRIBUTES);
 
-    typeEClass = createEClass(TYPE);
-    createEAttribute(typeEClass, TYPE__NAME);
+    loadXMLEClass = createEClass(LOAD_XML);
 
-    dataTypeEClass = createEClass(DATA_TYPE);
+    loadYAMLEClass = createEClass(LOAD_YAML);
 
-    entityEClass = createEClass(ENTITY);
-    createEReference(entityEClass, ENTITY__SUPER_TYPE);
-    createEReference(entityEClass, ENTITY__FEATURES);
+    selectOperationEClass = createEClass(SELECT_OPERATION);
+    createEAttribute(selectOperationEClass, SELECT_OPERATION__COLUMNS);
+    createEAttribute(selectOperationEClass, SELECT_OPERATION__TABLE);
+    createEAttribute(selectOperationEClass, SELECT_OPERATION__TARGET);
 
-    featureEClass = createEClass(FEATURE);
-    createEAttribute(featureEClass, FEATURE__MANY);
-    createEAttribute(featureEClass, FEATURE__NAME);
-    createEReference(featureEClass, FEATURE__TYPE);
+    concatOperationEClass = createEClass(CONCAT_OPERATION);
+    createEAttribute(concatOperationEClass, CONCAT_OPERATION__TARGET);
+    createEAttribute(concatOperationEClass, CONCAT_OPERATION__TABLES);
+
+    filterOperationEClass = createEClass(FILTER_OPERATION);
+    createEAttribute(filterOperationEClass, FILTER_OPERATION__COLUMN);
+    createEAttribute(filterOperationEClass, FILTER_OPERATION__TABLE);
+    createEAttribute(filterOperationEClass, FILTER_OPERATION__CONDITION);
+    createEAttribute(filterOperationEClass, FILTER_OPERATION__VALUE);
+    createEAttribute(filterOperationEClass, FILTER_OPERATION__TARGET);
+
+    saveOperationEClass = createEClass(SAVE_OPERATION);
+    createEAttribute(saveOperationEClass, SAVE_OPERATION__TABLES);
+    createEAttribute(saveOperationEClass, SAVE_OPERATION__FILE);
+    createEAttribute(saveOperationEClass, SAVE_OPERATION__FORMAT);
+
+    printOperationEClass = createEClass(PRINT_OPERATION);
+
+    printTableEClass = createEClass(PRINT_TABLE);
+    createEAttribute(printTableEClass, PRINT_TABLE__TABLE);
+
+    renameOperationEClass = createEClass(RENAME_OPERATION);
+    createEAttribute(renameOperationEClass, RENAME_OPERATION__ORIGINAL);
+    createEAttribute(renameOperationEClass, RENAME_OPERATION__RENAMED);
+    createEAttribute(renameOperationEClass, RENAME_OPERATION__TABLE);
+
+    limitOperationEClass = createEClass(LIMIT_OPERATION);
+    createEAttribute(limitOperationEClass, LIMIT_OPERATION__TABLE);
+    createEAttribute(limitOperationEClass, LIMIT_OPERATION__START);
+    createEAttribute(limitOperationEClass, LIMIT_OPERATION__END);
+
+    argMaxOperationEClass = createEClass(ARG_MAX_OPERATION);
+    createEAttribute(argMaxOperationEClass, ARG_MAX_OPERATION__COLUMN);
+    createEAttribute(argMaxOperationEClass, ARG_MAX_OPERATION__TABLE);
+    createEAttribute(argMaxOperationEClass, ARG_MAX_OPERATION__TARGET);
+
+    argMinOperationEClass = createEClass(ARG_MIN_OPERATION);
+    createEAttribute(argMinOperationEClass, ARG_MIN_OPERATION__COLUMN);
+    createEAttribute(argMinOperationEClass, ARG_MIN_OPERATION__TABLE);
+    createEAttribute(argMinOperationEClass, ARG_MIN_OPERATION__TARGET);
+
+    dropOperationEClass = createEClass(DROP_OPERATION);
+    createEAttribute(dropOperationEClass, DROP_OPERATION__TABLE);
+
+    processFoldersOperationEClass = createEClass(PROCESS_FOLDERS_OPERATION);
+    createEAttribute(processFoldersOperationEClass, PROCESS_FOLDERS_OPERATION__FOLDERS);
+    createEReference(processFoldersOperationEClass, PROCESS_FOLDERS_OPERATION__FOLDER_OPERATIONS);
   }
 
   /**
@@ -432,38 +930,93 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    packageDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
-    importEClass.getESuperTypes().add(this.getAbstractElement());
-    typeEClass.getESuperTypes().add(this.getAbstractElement());
-    dataTypeEClass.getESuperTypes().add(this.getType());
-    entityEClass.getESuperTypes().add(this.getType());
+    loadOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    loadJSONEClass.getESuperTypes().add(this.getLoadOperation());
+    loadXMLEClass.getESuperTypes().add(this.getLoadOperation());
+    loadYAMLEClass.getESuperTypes().add(this.getLoadOperation());
+    selectOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    concatOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    filterOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    saveOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    printOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    printTableEClass.getESuperTypes().add(this.getPrintOperation());
+    renameOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    limitOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    argMaxOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    argMinOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    dropOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
+    processFoldersOperationEClass.getESuperTypes().add(this.getTopLevelOperation());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(domainmodelEClass, Domainmodel.class, "Domainmodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDomainmodel_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Domainmodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModel_Operations(), this.getTopLevelOperation(), null, "operations", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(packageDeclarationEClass, PackageDeclaration.class, "PackageDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPackageDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, PackageDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPackageDeclaration_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, PackageDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(topLevelOperationEClass, TopLevelOperation.class, "TopLevelOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(loadOperationEClass, LoadOperation.class, "LoadOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoadOperation_File(), ecorePackage.getEString(), "file", null, 0, 1, LoadOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoadOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, LoadOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoadOperation_Nested(), ecorePackage.getEString(), "nested", null, 0, -1, LoadOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(loadJSONEClass, LoadJSON.class, "LoadJSON", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoadJSON_Attributes(), ecorePackage.getEString(), "attributes", null, 0, -1, LoadJSON.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getType_Name(), ecorePackage.getEString(), "name", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(loadXMLEClass, LoadXML.class, "LoadXML", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(loadYAMLEClass, LoadYAML.class, "LoadYAML", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEntity_SuperType(), this.getEntity(), null, "superType", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEntity_Features(), this.getFeature(), null, "features", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(selectOperationEClass, SelectOperation.class, "SelectOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSelectOperation_Columns(), ecorePackage.getEString(), "columns", null, 0, -1, SelectOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSelectOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, SelectOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSelectOperation_Target(), ecorePackage.getEString(), "target", null, 0, 1, SelectOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeature_Many(), ecorePackage.getEBoolean(), "many", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getFeature_Name(), ecorePackage.getEString(), "name", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFeature_Type(), this.getType(), null, "type", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(concatOperationEClass, ConcatOperation.class, "ConcatOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConcatOperation_Target(), ecorePackage.getEString(), "target", null, 0, 1, ConcatOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConcatOperation_Tables(), ecorePackage.getEString(), "tables", null, 0, -1, ConcatOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(filterOperationEClass, FilterOperation.class, "FilterOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFilterOperation_Column(), ecorePackage.getEString(), "column", null, 0, 1, FilterOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFilterOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, FilterOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFilterOperation_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, FilterOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFilterOperation_Value(), ecorePackage.getEString(), "value", null, 0, 1, FilterOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFilterOperation_Target(), ecorePackage.getEString(), "target", null, 0, 1, FilterOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(saveOperationEClass, SaveOperation.class, "SaveOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSaveOperation_Tables(), ecorePackage.getEString(), "tables", null, 0, -1, SaveOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSaveOperation_File(), ecorePackage.getEString(), "file", null, 0, 1, SaveOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSaveOperation_Format(), ecorePackage.getEString(), "format", null, 0, 1, SaveOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(printOperationEClass, PrintOperation.class, "PrintOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(printTableEClass, PrintTable.class, "PrintTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPrintTable_Table(), ecorePackage.getEString(), "table", null, 0, 1, PrintTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(renameOperationEClass, RenameOperation.class, "RenameOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRenameOperation_Original(), ecorePackage.getEString(), "original", null, 0, 1, RenameOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRenameOperation_Renamed(), ecorePackage.getEString(), "renamed", null, 0, 1, RenameOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRenameOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, RenameOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(limitOperationEClass, LimitOperation.class, "LimitOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLimitOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, LimitOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLimitOperation_Start(), ecorePackage.getEInt(), "start", null, 0, 1, LimitOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLimitOperation_End(), ecorePackage.getEInt(), "end", null, 0, 1, LimitOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(argMaxOperationEClass, ArgMaxOperation.class, "ArgMaxOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getArgMaxOperation_Column(), ecorePackage.getEString(), "column", null, 0, 1, ArgMaxOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getArgMaxOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, ArgMaxOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getArgMaxOperation_Target(), ecorePackage.getEString(), "target", null, 0, 1, ArgMaxOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(argMinOperationEClass, ArgMinOperation.class, "ArgMinOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getArgMinOperation_Column(), ecorePackage.getEString(), "column", null, 0, 1, ArgMinOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getArgMinOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, ArgMinOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getArgMinOperation_Target(), ecorePackage.getEString(), "target", null, 0, 1, ArgMinOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dropOperationEClass, DropOperation.class, "DropOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDropOperation_Table(), ecorePackage.getEString(), "table", null, 0, 1, DropOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(processFoldersOperationEClass, ProcessFoldersOperation.class, "ProcessFoldersOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProcessFoldersOperation_Folders(), ecorePackage.getEString(), "folders", null, 0, -1, ProcessFoldersOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcessFoldersOperation_FolderOperations(), this.getTopLevelOperation(), null, "folderOperations", null, 0, -1, ProcessFoldersOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

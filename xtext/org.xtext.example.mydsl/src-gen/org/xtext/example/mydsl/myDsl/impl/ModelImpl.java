@@ -17,41 +17,41 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.mydsl.myDsl.AbstractElement;
-import org.xtext.example.mydsl.myDsl.Domainmodel;
+import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.TopLevelOperation;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Domainmodel</b></em>'.
+ * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.DomainmodelImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Domainmodel
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElements()
+   * @see #getOperations()
    * @generated
    * @ordered
    */
-  protected EList<AbstractElement> elements;
+  protected EList<TopLevelOperation> operations;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DomainmodelImpl()
+  protected ModelImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.DOMAINMODEL;
+    return MyDslPackage.Literals.MODEL;
   }
 
   /**
@@ -73,13 +73,13 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
    * @generated
    */
   @Override
-  public EList<AbstractElement> getElements()
+  public EList<TopLevelOperation> getOperations()
   {
-    if (elements == null)
+    if (operations == null)
     {
-      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, MyDslPackage.DOMAINMODEL__ELEMENTS);
+      operations = new EObjectContainmentEList<TopLevelOperation>(TopLevelOperation.class, this, MyDslPackage.MODEL__OPERATIONS);
     }
-    return elements;
+    return operations;
   }
 
   /**
@@ -92,8 +92,8 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
   {
     switch (featureID)
     {
-      case MyDslPackage.DOMAINMODEL__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.MODEL__OPERATIONS:
+        return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +108,8 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
   {
     switch (featureID)
     {
-      case MyDslPackage.DOMAINMODEL__ELEMENTS:
-        return getElements();
+      case MyDslPackage.MODEL__OPERATIONS:
+        return getOperations();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +125,9 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
   {
     switch (featureID)
     {
-      case MyDslPackage.DOMAINMODEL__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends AbstractElement>)newValue);
+      case MyDslPackage.MODEL__OPERATIONS:
+        getOperations().clear();
+        getOperations().addAll((Collection<? extends TopLevelOperation>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +143,8 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
   {
     switch (featureID)
     {
-      case MyDslPackage.DOMAINMODEL__ELEMENTS:
-        getElements().clear();
+      case MyDslPackage.MODEL__OPERATIONS:
+        getOperations().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +160,10 @@ public class DomainmodelImpl extends MinimalEObjectImpl.Container implements Dom
   {
     switch (featureID)
     {
-      case MyDslPackage.DOMAINMODEL__ELEMENTS:
-        return elements != null && !elements.isEmpty();
+      case MyDslPackage.MODEL__OPERATIONS:
+        return operations != null && !operations.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //DomainmodelImpl
+} //ModelImpl

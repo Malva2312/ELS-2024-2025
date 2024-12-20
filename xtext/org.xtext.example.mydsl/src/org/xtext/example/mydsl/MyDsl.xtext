@@ -1,37 +1,71 @@
 grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
- 
-Domainmodel:
-    (elements+=AbstractElement)*;
- 
-PackageDeclaration:
-    'package' name=QualifiedName '{'
-        (elements+=AbstractElement)*
-    '}';
- 
-AbstractElement:
-    PackageDeclaration | Type | Import;
- 
-QualifiedName:
-    ID ('.' ID)*;
- 
-Import:
-    'import' importedNamespace=QualifiedNameWithWildcard;
- 
-QualifiedNameWithWildcard:
-    QualifiedName '.*'?;
- 
-Type:
-    DataType | Entity;
- 
-DataType:
-    'datatype' name=ID;
- 
-Entity:
-    'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
-        (features+=Feature)*
-    '}';
- 
-Feature:
-    (many?='many')? name=ID ':' type=[Type|QualifiedName];
+
+Model:
+    operations+=TopLevelOperation+;
+
+TopLevelOperation:
+    LoadOperation | SelectOperation | ConcatOperation | FilterOperation |
+    SaveOperation | PrintOperation | RenameOperation | LimitOperation |
+    ArgMaxOperation | ArgMinOperation | DropOperation | ProcessFoldersOperation |
+    {TopLevelOperation} EndOperation;
+
+LoadOperation:
+    LoadJSON | LoadXML | LoadYAML;
+
+LoadJSON:
+    'loadJSON' 'from' file=STRING 'into' table=STRING
+    ('withAttributes' '(' attributes+=STRING (',' attributes+=STRING)* ')')?
+    ('nestedIn' '(' nested+=STRING (',' nested+=STRING)* ')')?;
+
+LoadXML:
+    'loadXML' 'from' file=STRING 'into' table=STRING
+    ('nestedIn' '(' nested+=STRING (',' nested+=STRING)* ')')?;
+
+LoadYAML:
+    'loadYAML' 'from' file=STRING 'into' table=STRING
+    ('nestedIn' '(' nested+=STRING (',' nested+=STRING)* ')')?;
+
+SelectOperation:
+    'select' 'columns' '(' columns+=STRING (',' columns+=STRING)* ')' 'fromTable' table=STRING 'toTable' target=STRING;
+
+ConcatOperation:
+    'concatHorizontal' 'toTable' target=STRING 'onTables' '(' tables+=STRING (',' tables+=STRING)* ')';
+
+FilterOperation:
+    'filter' 'onColumn' column=STRING 'onTable' table=STRING
+    'where' condition=STRING 'value' value=STRING ('toTable' target=STRING)?;
+
+SaveOperation:
+    'save' 'tables' '(' tables+=STRING (',' tables+=STRING)* ')' 'to' file=STRING 'as' format=STRING;
+
+PrintOperation:
+    {PrintOperation} PrintAll | PrintTable;
+
+PrintAll:
+    'printAll';
+
+PrintTable:
+    'printTable' table=STRING;
+
+RenameOperation:
+    'renameColumn' 'from' original=STRING 'to' renamed=STRING 'onTable' table=STRING;
+
+LimitOperation:
+    'limit' 'table' table=STRING 'from' start=INT 'to' end=INT;
+
+ArgMaxOperation:
+    'argMax' 'onColumn' column=STRING 'onTable' table=STRING 'toTable' target=STRING;
+
+ArgMinOperation:
+    'argMin' 'onColumn' column=STRING 'onTable' table=STRING 'toTable' target=STRING;
+
+DropOperation:
+    'dropTable' table=STRING;
+
+ProcessFoldersOperation:
+    'processFolders' '(' folders+=STRING (',' folders+=STRING)* ')' 'with' '{' folderOperations+=TopLevelOperation+ '}';
+
+EndOperation:
+    'end';

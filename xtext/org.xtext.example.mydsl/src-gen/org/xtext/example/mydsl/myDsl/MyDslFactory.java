@@ -24,76 +24,166 @@ public interface MyDslFactory extends EFactory
   MyDslFactory eINSTANCE = org.xtext.example.mydsl.myDsl.impl.MyDslFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Domainmodel</em>'.
+   * Returns a new object of class '<em>Model</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Domainmodel</em>'.
+   * @return a new object of class '<em>Model</em>'.
    * @generated
    */
-  Domainmodel createDomainmodel();
+  Model createModel();
 
   /**
-   * Returns a new object of class '<em>Package Declaration</em>'.
+   * Returns a new object of class '<em>Top Level Operation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Package Declaration</em>'.
+   * @return a new object of class '<em>Top Level Operation</em>'.
    * @generated
    */
-  PackageDeclaration createPackageDeclaration();
+  TopLevelOperation createTopLevelOperation();
 
   /**
-   * Returns a new object of class '<em>Abstract Element</em>'.
+   * Returns a new object of class '<em>Load Operation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Abstract Element</em>'.
+   * @return a new object of class '<em>Load Operation</em>'.
    * @generated
    */
-  AbstractElement createAbstractElement();
+  LoadOperation createLoadOperation();
 
   /**
-   * Returns a new object of class '<em>Import</em>'.
+   * Returns a new object of class '<em>Load JSON</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Import</em>'.
+   * @return a new object of class '<em>Load JSON</em>'.
    * @generated
    */
-  Import createImport();
+  LoadJSON createLoadJSON();
 
   /**
-   * Returns a new object of class '<em>Type</em>'.
+   * Returns a new object of class '<em>Load XML</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type</em>'.
+   * @return a new object of class '<em>Load XML</em>'.
    * @generated
    */
-  Type createType();
+  LoadXML createLoadXML();
 
   /**
-   * Returns a new object of class '<em>Data Type</em>'.
+   * Returns a new object of class '<em>Load YAML</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Data Type</em>'.
+   * @return a new object of class '<em>Load YAML</em>'.
    * @generated
    */
-  DataType createDataType();
+  LoadYAML createLoadYAML();
 
   /**
-   * Returns a new object of class '<em>Entity</em>'.
+   * Returns a new object of class '<em>Select Operation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entity</em>'.
+   * @return a new object of class '<em>Select Operation</em>'.
    * @generated
    */
-  Entity createEntity();
+  SelectOperation createSelectOperation();
 
   /**
-   * Returns a new object of class '<em>Feature</em>'.
+   * Returns a new object of class '<em>Concat Operation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature</em>'.
+   * @return a new object of class '<em>Concat Operation</em>'.
    * @generated
    */
-  Feature createFeature();
+  ConcatOperation createConcatOperation();
+
+  /**
+   * Returns a new object of class '<em>Filter Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Filter Operation</em>'.
+   * @generated
+   */
+  FilterOperation createFilterOperation();
+
+  /**
+   * Returns a new object of class '<em>Save Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Save Operation</em>'.
+   * @generated
+   */
+  SaveOperation createSaveOperation();
+
+  /**
+   * Returns a new object of class '<em>Print Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Print Operation</em>'.
+   * @generated
+   */
+  PrintOperation createPrintOperation();
+
+  /**
+   * Returns a new object of class '<em>Print Table</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Print Table</em>'.
+   * @generated
+   */
+  PrintTable createPrintTable();
+
+  /**
+   * Returns a new object of class '<em>Rename Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rename Operation</em>'.
+   * @generated
+   */
+  RenameOperation createRenameOperation();
+
+  /**
+   * Returns a new object of class '<em>Limit Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Limit Operation</em>'.
+   * @generated
+   */
+  LimitOperation createLimitOperation();
+
+  /**
+   * Returns a new object of class '<em>Arg Max Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arg Max Operation</em>'.
+   * @generated
+   */
+  ArgMaxOperation createArgMaxOperation();
+
+  /**
+   * Returns a new object of class '<em>Arg Min Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Arg Min Operation</em>'.
+   * @generated
+   */
+  ArgMinOperation createArgMinOperation();
+
+  /**
+   * Returns a new object of class '<em>Drop Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Drop Operation</em>'.
+   * @generated
+   */
+  DropOperation createDropOperation();
+
+  /**
+   * Returns a new object of class '<em>Process Folders Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Process Folders Operation</em>'.
+   * @generated
+   */
+  ProcessFoldersOperation createProcessFoldersOperation();
 
   /**
    * Returns the package supported by this factory.

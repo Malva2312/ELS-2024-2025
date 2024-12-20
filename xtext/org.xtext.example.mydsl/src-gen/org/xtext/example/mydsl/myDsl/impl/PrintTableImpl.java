@@ -9,50 +9,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.xtext.example.mydsl.myDsl.Import;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.PrintTable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Import</b></em>'.
+ * An implementation of the model object '<em><b>Print Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PrintTableImpl#getTable <em>Table</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ImportImpl extends AbstractElementImpl implements Import
+public class PrintTableImpl extends PrintOperationImpl implements PrintTable
 {
   /**
-   * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
+   * The default value of the '{@link #getTable() <em>Table</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImportedNamespace()
+   * @see #getTable()
    * @generated
    * @ordered
    */
-  protected static final String IMPORTED_NAMESPACE_EDEFAULT = null;
+  protected static final String TABLE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
+   * The cached value of the '{@link #getTable() <em>Table</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImportedNamespace()
+   * @see #getTable()
    * @generated
    * @ordered
    */
-  protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
+  protected String table = TABLE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ImportImpl()
+  protected PrintTableImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class ImportImpl extends AbstractElementImpl implements Import
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.IMPORT;
+    return MyDslPackage.Literals.PRINT_TABLE;
   }
 
   /**
@@ -74,9 +74,9 @@ public class ImportImpl extends AbstractElementImpl implements Import
    * @generated
    */
   @Override
-  public String getImportedNamespace()
+  public String getTable()
   {
-    return importedNamespace;
+    return table;
   }
 
   /**
@@ -85,12 +85,12 @@ public class ImportImpl extends AbstractElementImpl implements Import
    * @generated
    */
   @Override
-  public void setImportedNamespace(String newImportedNamespace)
+  public void setTable(String newTable)
   {
-    String oldImportedNamespace = importedNamespace;
-    importedNamespace = newImportedNamespace;
+    String oldTable = table;
+    table = newTable;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PRINT_TABLE__TABLE, oldTable, table));
   }
 
   /**
@@ -103,8 +103,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
-        return getImportedNamespace();
+      case MyDslPackage.PRINT_TABLE__TABLE:
+        return getTable();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
-        setImportedNamespace((String)newValue);
+      case MyDslPackage.PRINT_TABLE__TABLE:
+        setTable((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
-        setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
+      case MyDslPackage.PRINT_TABLE__TABLE:
+        setTable(TABLE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
-        return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
+      case MyDslPackage.PRINT_TABLE__TABLE:
+        return TABLE_EDEFAULT == null ? table != null : !TABLE_EDEFAULT.equals(table);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class ImportImpl extends AbstractElementImpl implements Import
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (importedNamespace: ");
-    result.append(importedNamespace);
+    result.append(" (table: ");
+    result.append(table);
     result.append(')');
     return result.toString();
   }
 
-} //ImportImpl
+} //PrintTableImpl

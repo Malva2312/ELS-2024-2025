@@ -5,26 +5,24 @@ package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.xtext.example.mydsl.myDsl.AbstractElement;
+import org.xtext.example.mydsl.myDsl.LoadXML;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Element</b></em>'.
+ * An implementation of the model object '<em><b>Load XML</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement
+public class LoadXMLImpl extends LoadOperationImpl implements LoadXML
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AbstractElementImpl()
+  protected LoadXMLImpl()
   {
     super();
   }
@@ -37,7 +35,7 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.ABSTRACT_ELEMENT;
+    return MyDslPackage.Literals.LOAD_XML;
   }
 
-} //AbstractElementImpl
+} //LoadXMLImpl

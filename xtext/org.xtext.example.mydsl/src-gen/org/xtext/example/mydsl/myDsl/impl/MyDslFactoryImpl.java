@@ -65,14 +65,24 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     switch (eClass.getClassifierID())
     {
-      case MyDslPackage.DOMAINMODEL: return createDomainmodel();
-      case MyDslPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
-      case MyDslPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-      case MyDslPackage.IMPORT: return createImport();
-      case MyDslPackage.TYPE: return createType();
-      case MyDslPackage.DATA_TYPE: return createDataType();
-      case MyDslPackage.ENTITY: return createEntity();
-      case MyDslPackage.FEATURE: return createFeature();
+      case MyDslPackage.MODEL: return createModel();
+      case MyDslPackage.TOP_LEVEL_OPERATION: return createTopLevelOperation();
+      case MyDslPackage.LOAD_OPERATION: return createLoadOperation();
+      case MyDslPackage.LOAD_JSON: return createLoadJSON();
+      case MyDslPackage.LOAD_XML: return createLoadXML();
+      case MyDslPackage.LOAD_YAML: return createLoadYAML();
+      case MyDslPackage.SELECT_OPERATION: return createSelectOperation();
+      case MyDslPackage.CONCAT_OPERATION: return createConcatOperation();
+      case MyDslPackage.FILTER_OPERATION: return createFilterOperation();
+      case MyDslPackage.SAVE_OPERATION: return createSaveOperation();
+      case MyDslPackage.PRINT_OPERATION: return createPrintOperation();
+      case MyDslPackage.PRINT_TABLE: return createPrintTable();
+      case MyDslPackage.RENAME_OPERATION: return createRenameOperation();
+      case MyDslPackage.LIMIT_OPERATION: return createLimitOperation();
+      case MyDslPackage.ARG_MAX_OPERATION: return createArgMaxOperation();
+      case MyDslPackage.ARG_MIN_OPERATION: return createArgMinOperation();
+      case MyDslPackage.DROP_OPERATION: return createDropOperation();
+      case MyDslPackage.PROCESS_FOLDERS_OPERATION: return createProcessFoldersOperation();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -84,10 +94,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Domainmodel createDomainmodel()
+  public Model createModel()
   {
-    DomainmodelImpl domainmodel = new DomainmodelImpl();
-    return domainmodel;
+    ModelImpl model = new ModelImpl();
+    return model;
   }
 
   /**
@@ -96,10 +106,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public PackageDeclaration createPackageDeclaration()
+  public TopLevelOperation createTopLevelOperation()
   {
-    PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
-    return packageDeclaration;
+    TopLevelOperationImpl topLevelOperation = new TopLevelOperationImpl();
+    return topLevelOperation;
   }
 
   /**
@@ -108,10 +118,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public AbstractElement createAbstractElement()
+  public LoadOperation createLoadOperation()
   {
-    AbstractElementImpl abstractElement = new AbstractElementImpl();
-    return abstractElement;
+    LoadOperationImpl loadOperation = new LoadOperationImpl();
+    return loadOperation;
   }
 
   /**
@@ -120,10 +130,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Import createImport()
+  public LoadJSON createLoadJSON()
   {
-    ImportImpl import_ = new ImportImpl();
-    return import_;
+    LoadJSONImpl loadJSON = new LoadJSONImpl();
+    return loadJSON;
   }
 
   /**
@@ -132,10 +142,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Type createType()
+  public LoadXML createLoadXML()
   {
-    TypeImpl type = new TypeImpl();
-    return type;
+    LoadXMLImpl loadXML = new LoadXMLImpl();
+    return loadXML;
   }
 
   /**
@@ -144,10 +154,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public DataType createDataType()
+  public LoadYAML createLoadYAML()
   {
-    DataTypeImpl dataType = new DataTypeImpl();
-    return dataType;
+    LoadYAMLImpl loadYAML = new LoadYAMLImpl();
+    return loadYAML;
   }
 
   /**
@@ -156,10 +166,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Entity createEntity()
+  public SelectOperation createSelectOperation()
   {
-    EntityImpl entity = new EntityImpl();
-    return entity;
+    SelectOperationImpl selectOperation = new SelectOperationImpl();
+    return selectOperation;
   }
 
   /**
@@ -168,10 +178,130 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Feature createFeature()
+  public ConcatOperation createConcatOperation()
   {
-    FeatureImpl feature = new FeatureImpl();
-    return feature;
+    ConcatOperationImpl concatOperation = new ConcatOperationImpl();
+    return concatOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FilterOperation createFilterOperation()
+  {
+    FilterOperationImpl filterOperation = new FilterOperationImpl();
+    return filterOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SaveOperation createSaveOperation()
+  {
+    SaveOperationImpl saveOperation = new SaveOperationImpl();
+    return saveOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public PrintOperation createPrintOperation()
+  {
+    PrintOperationImpl printOperation = new PrintOperationImpl();
+    return printOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public PrintTable createPrintTable()
+  {
+    PrintTableImpl printTable = new PrintTableImpl();
+    return printTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RenameOperation createRenameOperation()
+  {
+    RenameOperationImpl renameOperation = new RenameOperationImpl();
+    return renameOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LimitOperation createLimitOperation()
+  {
+    LimitOperationImpl limitOperation = new LimitOperationImpl();
+    return limitOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ArgMaxOperation createArgMaxOperation()
+  {
+    ArgMaxOperationImpl argMaxOperation = new ArgMaxOperationImpl();
+    return argMaxOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ArgMinOperation createArgMinOperation()
+  {
+    ArgMinOperationImpl argMinOperation = new ArgMinOperationImpl();
+    return argMinOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DropOperation createDropOperation()
+  {
+    DropOperationImpl dropOperation = new DropOperationImpl();
+    return dropOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ProcessFoldersOperation createProcessFoldersOperation()
+  {
+    ProcessFoldersOperationImpl processFoldersOperation = new ProcessFoldersOperationImpl();
+    return processFoldersOperation;
   }
 
   /**

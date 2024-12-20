@@ -15,14 +15,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.xtext.example.mydsl.myDsl.Domainmodel;
+import org.xtext.example.mydsl.myDsl.Model;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(MyDslInjectorProvider.class)
 @SuppressWarnings("all")
 public class MyDslParsingTest {
   @Inject
-  private ParseHelper<Domainmodel> parseHelper;
+  private ParseHelper<Model> parseHelper;
 
   @Test
   public void loadModel() {
@@ -30,7 +30,7 @@ public class MyDslParsingTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Hello Xtext!");
       _builder.newLine();
-      final Domainmodel result = this.parseHelper.parse(_builder);
+      final Model result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();

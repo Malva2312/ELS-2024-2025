@@ -14,13 +14,24 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.xtext.example.mydsl.myDsl.DataType;
-import org.xtext.example.mydsl.myDsl.Domainmodel;
-import org.xtext.example.mydsl.myDsl.Entity;
-import org.xtext.example.mydsl.myDsl.Feature;
-import org.xtext.example.mydsl.myDsl.Import;
+import org.xtext.example.mydsl.myDsl.ArgMaxOperation;
+import org.xtext.example.mydsl.myDsl.ArgMinOperation;
+import org.xtext.example.mydsl.myDsl.ConcatOperation;
+import org.xtext.example.mydsl.myDsl.DropOperation;
+import org.xtext.example.mydsl.myDsl.FilterOperation;
+import org.xtext.example.mydsl.myDsl.LimitOperation;
+import org.xtext.example.mydsl.myDsl.LoadJSON;
+import org.xtext.example.mydsl.myDsl.LoadXML;
+import org.xtext.example.mydsl.myDsl.LoadYAML;
+import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.PackageDeclaration;
+import org.xtext.example.mydsl.myDsl.PrintOperation;
+import org.xtext.example.mydsl.myDsl.PrintTable;
+import org.xtext.example.mydsl.myDsl.ProcessFoldersOperation;
+import org.xtext.example.mydsl.myDsl.RenameOperation;
+import org.xtext.example.mydsl.myDsl.SaveOperation;
+import org.xtext.example.mydsl.myDsl.SelectOperation;
+import org.xtext.example.mydsl.myDsl.TopLevelOperation;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -37,23 +48,56 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == MyDslPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case MyDslPackage.DATA_TYPE:
-				sequence_DataType(context, (DataType) semanticObject); 
+			case MyDslPackage.ARG_MAX_OPERATION:
+				sequence_ArgMaxOperation(context, (ArgMaxOperation) semanticObject); 
 				return; 
-			case MyDslPackage.DOMAINMODEL:
-				sequence_Domainmodel(context, (Domainmodel) semanticObject); 
+			case MyDslPackage.ARG_MIN_OPERATION:
+				sequence_ArgMinOperation(context, (ArgMinOperation) semanticObject); 
 				return; 
-			case MyDslPackage.ENTITY:
-				sequence_Entity(context, (Entity) semanticObject); 
+			case MyDslPackage.CONCAT_OPERATION:
+				sequence_ConcatOperation(context, (ConcatOperation) semanticObject); 
 				return; 
-			case MyDslPackage.FEATURE:
-				sequence_Feature(context, (Feature) semanticObject); 
+			case MyDslPackage.DROP_OPERATION:
+				sequence_DropOperation(context, (DropOperation) semanticObject); 
 				return; 
-			case MyDslPackage.IMPORT:
-				sequence_Import(context, (Import) semanticObject); 
+			case MyDslPackage.FILTER_OPERATION:
+				sequence_FilterOperation(context, (FilterOperation) semanticObject); 
 				return; 
-			case MyDslPackage.PACKAGE_DECLARATION:
-				sequence_PackageDeclaration(context, (PackageDeclaration) semanticObject); 
+			case MyDslPackage.LIMIT_OPERATION:
+				sequence_LimitOperation(context, (LimitOperation) semanticObject); 
+				return; 
+			case MyDslPackage.LOAD_JSON:
+				sequence_LoadJSON(context, (LoadJSON) semanticObject); 
+				return; 
+			case MyDslPackage.LOAD_XML:
+				sequence_LoadXML(context, (LoadXML) semanticObject); 
+				return; 
+			case MyDslPackage.LOAD_YAML:
+				sequence_LoadYAML(context, (LoadYAML) semanticObject); 
+				return; 
+			case MyDslPackage.MODEL:
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
+			case MyDslPackage.PRINT_OPERATION:
+				sequence_PrintOperation(context, (PrintOperation) semanticObject); 
+				return; 
+			case MyDslPackage.PRINT_TABLE:
+				sequence_PrintTable(context, (PrintTable) semanticObject); 
+				return; 
+			case MyDslPackage.PROCESS_FOLDERS_OPERATION:
+				sequence_ProcessFoldersOperation(context, (ProcessFoldersOperation) semanticObject); 
+				return; 
+			case MyDslPackage.RENAME_OPERATION:
+				sequence_RenameOperation(context, (RenameOperation) semanticObject); 
+				return; 
+			case MyDslPackage.SAVE_OPERATION:
+				sequence_SaveOperation(context, (SaveOperation) semanticObject); 
+				return; 
+			case MyDslPackage.SELECT_OPERATION:
+				sequence_SelectOperation(context, (SelectOperation) semanticObject); 
+				return; 
+			case MyDslPackage.TOP_LEVEL_OPERATION:
+				sequence_TopLevelOperation(context, (TopLevelOperation) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -63,21 +107,26 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     AbstractElement returns DataType
-	 *     Type returns DataType
-	 *     DataType returns DataType
+	 *     TopLevelOperation returns ArgMaxOperation
+	 *     ArgMaxOperation returns ArgMaxOperation
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (column=STRING table=STRING target=STRING)
 	 * </pre>
 	 */
-	protected void sequence_DataType(ISerializationContext context, DataType semanticObject) {
+	protected void sequence_ArgMaxOperation(ISerializationContext context, ArgMaxOperation semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.TYPE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.TYPE__NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARG_MAX_OPERATION__COLUMN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARG_MAX_OPERATION__COLUMN));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARG_MAX_OPERATION__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARG_MAX_OPERATION__TABLE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARG_MAX_OPERATION__TARGET) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARG_MAX_OPERATION__TARGET));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getArgMaxOperationAccess().getColumnSTRINGTerminalRuleCall_2_0(), semanticObject.getColumn());
+		feeder.accept(grammarAccess.getArgMaxOperationAccess().getTableSTRINGTerminalRuleCall_4_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getArgMaxOperationAccess().getTargetSTRINGTerminalRuleCall_6_0(), semanticObject.getTarget());
 		feeder.finish();
 	}
 	
@@ -85,64 +134,26 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Domainmodel returns Domainmodel
+	 *     TopLevelOperation returns ArgMinOperation
+	 *     ArgMinOperation returns ArgMinOperation
 	 *
 	 * Constraint:
-	 *     elements+=AbstractElement+
+	 *     (column=STRING table=STRING target=STRING)
 	 * </pre>
 	 */
-	protected void sequence_Domainmodel(ISerializationContext context, Domainmodel semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     AbstractElement returns Entity
-	 *     Type returns Entity
-	 *     Entity returns Entity
-	 *
-	 * Constraint:
-	 *     (name=ID superType=[Entity|QualifiedName]? features+=Feature*)
-	 * </pre>
-	 */
-	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Feature returns Feature
-	 *
-	 * Constraint:
-	 *     (many?='many'? name=ID type=[Type|QualifiedName])
-	 * </pre>
-	 */
-	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     AbstractElement returns Import
-	 *     Import returns Import
-	 *
-	 * Constraint:
-	 *     importedNamespace=QualifiedNameWithWildcard
-	 * </pre>
-	 */
-	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+	protected void sequence_ArgMinOperation(ISerializationContext context, ArgMinOperation semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARG_MIN_OPERATION__COLUMN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARG_MIN_OPERATION__COLUMN));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARG_MIN_OPERATION__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARG_MIN_OPERATION__TABLE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARG_MIN_OPERATION__TARGET) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARG_MIN_OPERATION__TARGET));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0(), semanticObject.getImportedNamespace());
+		feeder.accept(grammarAccess.getArgMinOperationAccess().getColumnSTRINGTerminalRuleCall_2_0(), semanticObject.getColumn());
+		feeder.accept(grammarAccess.getArgMinOperationAccess().getTableSTRINGTerminalRuleCall_4_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getArgMinOperationAccess().getTargetSTRINGTerminalRuleCall_6_0(), semanticObject.getTarget());
 		feeder.finish();
 	}
 	
@@ -150,14 +161,262 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     PackageDeclaration returns PackageDeclaration
-	 *     AbstractElement returns PackageDeclaration
+	 *     TopLevelOperation returns ConcatOperation
+	 *     ConcatOperation returns ConcatOperation
 	 *
 	 * Constraint:
-	 *     (name=QualifiedName elements+=AbstractElement*)
+	 *     (target=STRING tables+=STRING tables+=STRING*)
 	 * </pre>
 	 */
-	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
+	protected void sequence_ConcatOperation(ISerializationContext context, ConcatOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns DropOperation
+	 *     DropOperation returns DropOperation
+	 *
+	 * Constraint:
+	 *     table=STRING
+	 * </pre>
+	 */
+	protected void sequence_DropOperation(ISerializationContext context, DropOperation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.DROP_OPERATION__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.DROP_OPERATION__TABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDropOperationAccess().getTableSTRINGTerminalRuleCall_1_0(), semanticObject.getTable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns FilterOperation
+	 *     FilterOperation returns FilterOperation
+	 *
+	 * Constraint:
+	 *     (column=STRING table=STRING condition=STRING value=STRING target=STRING?)
+	 * </pre>
+	 */
+	protected void sequence_FilterOperation(ISerializationContext context, FilterOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns LimitOperation
+	 *     LimitOperation returns LimitOperation
+	 *
+	 * Constraint:
+	 *     (table=STRING start=INT end=INT)
+	 * </pre>
+	 */
+	protected void sequence_LimitOperation(ISerializationContext context, LimitOperation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.LIMIT_OPERATION__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.LIMIT_OPERATION__TABLE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.LIMIT_OPERATION__START) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.LIMIT_OPERATION__START));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.LIMIT_OPERATION__END) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.LIMIT_OPERATION__END));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLimitOperationAccess().getTableSTRINGTerminalRuleCall_2_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getLimitOperationAccess().getStartINTTerminalRuleCall_4_0(), semanticObject.getStart());
+		feeder.accept(grammarAccess.getLimitOperationAccess().getEndINTTerminalRuleCall_6_0(), semanticObject.getEnd());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns LoadJSON
+	 *     LoadOperation returns LoadJSON
+	 *     LoadJSON returns LoadJSON
+	 *
+	 * Constraint:
+	 *     (file=STRING table=STRING (attributes+=STRING attributes+=STRING*)? (nested+=STRING nested+=STRING*)?)
+	 * </pre>
+	 */
+	protected void sequence_LoadJSON(ISerializationContext context, LoadJSON semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns LoadXML
+	 *     LoadOperation returns LoadXML
+	 *     LoadXML returns LoadXML
+	 *
+	 * Constraint:
+	 *     (file=STRING table=STRING (nested+=STRING nested+=STRING*)?)
+	 * </pre>
+	 */
+	protected void sequence_LoadXML(ISerializationContext context, LoadXML semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns LoadYAML
+	 *     LoadOperation returns LoadYAML
+	 *     LoadYAML returns LoadYAML
+	 *
+	 * Constraint:
+	 *     (file=STRING table=STRING (nested+=STRING nested+=STRING*)?)
+	 * </pre>
+	 */
+	protected void sequence_LoadYAML(ISerializationContext context, LoadYAML semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Model returns Model
+	 *
+	 * Constraint:
+	 *     operations+=TopLevelOperation+
+	 * </pre>
+	 */
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns PrintOperation
+	 *     PrintOperation returns PrintOperation
+	 *
+	 * Constraint:
+	 *     {PrintOperation}
+	 * </pre>
+	 */
+	protected void sequence_PrintOperation(ISerializationContext context, PrintOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns PrintTable
+	 *     PrintOperation returns PrintTable
+	 *     PrintTable returns PrintTable
+	 *
+	 * Constraint:
+	 *     table=STRING
+	 * </pre>
+	 */
+	protected void sequence_PrintTable(ISerializationContext context, PrintTable semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PRINT_TABLE__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PRINT_TABLE__TABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPrintTableAccess().getTableSTRINGTerminalRuleCall_1_0(), semanticObject.getTable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns ProcessFoldersOperation
+	 *     ProcessFoldersOperation returns ProcessFoldersOperation
+	 *
+	 * Constraint:
+	 *     (folders+=STRING folders+=STRING* folderOperations+=TopLevelOperation+)
+	 * </pre>
+	 */
+	protected void sequence_ProcessFoldersOperation(ISerializationContext context, ProcessFoldersOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns RenameOperation
+	 *     RenameOperation returns RenameOperation
+	 *
+	 * Constraint:
+	 *     (original=STRING renamed=STRING table=STRING)
+	 * </pre>
+	 */
+	protected void sequence_RenameOperation(ISerializationContext context, RenameOperation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RENAME_OPERATION__ORIGINAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RENAME_OPERATION__ORIGINAL));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RENAME_OPERATION__RENAMED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RENAME_OPERATION__RENAMED));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RENAME_OPERATION__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RENAME_OPERATION__TABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRenameOperationAccess().getOriginalSTRINGTerminalRuleCall_2_0(), semanticObject.getOriginal());
+		feeder.accept(grammarAccess.getRenameOperationAccess().getRenamedSTRINGTerminalRuleCall_4_0(), semanticObject.getRenamed());
+		feeder.accept(grammarAccess.getRenameOperationAccess().getTableSTRINGTerminalRuleCall_6_0(), semanticObject.getTable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns SaveOperation
+	 *     SaveOperation returns SaveOperation
+	 *
+	 * Constraint:
+	 *     (tables+=STRING tables+=STRING* file=STRING format=STRING)
+	 * </pre>
+	 */
+	protected void sequence_SaveOperation(ISerializationContext context, SaveOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns SelectOperation
+	 *     SelectOperation returns SelectOperation
+	 *
+	 * Constraint:
+	 *     (columns+=STRING columns+=STRING* table=STRING target=STRING)
+	 * </pre>
+	 */
+	protected void sequence_SelectOperation(ISerializationContext context, SelectOperation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TopLevelOperation returns TopLevelOperation
+	 *
+	 * Constraint:
+	 *     {TopLevelOperation}
+	 * </pre>
+	 */
+	protected void sequence_TopLevelOperation(ISerializationContext context, TopLevelOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

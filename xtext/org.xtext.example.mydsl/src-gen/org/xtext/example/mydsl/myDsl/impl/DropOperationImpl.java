@@ -9,50 +9,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.xtext.example.mydsl.myDsl.DropOperation;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Type;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Drop Operation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.TypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.DropOperationImpl#getTable <em>Table</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TypeImpl extends AbstractElementImpl implements Type
+public class DropOperationImpl extends TopLevelOperationImpl implements DropOperation
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getTable() <em>Table</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getTable()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String TABLE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getTable() <em>Table</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getTable()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String table = TABLE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypeImpl()
+  protected DropOperationImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class TypeImpl extends AbstractElementImpl implements Type
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.TYPE;
+    return MyDslPackage.Literals.DROP_OPERATION;
   }
 
   /**
@@ -74,9 +74,9 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * @generated
    */
   @Override
-  public String getName()
+  public String getTable()
   {
-    return name;
+    return table;
   }
 
   /**
@@ -85,12 +85,12 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * @generated
    */
   @Override
-  public void setName(String newName)
+  public void setTable(String newTable)
   {
-    String oldName = name;
-    name = newName;
+    String oldTable = table;
+    table = newTable;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.TYPE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.DROP_OPERATION__TABLE, oldTable, table));
   }
 
   /**
@@ -103,8 +103,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        return getName();
+      case MyDslPackage.DROP_OPERATION__TABLE:
+        return getTable();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        setName((String)newValue);
+      case MyDslPackage.DROP_OPERATION__TABLE:
+        setTable((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        setName(NAME_EDEFAULT);
+      case MyDslPackage.DROP_OPERATION__TABLE:
+        setTable(TABLE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MyDslPackage.DROP_OPERATION__TABLE:
+        return TABLE_EDEFAULT == null ? table != null : !TABLE_EDEFAULT.equals(table);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class TypeImpl extends AbstractElementImpl implements Type
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (table: ");
+    result.append(table);
     result.append(')');
     return result.toString();
   }
 
-} //TypeImpl
+} //DropOperationImpl

@@ -73,66 +73,149 @@ public class MyDslSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case MyDslPackage.DOMAINMODEL:
+      case MyDslPackage.MODEL:
       {
-        Domainmodel domainmodel = (Domainmodel)theEObject;
-        T result = caseDomainmodel(domainmodel);
+        Model model = (Model)theEObject;
+        T result = caseModel(model);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.PACKAGE_DECLARATION:
+      case MyDslPackage.TOP_LEVEL_OPERATION:
       {
-        PackageDeclaration packageDeclaration = (PackageDeclaration)theEObject;
-        T result = casePackageDeclaration(packageDeclaration);
-        if (result == null) result = caseAbstractElement(packageDeclaration);
+        TopLevelOperation topLevelOperation = (TopLevelOperation)theEObject;
+        T result = caseTopLevelOperation(topLevelOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.ABSTRACT_ELEMENT:
+      case MyDslPackage.LOAD_OPERATION:
       {
-        AbstractElement abstractElement = (AbstractElement)theEObject;
-        T result = caseAbstractElement(abstractElement);
+        LoadOperation loadOperation = (LoadOperation)theEObject;
+        T result = caseLoadOperation(loadOperation);
+        if (result == null) result = caseTopLevelOperation(loadOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.IMPORT:
+      case MyDslPackage.LOAD_JSON:
       {
-        Import import_ = (Import)theEObject;
-        T result = caseImport(import_);
-        if (result == null) result = caseAbstractElement(import_);
+        LoadJSON loadJSON = (LoadJSON)theEObject;
+        T result = caseLoadJSON(loadJSON);
+        if (result == null) result = caseLoadOperation(loadJSON);
+        if (result == null) result = caseTopLevelOperation(loadJSON);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.TYPE:
+      case MyDslPackage.LOAD_XML:
       {
-        Type type = (Type)theEObject;
-        T result = caseType(type);
-        if (result == null) result = caseAbstractElement(type);
+        LoadXML loadXML = (LoadXML)theEObject;
+        T result = caseLoadXML(loadXML);
+        if (result == null) result = caseLoadOperation(loadXML);
+        if (result == null) result = caseTopLevelOperation(loadXML);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.DATA_TYPE:
+      case MyDslPackage.LOAD_YAML:
       {
-        DataType dataType = (DataType)theEObject;
-        T result = caseDataType(dataType);
-        if (result == null) result = caseType(dataType);
-        if (result == null) result = caseAbstractElement(dataType);
+        LoadYAML loadYAML = (LoadYAML)theEObject;
+        T result = caseLoadYAML(loadYAML);
+        if (result == null) result = caseLoadOperation(loadYAML);
+        if (result == null) result = caseTopLevelOperation(loadYAML);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.ENTITY:
+      case MyDslPackage.SELECT_OPERATION:
       {
-        Entity entity = (Entity)theEObject;
-        T result = caseEntity(entity);
-        if (result == null) result = caseType(entity);
-        if (result == null) result = caseAbstractElement(entity);
+        SelectOperation selectOperation = (SelectOperation)theEObject;
+        T result = caseSelectOperation(selectOperation);
+        if (result == null) result = caseTopLevelOperation(selectOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.FEATURE:
+      case MyDslPackage.CONCAT_OPERATION:
       {
-        Feature feature = (Feature)theEObject;
-        T result = caseFeature(feature);
+        ConcatOperation concatOperation = (ConcatOperation)theEObject;
+        T result = caseConcatOperation(concatOperation);
+        if (result == null) result = caseTopLevelOperation(concatOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.FILTER_OPERATION:
+      {
+        FilterOperation filterOperation = (FilterOperation)theEObject;
+        T result = caseFilterOperation(filterOperation);
+        if (result == null) result = caseTopLevelOperation(filterOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.SAVE_OPERATION:
+      {
+        SaveOperation saveOperation = (SaveOperation)theEObject;
+        T result = caseSaveOperation(saveOperation);
+        if (result == null) result = caseTopLevelOperation(saveOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.PRINT_OPERATION:
+      {
+        PrintOperation printOperation = (PrintOperation)theEObject;
+        T result = casePrintOperation(printOperation);
+        if (result == null) result = caseTopLevelOperation(printOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.PRINT_TABLE:
+      {
+        PrintTable printTable = (PrintTable)theEObject;
+        T result = casePrintTable(printTable);
+        if (result == null) result = casePrintOperation(printTable);
+        if (result == null) result = caseTopLevelOperation(printTable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.RENAME_OPERATION:
+      {
+        RenameOperation renameOperation = (RenameOperation)theEObject;
+        T result = caseRenameOperation(renameOperation);
+        if (result == null) result = caseTopLevelOperation(renameOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.LIMIT_OPERATION:
+      {
+        LimitOperation limitOperation = (LimitOperation)theEObject;
+        T result = caseLimitOperation(limitOperation);
+        if (result == null) result = caseTopLevelOperation(limitOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.ARG_MAX_OPERATION:
+      {
+        ArgMaxOperation argMaxOperation = (ArgMaxOperation)theEObject;
+        T result = caseArgMaxOperation(argMaxOperation);
+        if (result == null) result = caseTopLevelOperation(argMaxOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.ARG_MIN_OPERATION:
+      {
+        ArgMinOperation argMinOperation = (ArgMinOperation)theEObject;
+        T result = caseArgMinOperation(argMinOperation);
+        if (result == null) result = caseTopLevelOperation(argMinOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.DROP_OPERATION:
+      {
+        DropOperation dropOperation = (DropOperation)theEObject;
+        T result = caseDropOperation(dropOperation);
+        if (result == null) result = caseTopLevelOperation(dropOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.PROCESS_FOLDERS_OPERATION:
+      {
+        ProcessFoldersOperation processFoldersOperation = (ProcessFoldersOperation)theEObject;
+        T result = caseProcessFoldersOperation(processFoldersOperation);
+        if (result == null) result = caseTopLevelOperation(processFoldersOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -141,129 +224,289 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Domainmodel</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Domainmodel</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseDomainmodel(Domainmodel object)
+  public T caseModel(Model object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Top Level Operation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Top Level Operation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casePackageDeclaration(PackageDeclaration object)
+  public T caseTopLevelOperation(TopLevelOperation object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Load Operation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Load Operation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAbstractElement(AbstractElement object)
+  public T caseLoadOperation(LoadOperation object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Load JSON</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Load JSON</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseImport(Import object)
+  public T caseLoadJSON(LoadJSON object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Load XML</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Load XML</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseType(Type object)
+  public T caseLoadXML(LoadXML object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Load YAML</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Load YAML</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseDataType(DataType object)
+  public T caseLoadYAML(LoadYAML object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Select Operation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Select Operation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEntity(Entity object)
+  public T caseSelectOperation(SelectOperation object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Concat Operation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Concat Operation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFeature(Feature object)
+  public T caseConcatOperation(ConcatOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Filter Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Filter Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFilterOperation(FilterOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Save Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Save Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSaveOperation(SaveOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Print Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Print Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePrintOperation(PrintOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Print Table</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Print Table</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePrintTable(PrintTable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rename Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rename Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRenameOperation(RenameOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Limit Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Limit Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLimitOperation(LimitOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arg Max Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arg Max Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArgMaxOperation(ArgMaxOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Arg Min Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Arg Min Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArgMinOperation(ArgMinOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Drop Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Drop Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDropOperation(DropOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Process Folders Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Process Folders Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseProcessFoldersOperation(ProcessFoldersOperation object)
   {
     return null;
   }
