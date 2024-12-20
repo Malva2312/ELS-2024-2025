@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.xtext.example.mydsl.myDsl.util,
- org.xtext.example.mydsl.parser.antlr.internal,
  org.xtext.example.mydsl.scoping,
  org.xtext.example.mydsl.services,
  org.xtext.example.mydsl.generator,
@@ -24,5 +23,6 @@ Export-Package: org.xtext.example.mydsl.myDsl.util,
  org.xtext.example.mydsl.myDsl.impl,
  org.xtext.example.mydsl.myDsl,
  org.xtext.example.mydsl.serializer,
+ org.xtext.example.mydsl.parser.antlr.internal,
  org.xtext.example.mydsl.parser.antlr
 Import-Package: org.apache.log4j

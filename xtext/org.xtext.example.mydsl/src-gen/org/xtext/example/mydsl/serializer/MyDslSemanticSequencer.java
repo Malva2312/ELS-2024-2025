@@ -125,8 +125,8 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getArgMaxOperationAccess().getColumnSTRINGTerminalRuleCall_2_0(), semanticObject.getColumn());
-		feeder.accept(grammarAccess.getArgMaxOperationAccess().getTableSTRINGTerminalRuleCall_4_0(), semanticObject.getTable());
-		feeder.accept(grammarAccess.getArgMaxOperationAccess().getTargetSTRINGTerminalRuleCall_6_0(), semanticObject.getTarget());
+		feeder.accept(grammarAccess.getArgMaxOperationAccess().getTableSTRINGTerminalRuleCall_5_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getArgMaxOperationAccess().getTargetSTRINGTerminalRuleCall_8_0(), semanticObject.getTarget());
 		feeder.finish();
 	}
 	
@@ -152,8 +152,8 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getArgMinOperationAccess().getColumnSTRINGTerminalRuleCall_2_0(), semanticObject.getColumn());
-		feeder.accept(grammarAccess.getArgMinOperationAccess().getTableSTRINGTerminalRuleCall_4_0(), semanticObject.getTable());
-		feeder.accept(grammarAccess.getArgMinOperationAccess().getTargetSTRINGTerminalRuleCall_6_0(), semanticObject.getTarget());
+		feeder.accept(grammarAccess.getArgMinOperationAccess().getTableSTRINGTerminalRuleCall_5_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getArgMinOperationAccess().getTargetSTRINGTerminalRuleCall_8_0(), semanticObject.getTarget());
 		feeder.finish();
 	}
 	
@@ -230,8 +230,8 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLimitOperationAccess().getTableSTRINGTerminalRuleCall_2_0(), semanticObject.getTable());
-		feeder.accept(grammarAccess.getLimitOperationAccess().getStartINTTerminalRuleCall_4_0(), semanticObject.getStart());
-		feeder.accept(grammarAccess.getLimitOperationAccess().getEndINTTerminalRuleCall_6_0(), semanticObject.getEnd());
+		feeder.accept(grammarAccess.getLimitOperationAccess().getStartINTTerminalRuleCall_5_0(), semanticObject.getStart());
+		feeder.accept(grammarAccess.getLimitOperationAccess().getEndINTTerminalRuleCall_8_0(), semanticObject.getEnd());
 		feeder.finish();
 	}
 	
@@ -371,8 +371,8 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRenameOperationAccess().getOriginalSTRINGTerminalRuleCall_2_0(), semanticObject.getOriginal());
-		feeder.accept(grammarAccess.getRenameOperationAccess().getRenamedSTRINGTerminalRuleCall_4_0(), semanticObject.getRenamed());
-		feeder.accept(grammarAccess.getRenameOperationAccess().getTableSTRINGTerminalRuleCall_6_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getRenameOperationAccess().getRenamedSTRINGTerminalRuleCall_5_0(), semanticObject.getRenamed());
+		feeder.accept(grammarAccess.getRenameOperationAccess().getTableSTRINGTerminalRuleCall_8_0(), semanticObject.getTable());
 		feeder.finish();
 	}
 	

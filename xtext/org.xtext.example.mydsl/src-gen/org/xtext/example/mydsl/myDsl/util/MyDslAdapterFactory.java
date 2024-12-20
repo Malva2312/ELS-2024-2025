@@ -106,11 +106,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createLoadYAMLAdapter();
       }
       @Override
-      public Adapter caseSelectOperation(SelectOperation object)
-      {
-        return createSelectOperationAdapter();
-      }
-      @Override
       public Adapter caseConcatOperation(ConcatOperation object)
       {
         return createConcatOperationAdapter();
@@ -154,6 +149,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseArgMinOperation(ArgMinOperation object)
       {
         return createArgMinOperationAdapter();
+      }
+      @Override
+      public Adapter caseSelectOperation(SelectOperation object)
+      {
+        return createSelectOperationAdapter();
       }
       @Override
       public Adapter caseDropOperation(DropOperation object)
@@ -273,21 +273,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLoadYAMLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.SelectOperation <em>Select Operation</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.SelectOperation
-   * @generated
-   */
-  public Adapter createSelectOperationAdapter()
   {
     return null;
   }
@@ -423,6 +408,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createArgMinOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.SelectOperation <em>Select Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation
+   * @generated
+   */
+  public Adapter createSelectOperationAdapter()
   {
     return null;
   }

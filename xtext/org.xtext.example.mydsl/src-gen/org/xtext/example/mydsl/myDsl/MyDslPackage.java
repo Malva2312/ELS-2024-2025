@@ -298,52 +298,6 @@ public interface MyDslPackage extends EPackage
   int LOAD_YAML_FEATURE_COUNT = LOAD_OPERATION_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl <em>Select Operation</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSelectOperation()
-   * @generated
-   */
-  int SELECT_OPERATION = 6;
-
-  /**
-   * The feature id for the '<em><b>Columns</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SELECT_OPERATION__COLUMNS = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Table</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SELECT_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Target</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SELECT_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Select Operation</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SELECT_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
-
-  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ConcatOperationImpl <em>Concat Operation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -351,7 +305,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getConcatOperation()
    * @generated
    */
-  int CONCAT_OPERATION = 7;
+  int CONCAT_OPERATION = 6;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' attribute.
@@ -388,7 +342,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFilterOperation()
    * @generated
    */
-  int FILTER_OPERATION = 8;
+  int FILTER_OPERATION = 7;
 
   /**
    * The feature id for the '<em><b>Column</b></em>' attribute.
@@ -452,7 +406,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSaveOperation()
    * @generated
    */
-  int SAVE_OPERATION = 9;
+  int SAVE_OPERATION = 8;
 
   /**
    * The feature id for the '<em><b>Tables</b></em>' attribute list.
@@ -498,7 +452,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrintOperation()
    * @generated
    */
-  int PRINT_OPERATION = 10;
+  int PRINT_OPERATION = 9;
 
   /**
    * The number of structural features of the '<em>Print Operation</em>' class.
@@ -517,7 +471,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrintTable()
    * @generated
    */
-  int PRINT_TABLE = 11;
+  int PRINT_TABLE = 10;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' attribute.
@@ -545,7 +499,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRenameOperation()
    * @generated
    */
-  int RENAME_OPERATION = 12;
+  int RENAME_OPERATION = 11;
 
   /**
    * The feature id for the '<em><b>Original</b></em>' attribute.
@@ -591,7 +545,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLimitOperation()
    * @generated
    */
-  int LIMIT_OPERATION = 13;
+  int LIMIT_OPERATION = 12;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' attribute.
@@ -637,7 +591,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArgMaxOperation()
    * @generated
    */
-  int ARG_MAX_OPERATION = 14;
+  int ARG_MAX_OPERATION = 13;
 
   /**
    * The feature id for the '<em><b>Column</b></em>' attribute.
@@ -683,7 +637,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArgMinOperation()
    * @generated
    */
-  int ARG_MIN_OPERATION = 15;
+  int ARG_MIN_OPERATION = 14;
 
   /**
    * The feature id for the '<em><b>Column</b></em>' attribute.
@@ -720,6 +674,52 @@ public interface MyDslPackage extends EPackage
    * @ordered
    */
   int ARG_MIN_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl <em>Select Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSelectOperation()
+   * @generated
+   */
+  int SELECT_OPERATION = 15;
+
+  /**
+   * The feature id for the '<em><b>Columns</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION__COLUMNS = TOP_LEVEL_OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION__TABLE = TOP_LEVEL_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION__TARGET = TOP_LEVEL_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Select Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_OPERATION_FEATURE_COUNT = TOP_LEVEL_OPERATION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.DropOperationImpl <em>Drop Operation</em>}' class.
@@ -901,49 +901,6 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getLoadYAML();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SelectOperation <em>Select Operation</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Select Operation</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SelectOperation
-   * @generated
-   */
-  EClass getSelectOperation();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getColumns <em>Columns</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Columns</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getColumns()
-   * @see #getSelectOperation()
-   * @generated
-   */
-  EAttribute getSelectOperation_Columns();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getTable <em>Table</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Table</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getTable()
-   * @see #getSelectOperation()
-   * @generated
-   */
-  EAttribute getSelectOperation_Table();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getTarget <em>Target</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Target</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getTarget()
-   * @see #getSelectOperation()
-   * @generated
-   */
-  EAttribute getSelectOperation_Target();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ConcatOperation <em>Concat Operation</em>}'.
@@ -1289,6 +1246,49 @@ public interface MyDslPackage extends EPackage
   EAttribute getArgMinOperation_Target();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SelectOperation <em>Select Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Select Operation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation
+   * @generated
+   */
+  EClass getSelectOperation();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getColumns <em>Columns</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Columns</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getColumns()
+   * @see #getSelectOperation()
+   * @generated
+   */
+  EAttribute getSelectOperation_Columns();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Table</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getTable()
+   * @see #getSelectOperation()
+   * @generated
+   */
+  EAttribute getSelectOperation_Table();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.SelectOperation#getTarget <em>Target</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Target</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SelectOperation#getTarget()
+   * @see #getSelectOperation()
+   * @generated
+   */
+  EAttribute getSelectOperation_Target();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.DropOperation <em>Drop Operation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1463,40 +1463,6 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EClass LOAD_YAML = eINSTANCE.getLoadYAML();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl <em>Select Operation</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSelectOperation()
-     * @generated
-     */
-    EClass SELECT_OPERATION = eINSTANCE.getSelectOperation();
-
-    /**
-     * The meta object literal for the '<em><b>Columns</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SELECT_OPERATION__COLUMNS = eINSTANCE.getSelectOperation_Columns();
-
-    /**
-     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SELECT_OPERATION__TABLE = eINSTANCE.getSelectOperation_Table();
-
-    /**
-     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SELECT_OPERATION__TARGET = eINSTANCE.getSelectOperation_Target();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ConcatOperationImpl <em>Concat Operation</em>}' class.
@@ -1771,6 +1737,40 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EAttribute ARG_MIN_OPERATION__TARGET = eINSTANCE.getArgMinOperation_Target();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl <em>Select Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.SelectOperationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSelectOperation()
+     * @generated
+     */
+    EClass SELECT_OPERATION = eINSTANCE.getSelectOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Columns</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SELECT_OPERATION__COLUMNS = eINSTANCE.getSelectOperation_Columns();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SELECT_OPERATION__TABLE = eINSTANCE.getSelectOperation_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Target</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SELECT_OPERATION__TARGET = eINSTANCE.getSelectOperation_Target();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.DropOperationImpl <em>Drop Operation</em>}' class.

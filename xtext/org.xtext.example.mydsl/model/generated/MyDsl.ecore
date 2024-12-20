@@ -18,12 +18,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoadXML" eSuperTypes="#//LoadOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoadYAML" eSuperTypes="#//LoadOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SelectOperation" eSuperTypes="#//TopLevelOperation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columns" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConcatOperation" eSuperTypes="#//TopLevelOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tables" unique="false"
@@ -63,6 +57,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArgMinOperation" eSuperTypes="#//TopLevelOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="column" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectOperation" eSuperTypes="#//TopLevelOperation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columns" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

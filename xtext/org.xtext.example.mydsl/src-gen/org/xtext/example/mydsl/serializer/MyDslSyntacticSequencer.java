@@ -35,22 +35,22 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * EndOperation:
-	 *     'end';
+	 *     '.end();';
 	 */
 	protected String getEndOperationToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "end";
+		return ".end();";
 	}
 	
 	/**
 	 * PrintAll:
-	 *     'printAll';
+	 *     '.printAll()';
 	 */
 	protected String getPrintAllToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "printAll";
+		return ".printAll()";
 	}
 	
 	@Override

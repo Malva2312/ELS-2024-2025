@@ -122,14 +122,6 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.SELECT_OPERATION:
-      {
-        SelectOperation selectOperation = (SelectOperation)theEObject;
-        T result = caseSelectOperation(selectOperation);
-        if (result == null) result = caseTopLevelOperation(selectOperation);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.CONCAT_OPERATION:
       {
         ConcatOperation concatOperation = (ConcatOperation)theEObject;
@@ -200,6 +192,14 @@ public class MyDslSwitch<T> extends Switch<T>
         ArgMinOperation argMinOperation = (ArgMinOperation)theEObject;
         T result = caseArgMinOperation(argMinOperation);
         if (result == null) result = caseTopLevelOperation(argMinOperation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.SELECT_OPERATION:
+      {
+        SelectOperation selectOperation = (SelectOperation)theEObject;
+        T result = caseSelectOperation(selectOperation);
+        if (result == null) result = caseTopLevelOperation(selectOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -315,22 +315,6 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseLoadYAML(LoadYAML object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Select Operation</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Select Operation</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSelectOperation(SelectOperation object)
   {
     return null;
   }
@@ -475,6 +459,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseArgMinOperation(ArgMinOperation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Select Operation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Select Operation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSelectOperation(SelectOperation object)
   {
     return null;
   }

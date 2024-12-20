@@ -20,11 +20,6 @@
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//LoadXML"/>
     <genClasses ecoreClass="MyDsl.ecore#//LoadYAML"/>
-    <genClasses ecoreClass="MyDsl.ecore#//SelectOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//SelectOperation/columns"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//SelectOperation/table"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//SelectOperation/target"/>
-    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//ConcatOperation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//ConcatOperation/target"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//ConcatOperation/tables"/>
@@ -64,6 +59,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//ArgMinOperation/column"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//ArgMinOperation/table"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//ArgMinOperation/target"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//SelectOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//SelectOperation/columns"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//SelectOperation/table"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//SelectOperation/target"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//DropOperation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//DropOperation/table"/>

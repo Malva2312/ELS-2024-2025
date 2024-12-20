@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.parser.IParser;
 import org.xtext.example.mydsl.MyDslStandaloneSetup;
+import org.xtext.example.mydsl.myDsl.TopLevelOperation;
 import pt.up.fe.els2024.Builder.DataBaseBuilder;
 
 import java.io.IOException;
@@ -43,77 +44,72 @@ public class Main {
 			throw new RuntimeException(message);
 		}
 
+		DataBaseBuilder dbBuilder = new DataBaseBuilder();
+
 		var treeIterator = resource.getAllContents();
 
-		while(treeIterator.hasNext()) {
+		while (treeIterator.hasNext()) {
 			var element = treeIterator.next();
+			System.out.println(element);
 /*
-			if (element instanceof Entity entity){
-				System.out.println("Entity: " + entity.getName());
-
-				if (entity.getSuperType() != null) {
-					System.out.println("Entity extends: " + entity.getSuperType().getName());
+			if (element instanceof TopLevelOperation operation) {
+				switch (operation.getClass().getSimpleName()) {
+					case "ArgMaxOperation":
+						dbBuilder.selectMax().end();
+						break;
+					case "ArgMinOperation":
+						dbBuilder.selectMin().end();
+						break;
+					case "ConcatHorizontalOperation":
+						dbBuilder.concactHorizontal().end();
+						break;
+					case "DropOperation":
+						dbBuilder.drop().end();
+						break;
+					case "FilterOperation":
+						dbBuilder.filter().end();
+						break;
+					case "JoinOperation":
+						dbBuilder.joinTables("table1", "table2").end();
+						break;
+					case "LimitOperation":
+						dbBuilder.limit().end();
+						break;
+					case "LoadJSONOperation":
+						dbBuilder.loadJSON().end();
+						break;
+					case "LoadXMLOperation":
+						dbBuilder.loadXML().end();
+						break;
+					case "LoadYAMLOperation":
+						dbBuilder.loadYAML().end();
+						break;
+					case "PrintAllOperation":
+						dbBuilder.printAll().end();
+						break;
+					case "PrintTableOperation":
+						dbBuilder.printTable("tableName").end();
+						break;
+					case "ProcessFoldersOperation":
+						dbBuilder.processFolders().end();
+						break;
+					case "RenameOperation":
+						dbBuilder.rename().end();
+						break;
+					case "SaveOperation":
+						dbBuilder.save().end();
+						break;
+					case "SelectColumnsOperation":
+						dbBuilder.select().end();
+						break;
+					default:
+						System.out.println("Unknown Operation");
 				}
 			}*/
-/*
-			// Find Entity instances
-			if (element instanceof Entity entity) {
-				System.out.println("Found Entity: " + entity.getName());
-
-				var superType = entity.getSuperType();
-
-				// If superType is present in the Entity (i.e., Entity has 'extends').
-				// automatically returns a reference to the corresponding node,
-				// instead of just the name of the superType.
-				// This happens because superType was defined in the Xtext DSL as superType=[Entity],
-				// the [] creates cross-references.
-				if(superType != null) {
-					System.out.println("Entity extends " + entity.getSuperType().getName());
-				}
-*/
-			}
 		}
+	}
 
 	public static void main(String[] args) {
-
-		new Main().parse("example.mydsl");
-
-		/*DataBaseBuilder db = new DataBaseBuilder();
-		db
-			.loadJSON()
-			.from("assignment2Files/run1/profiling.json")
-			.into("time")
-			.withAttributes("time%", "seconds", "name")
-			.nestedIn("functions")
-
-			.loadXML()
-			.from("assignment2Files/run1/vitis-report.xml")
-			.into("vitis")
-			.nestedIn("Device", "Resources")
-
-			.loadYAML()
-			.from("assignment2Files/run1/decision_tree.yaml")
-			.into("decision_tree")
-
-			.loadYAML()
-			.from("assignment2Files/run1/decision_tree.yaml")
-			.into("decision_tree2")
-			.nestedIn("params")
-
-			.selectMax()
-			.onColumn("time%")
-			.onTable("time")
-
-			.concactHorizontal()
-			.toTable("final")
-			.onTables("decision_tree", "decision_tree2", "time", "vitis")
-
-			.save()
-			.tables("final")
-			.to("assignment2Files/output.html")
-			.as("html")
-
-			.end();
-*/
-}
+		new Main().parse("./assignment3Files/000INPUT/example.mydsl");
+	}
 }

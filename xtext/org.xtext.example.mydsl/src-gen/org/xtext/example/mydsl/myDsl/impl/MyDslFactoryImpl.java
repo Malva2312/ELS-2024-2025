@@ -71,7 +71,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.LOAD_JSON: return createLoadJSON();
       case MyDslPackage.LOAD_XML: return createLoadXML();
       case MyDslPackage.LOAD_YAML: return createLoadYAML();
-      case MyDslPackage.SELECT_OPERATION: return createSelectOperation();
       case MyDslPackage.CONCAT_OPERATION: return createConcatOperation();
       case MyDslPackage.FILTER_OPERATION: return createFilterOperation();
       case MyDslPackage.SAVE_OPERATION: return createSaveOperation();
@@ -81,6 +80,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.LIMIT_OPERATION: return createLimitOperation();
       case MyDslPackage.ARG_MAX_OPERATION: return createArgMaxOperation();
       case MyDslPackage.ARG_MIN_OPERATION: return createArgMinOperation();
+      case MyDslPackage.SELECT_OPERATION: return createSelectOperation();
       case MyDslPackage.DROP_OPERATION: return createDropOperation();
       case MyDslPackage.PROCESS_FOLDERS_OPERATION: return createProcessFoldersOperation();
       default:
@@ -158,18 +158,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     LoadYAMLImpl loadYAML = new LoadYAMLImpl();
     return loadYAML;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SelectOperation createSelectOperation()
-  {
-    SelectOperationImpl selectOperation = new SelectOperationImpl();
-    return selectOperation;
   }
 
   /**
@@ -278,6 +266,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ArgMinOperationImpl argMinOperation = new ArgMinOperationImpl();
     return argMinOperation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SelectOperation createSelectOperation()
+  {
+    SelectOperationImpl selectOperation = new SelectOperationImpl();
+    return selectOperation;
   }
 
   /**

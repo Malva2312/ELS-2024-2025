@@ -78,15 +78,6 @@ public interface MyDslFactory extends EFactory
   LoadYAML createLoadYAML();
 
   /**
-   * Returns a new object of class '<em>Select Operation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Select Operation</em>'.
-   * @generated
-   */
-  SelectOperation createSelectOperation();
-
-  /**
    * Returns a new object of class '<em>Concat Operation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -166,6 +157,15 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   ArgMinOperation createArgMinOperation();
+
+  /**
+   * Returns a new object of class '<em>Select Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Select Operation</em>'.
+   * @generated
+   */
+  SelectOperation createSelectOperation();
 
   /**
    * Returns a new object of class '<em>Drop Operation</em>'.
