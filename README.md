@@ -346,7 +346,83 @@ is an abstract class that represents a builder for various operations. It provid
 ```
     It may still have some bugs.
 
+---
+# Checkpoint 3
 
+## Compile and Run
+
+### Compile the Project
+
+To compile and install the program, run the following command:
+```bash
+gradle installDist
+```
+This will compile the classes and create a launcher script in the build/install/dsl-project/bin folder. For convenience, there are two script files in the root of the repository:
+
+For Windows: ```dsl-project.bat```
+For Linux: ```dsl-project```
+
+### Running the Program
+To execute the DSL script:
+
+1. Place your input DSL file (e.g., example.mydsl) in the root folder.
+2. Run the appropriate command:
+
+On Linux:
+
+```bash
+Copy code
+./gradlew run --args="src/main/resources/example.mydsl"
+```
+On Windows:
+```bash
+Copy code
+.\gradlew.bat run --args="src/main/resources/example.mydsl"
+```
+The program will parse the DSL file, process the input data, and generate the output as specified in the script.
+
+## Configuration and DSL Features
+**Example DSL Script**
+The DSL enables users to load, manipulate, and save data systematically. Below is an example script:
+
+```plaintext
+.loadJSON()
+.from("profiling.json")
+.into("functions")
+.nestedIn("functions")
+.selectTop(3)
+.renameColumn("name", "name #1")
+.save()
+.to("output.html")
+.as("html")
+.end();
+```
+
+## Key Operations
+
+**Data Loading**: Load data from JSON, XML, and YAML files.
+
+**Column Operations**: Rename columns, extract nested sections, and calculate values.
+
+**Data Saving**: Export results in formats like CSV or HTML.
+
+## Development Details
+### Semantic Model
+The DSL operates on a semantic model that supports:
+- Representing tabular data (Table, Column, Row).
+- Implementing a fluent API for operations (e.g., loadJSON, renameColumn, save).
+### Grammar
+The grammar for the DSL is defined using Xtext, supporting operations like data loading, renaming, and saving:
+
+```antlr
+LoadJSON:
+    '.loadJSON()'
+    '.from(' file=STRING ')'
+    '.into(' table=STRING ')'
+    ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
+```
+### Backend
+The backend executes parsed DSL scripts using the ```DataBaseBuilder``` API. Each DSL operation maps directly to Java methods.
 
 # Group
 
