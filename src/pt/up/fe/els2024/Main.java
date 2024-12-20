@@ -51,7 +51,7 @@ public class Main {
 		while (treeIterator.hasNext()) {
 			var element = treeIterator.next();
 			System.out.println(element);
-/*
+
 			if (element instanceof TopLevelOperation operation) {
 				switch (operation.getClass().getSimpleName()) {
 					case "ArgMaxOperation":
@@ -105,7 +105,7 @@ public class Main {
 					default:
 						System.out.println("Unknown Operation");
 				}
-			}*/
+			}
 		}
 	}
 
