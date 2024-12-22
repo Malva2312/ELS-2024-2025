@@ -21,9 +21,13 @@
 .selectMax()
 .onColumn("time%")
 .onTable("time")
+.toTable("time")
 
+.concatHorizontal()
+.toTable("final")
+.onTables("decision_tree", "decision_tree2", "time", "vitis")
 
 .save()
-.tables("vitis", "decision_tree", "decision_tree2", "time")
-.to("assignment2Files/newfile.csv")
-.as("csv")
+.tables("final")
+.to("assignment2Files/output.html")
+.as("html")
