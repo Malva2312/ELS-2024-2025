@@ -18,6 +18,11 @@
 .into("decision_tree2")
 .nestedIn("params")
 
+.selectMax()
+.onColumn("time%")
+.onTable("time")
+
+
 .save()
 .tables("vitis", "decision_tree", "decision_tree2", "time")
 .to("assignment2Files/newfile.csv")

@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: pt.up.fe.els2024.mydsl.ui
+Bundle-ManifestVersion: 2
+Bundle-Name: pt.up.fe.els2024.mydsl.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: pt.up.fe.els2024.mydsl.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: pt.up.fe.els2024.mydsl,
+ pt.up.fe.els2024.mydsl.ide,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.14.300",
+ org.eclipse.ui.ide;bundle-version="3.18.500",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Export-Package: org.xtext.example.mydsl.ui.contentassist,
+ pt.up.fe.els2024.mydsl.ui.internal,
+ org.xtext.example.mydsl.ui.quickfix
+Bundle-Activator: pt.up.fe.els2024.mydsl.ui.internal.MydslActivator

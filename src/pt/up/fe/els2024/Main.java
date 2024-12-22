@@ -94,6 +94,7 @@ public class Main {
 			throw new RuntimeException(message);
 		}
 
+
 		var treeIterator = resource.getAllContents();
 		while (treeIterator.hasNext()) {
 			var element = treeIterator.next();
