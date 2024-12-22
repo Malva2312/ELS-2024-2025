@@ -57,9 +57,9 @@ public class Main {
 		operationHandlers.put(RenameOperation.class.getSimpleName(), e -> {
 			if (e instanceof RenameOperation) handleRenameOperation(e);
 		});
-		operationHandlers.put(LimitOperation.class.getSimpleName(), e -> {
-			if (e instanceof LimitOperation) handleLimitOperation(e);
-		});
+		//operationHandlers.put(LimitOperation.class.getSimpleName(), e -> {
+		//	if (e instanceof LimitOperation) handleLimitOperation(e);
+		//});
 		operationHandlers.put(ArgMaxOperation.class.getSimpleName(), e -> {
 			if (e instanceof ArgMaxOperation) handleArgMaxOperation(e);
 		});
@@ -159,15 +159,12 @@ public class Main {
 		StringBuilder output = new StringBuilder(".filter()");
 		appendCommonFeatures(eObject, output, "column", "table", "condition", "value", "target");
 		System.out.println(output);
-		/* TODO: Implement this
-		dataBaseBuilder.filter()
-			.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
-			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.withCondition((String) eObject.eGet(eObject.eClass().getEStructuralFeature("condition")))
-			.withValue((String) eObject.eGet(eObject.eClass().getEStructuralFeature("value")))
-			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
-			.end();
-		*/
+dataBaseBuilder.filter()
+    .onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
+    .onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+    .where((String) eObject.eGet(eObject.eClass().getEStructuralFeature("condition")),
+           (String) eObject.eGet(eObject.eClass().getEStructuralFeature("value")))
+    .end();
 	}
 
 	private void handleSaveOperation(EObject eObject) {
@@ -185,26 +182,11 @@ public class Main {
 		StringBuilder output = new StringBuilder(".renameColumn()");
 		appendCommonFeatures(eObject, output, "original", "renamed", "table");
 		System.out.println(output);
-		/* TODO: Implement this
-		dataBaseBuilder.renameColumn()
-			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("original")))
-			.to((String) eObject.eGet(eObject.eClass().getEStructuralFeature("renamed")))
-			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.end();
-		*/
-	}
-
-	private void handleLimitOperation(EObject eObject) {
-		StringBuilder output = new StringBuilder(".limit()");
-		appendCommonFeatures(eObject, output, "start", "end", "table");
-		System.out.println(output);
-		/* TODO: Implement this
-		dataBaseBuilder.limit()
-			.from((Integer) eObject.eGet(eObject.eClass().getEStructuralFeature("start")))
-			.to((Integer) eObject.eGet(eObject.eClass().getEStructuralFeature("end")))
-			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.end();
-		 */
+		dataBaseBuilder.rename()
+		.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("original")))
+		.to((String) eObject.eGet(eObject.eClass().getEStructuralFeature("renamed")))
+		.table((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+		.end();
 	}
 
 	private void handleArgMaxOperation(EObject eObject) {
@@ -233,13 +215,12 @@ public class Main {
 		StringBuilder output = new StringBuilder(".select()");
 		appendCommonFeatures(eObject, output, "columns", "table", "target");
 		System.out.println(output);
-		/* TODO: Implement this
-		dataBaseBuilder.select()
-			.columns((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("columns"))).toArray(new String[0]))
+		dataBaseBuilder
+			.select((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("columns"))).toArray(new String[0]))
 			.fromTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
 			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
 			.end();
-		*/
+
 	}
 
 	private void handleDropOperation(EObject eObject) {

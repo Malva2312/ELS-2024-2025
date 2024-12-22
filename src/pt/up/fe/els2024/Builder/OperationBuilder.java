@@ -107,7 +107,7 @@ public abstract class OperationBuilder {
      *
      * @return a new SelectColumnsOperation instance
      */
-    public SelectColumnsOperation select() {
+    public SelectColumnsOperation select(String[] columns) {
         executeOperation();
         return new SelectColumnsOperation(getBuilder());
     }
