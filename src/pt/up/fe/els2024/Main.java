@@ -8,28 +8,75 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.parser.IParser;
 import org.xtext.example.mydsl.MyDslStandaloneSetup;
-import org.xtext.example.mydsl.myDsl.TopLevelOperation;
 import pt.up.fe.els2024.Builder.DataBaseBuilder;
 
+
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
+
+import org.xtext.example.mydsl.myDsl.*;
 
 public class Main {
 	@Inject
 	private IParser parser;
 
+	private final Map<String, Consumer<EObject>> operationHandlers = new HashMap<>();
+	private final DataBaseBuilder dataBaseBuilder = new DataBaseBuilder();
+
 	public Main() {
-		// EMF Registration is important,
-		// otherwise cross-references (e.g., entity.getSuperType()) will always return null
 		var injector = new MyDslStandaloneSetup().createInjectorAndDoEMFRegistration();
 		injector.injectMembers(this);
+
+		operationHandlers.put(LoadJSON.class.getSimpleName(), e -> {
+			if (e instanceof LoadJSON) handleLoadJSON(e);
+		});
+		operationHandlers.put(LoadXML.class.getSimpleName(), e -> {
+			if (e instanceof LoadXML) handleLoadXML(e);
+		});
+		operationHandlers.put(LoadYAML.class.getSimpleName(), e -> {
+			if (e instanceof LoadYAML) handleLoadYAML(e);
+		});
+		operationHandlers.put(ConcatOperation.class.getSimpleName(), e -> {
+			if (e instanceof ConcatOperation) handleConcatOperation(e);
+		});
+		operationHandlers.put(FilterOperation.class.getSimpleName(), e -> {
+			if (e instanceof FilterOperation) handleFilterOperation(e);
+		});
+		operationHandlers.put(SaveOperation.class.getSimpleName(), e -> {
+			if (e instanceof SaveOperation) handleSaveOperation(e);
+		});
+		operationHandlers.put(PrintOperation.class.getSimpleName(), e -> {
+			if (e instanceof PrintOperation) System.out.println(".printAll()");
+		});
+		operationHandlers.put(PrintTable.class.getSimpleName(), e -> {
+			if (e instanceof PrintTable) System.out.println(".printTable()");
+		});
+		operationHandlers.put(RenameOperation.class.getSimpleName(), e -> {
+			if (e instanceof RenameOperation) handleRenameOperation(e);
+		});
+		operationHandlers.put(LimitOperation.class.getSimpleName(), e -> {
+			if (e instanceof LimitOperation) handleLimitOperation(e);
+		});
+		operationHandlers.put(ArgMaxOperation.class.getSimpleName(), e -> {
+			if (e instanceof ArgMaxOperation) handleArgMaxOperation(e);
+		});
+		operationHandlers.put(ArgMinOperation.class.getSimpleName(), e -> {
+			if (e instanceof ArgMinOperation) handleArgMinOperation(e);
+		});
+		operationHandlers.put(SelectOperation.class.getSimpleName(), e -> {
+			if (e instanceof SelectOperation) handleSelectOperation(e);
+		});
+		operationHandlers.put(DropOperation.class.getSimpleName(), e -> {
+			if (e instanceof DropOperation) handleDropOperation(e);
+		});
+		operationHandlers.put(ProcessFoldersOperation.class.getSimpleName(), e -> {
+			if (e instanceof ProcessFoldersOperation) handleProcessFoldersOperation(e);
+		});
 	}
 
-
 	public void parse(String filePath) {
-
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createFileURI(filePath));
 		try {
@@ -46,305 +93,115 @@ public class Main {
 			throw new RuntimeException(message);
 		}
 
-		DataBaseBuilder dbBuilder = new DataBaseBuilder();
-
 		var treeIterator = resource.getAllContents();
-		
-		var output = new StringBuilder();
-
 		while (treeIterator.hasNext()) {
 			var element = treeIterator.next();
 
-			EObject eObject = (EObject) element; // Cast your element to EObject
-
-			switch (element.getClass().getSimpleName()) {
-				case "ModelImpl":
-					//output.append("Model");
-					break;
-				case "TopLevelOperationImpl":
-					//output.append("TopLevelOperation");
-					break;
-				case "LoadJSONImpl":
-					output.append(".loadJSON()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("file")) {
-							output.append(".from(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".into(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("attributes")) {
-						Object nested = eObject.eGet(feature).toString();
-							String nestedStr = (String) nested;
-							String processed = nestedStr
-									.replaceAll("[\\[\\]]", "") // Remove square brackets
-									.replaceAll("\\s+", "");   // Remove extra spaces
-							String[] parts = processed.split(","); // Split into individual elements
-
-							// Generate output using string concatenation
-							String result = ".withAttributes(";
-							for (int i = 0; i < parts.length; i++) {
-								result += "\"" + parts[i] + "\"";
-								if (i < parts.length - 1) {
-									result += ", "; // Add a comma and space between elements
-								}
-							}
-							result += ")";
-							output.append(result);
-						} else if (feature.getName().equals("nested")) {
-							Object nested = eObject.eGet(feature).toString();
-							String nestedStr = (String) nested;
-							String processed = nestedStr
-									.replaceAll("[\\[\\]]", "") // Remove square brackets
-									.replaceAll("\\s+", "");   // Remove extra spaces
-							String[] parts = processed.split(","); // Split into individual elements
-
-							// Generate output using string concatenation
-							String result = ".nestedIn(";
-							for (int i = 0; i < parts.length; i++) {
-								result += "\"" + parts[i] + "\"";
-								if (i < parts.length - 1) {
-									result += ", "; // Add a comma and space between elements
-								}
-							}
-							result += ")";
-							output.append(result);
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "LoadXMLImpl":
-					output.append(".loadXML()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("file")) {
-							output.append(".from(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".into(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("nested")) {
-							Object nested = eObject.eGet(feature).toString();
-							// Convert "[Device, Resources]" to "Device", "Resources"
-							String nestedStr = (String) nested;
-							String processed = nestedStr
-									.replaceAll("[\\[\\]]", "") // Remove square brackets
-									.replaceAll("\\s+", "");   // Remove extra spaces
-							String[] parts = processed.split(","); // Split into individual elements
-
-							// Generate output using string concatenation
-							String result = ".nestedIn(";
-							for (int i = 0; i < parts.length; i++) {
-								result += "\"" + parts[i] + "\"";
-								if (i < parts.length - 1) {
-									result += ", "; // Add a comma and space between elements
-								}
-							}
-							result += ")";
-							output.append(result);
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "LoadYAMLImpl":
-					output.append(".loadYAML()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("file")) {
-							output.append(".from(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".into(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("nested")){
-							Object nested = eObject.eGet(feature).toString();
-							// Convert "[Device, Resources]" to "Device", "Resources"
-							String nestedStr = (String) nested;
-							String processed = nestedStr
-									.replaceAll("[\\[\\]]", "") // Remove square brackets
-									.replaceAll("\\s+", "");   // Remove extra spaces
-							String[] parts = processed.split(","); // Split into individual elements
-
-							// Generate output using string concatenation
-							String result = ".nestedIn(";
-							for (int i = 0; i < parts.length; i++) {
-								result += "\"" + parts[i] + "\"";
-								if (i < parts.length - 1) {
-									result += ", "; // Add a comma and space between elements
-								}
-							}
-							result += ")";
-							output.append(result);
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "ConcatOperationImpl":
-					output.append(".concatHorizontal()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("target")) {
-							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("tables")) {
-							Object nested = eObject.eGet(feature).toString();
-							// Convert "[Device, Resources]" to "Device", "Resources"
-							String nestedStr = (String) nested;
-							String processed = nestedStr
-									.replaceAll("[\\[\\]]", "") // Remove square brackets
-									.replaceAll("\\s+", "");   // Remove extra spaces
-							String[] parts = processed.split(","); // Split into individual elements
-
-							// Generate output using string concatenation
-							String result = ".onTables(";
-							for (int i = 0; i < parts.length; i++) {
-								result += "\"" + parts[i] + "\"";
-								if (i < parts.length - 1) {
-									result += ", "; // Add a comma and space between elements
-								}
-							}
-							result += ")";
-							output.append(result);
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "FilterOperationImpl":
-					output.append("Filter");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("column")) {
-							output.append(".onColumn(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("target")) {
-							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("condition")) {
-							output.append(".where(\"" + eObject.eGet(feature) + "\", ");
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "SaveOperationImpl":
-					output.append(".save()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("file")) {
-							output.append(".to(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("format")) {
-							output.append(".as(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("tables")){
-							Object nested = eObject.eGet(feature).toString();
-							String nestedStr = (String) nested;
-							String processed = nestedStr
-									.replaceAll("[\\[\\]]", "") // Remove square brackets
-									.replaceAll("\\s+", "");   // Remove extra spaces
-							String[] parts = processed.split(","); // Split into individual elements
-
-							// Generate output using string concatenation
-							String result = ".tables(";
-							for (int i = 0; i < parts.length; i++) {
-								result += "\"" + parts[i] + "\"";
-								if (i < parts.length - 1) {
-									result += ", "; // Add a comma and space between elements
-								}
-							}
-							result += ")";
-							output.append(result);
-						}else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "PrintOperationImpl":
-					//output.append("Print");
-					break;
-				case "PrintAllImpl":
-					output.append(".printAll()");
-					break;
-				case "PrintTableImpl":
-					output.append(".printTable()");
-					break;
-				case "RenameOperationImpl":
-					output.append(".renameColumn()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("original")){
-							output.append(".from(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("renamed")) {
-							output.append(".to(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "LimitOperationImpl":
-					output.append(".limit()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("start")){
-							output.append(".from(" + eObject.eGet(feature) + ")");
-						} else if (feature.getName().equals("end")) {
-							output.append(".to(" + eObject.eGet(feature) + ")");
-						} else if (feature.getName().equals("onTable")) {
-							output.append(".table(\"" + eObject.eGet(feature) + "\")");
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "ArgMaxOperationImpl":
-					output.append(".selectMax()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("column")){
-							output.append(".onColumn(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("target")) {
-							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "ArgMinOperationImpl":
-					output.append(".selectMin()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("column")){
-							output.append(".onColumn(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("table")) {
-							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
-						} else if (feature.getName().equals("target")) {
-							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "SelectOperationImpl":
-					output.append(".select()");
-				case "DropOperationImpl":
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("table")){
-							output.append(".dropTable(\"" + eObject.eGet(feature) + "\")");
-						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-					}
-					break;
-				case "ProcessFoldersOperationImpl":
-					output.append(".processFolders()");
-					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
-						if (feature.getName().equals("folders")) {
-							Object nested = eObject.eGet(feature).toString();
-							String nestedStr = ((String) nested).replaceAll("[\\[\\]]", ""); // Remove brackets
-							String[] folders = nestedStr.split(",");
-							output.append(".folders(");
-							for (int i = 0; i < folders.length; i++) {
-								output.append("\"").append(folders[i].trim()).append("\"");
-								if (i < folders.length - 1) {
-									output.append(", ");
-								}
-							}
-							output.append(")");
-						} else if (feature.getName().equals("with")) {
-							output.append(".with(() -> {");
-
-							Object withContent = eObject.eGet(feature);
-							if (withContent instanceof EObject) {
-								var subTreeIterator = ((EObject) withContent).eAllContents();
-								while (subTreeIterator.hasNext()) {
-									var subElement = subTreeIterator.next();
-									EObject subEObject = (EObject) subElement;
-									output.append("\n    // Processando subElemento do with\n");
-								}
-							}
-							output.append("})");
-						} else {
-							output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
-						}
-					}
-					break;
-				case "EndOperationImpl":
-					output.append(".end()");
-					break;
-				default:
-					output.append("Unknown Operation");
+			System.out.println("Element: " + element.eClass().getName());
+			var handler = operationHandlers.get(element);
+			if (handler != null) {
+				handler.accept(element);
+			} else {
+				System.out.println("Unknown operation: " + element.eClass().getName());
 			}
-			output.append("");
+
 		}
+	}
+
+	private void handleLoadJSON(EObject eObject) {
+		StringBuilder output = new StringBuilder(".loadJSON()");
+		appendCommonFeatures(eObject, output, "file", "table", "attributes", "nested");
 		System.out.println(output);
+		// Use dataBaseBuilder here if needed
+	}
+
+	private void handleLoadXML(EObject eObject) {
+		StringBuilder output = new StringBuilder(".loadXML()");
+		appendCommonFeatures(eObject, output, "file", "table", "nested");
+		System.out.println(output);
+	}
+
+	private void handleLoadYAML(EObject eObject) {
+		StringBuilder output = new StringBuilder(".loadYAML()");
+		appendCommonFeatures(eObject, output, "file", "table", "nested");
+		System.out.println(output);
+	}
+
+	private void handleConcatOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".concatHorizontal()");
+		appendCommonFeatures(eObject, output, "target", "tables");
+		System.out.println(output);
+	}
+
+	private void handleFilterOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".filter()");
+		appendCommonFeatures(eObject, output, "column", "table", "condition", "value", "target");
+		System.out.println(output);
+	}
+
+	private void handleSaveOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".save()");
+		appendCommonFeatures(eObject, output, "tables", "file", "format");
+		System.out.println(output);
+	}
+
+	private void handleRenameOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".renameColumn()");
+		appendCommonFeatures(eObject, output, "original", "renamed", "table");
+		System.out.println(output);
+	}
+
+	private void handleLimitOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".limit()");
+		appendCommonFeatures(eObject, output, "start", "end", "table");
+		System.out.println(output);
+	}
+
+	private void handleArgMaxOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".selectMax()");
+		appendCommonFeatures(eObject, output, "column", "table", "target");
+		System.out.println(output);
+	}
+
+	private void handleArgMinOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".selectMin()");
+		appendCommonFeatures(eObject, output, "column", "table", "target");
+		System.out.println(output);
+	}
+
+	private void handleSelectOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".select()");
+		appendCommonFeatures(eObject, output, "columns", "table", "target");
+		System.out.println(output);
+	}
+
+	private void handleDropOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".dropTable()");
+		appendCommonFeatures(eObject, output, "table");
+		System.out.println(output);
+	}
+
+	private void handleProcessFoldersOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".processFolders()");
+		appendCommonFeatures(eObject, output, "folders", "with");
+		System.out.println(output);
+	}
+
+	private void appendCommonFeatures(EObject eObject, StringBuilder output, String... featureNames) {
+		for (String featureName : featureNames) {
+			var feature = eObject.eClass().getEStructuralFeature(featureName);
+			if (feature != null) {
+				var value = eObject.eGet(feature);
+				if (value instanceof List<?> listValue) {
+					output.append(".").append(featureName).append("(")
+							.append(String.join(", ", listValue.stream()
+									.map(String::valueOf).toArray(String[]::new)))
+							.append(")");
+				} else {
+					output.append(".").append(featureName).append("(\"").append(value).append("\")");
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) {
