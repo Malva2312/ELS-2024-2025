@@ -9,6 +9,34 @@
 .into("vitis")
 .nestedIn("Device", "Resources")
 
+.filter()
+.onColumn("time%")
+.onTable("time")
+.where("time%" value ">5")
+
+.printAll()
+
+.printTable("time")
+
+.renameColumn()
+.from("time%")
+.to("time")
+.onTable("time")
+
+.limit()
+.table("time")
+.from(0)
+.to(10)
+
+.selectMin()
+.onColumn("time")
+.onTable("time")
+.toTable("time")
+
+.dropTable("time")
+
+.processFolders("assignment2Files/run1") with {.printAll()}
+
 .loadYAML()
 .from("assignment2Files/run1/decision_tree.yaml")
 .into("decision_tree")

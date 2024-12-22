@@ -49,6 +49,8 @@ public class Main {
 		DataBaseBuilder dbBuilder = new DataBaseBuilder();
 
 		var treeIterator = resource.getAllContents();
+		
+		var output = new StringBuilder();
 
 		while (treeIterator.hasNext()) {
 			var element = treeIterator.next();
@@ -57,21 +59,20 @@ public class Main {
 
 			switch (element.getClass().getSimpleName()) {
 				case "ModelImpl":
-					//System.out.println("Model");
+					//output.append("Model");
 					break;
 				case "TopLevelOperationImpl":
-					//System.out.println("TopLevelOperation");
+					//output.append("TopLevelOperation");
 					break;
 				case "LoadJSONImpl":
-					System.out.println(".loadJSON()");
+					output.append(".loadJSON()");
 					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
 						if (feature.getName().equals("file")) {
-							System.out.println(".from(\"" + eObject.eGet(feature) + "\")");
+							output.append(".from(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("table")) {
-							System.out.println(".into(\"" + eObject.eGet(feature) + "\")");
+							output.append(".into(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("attributes")) {
-							Object nested = eObject.eGet(feature).toString();
-							// Convert "[Device, Resources]" to "Device", "Resources"
+						Object nested = eObject.eGet(feature).toString();
 							String nestedStr = (String) nested;
 							String processed = nestedStr
 									.replaceAll("[\\[\\]]", "") // Remove square brackets
@@ -87,10 +88,9 @@ public class Main {
 								}
 							}
 							result += ")";
-							System.out.println(result);
+							output.append(result);
 						} else if (feature.getName().equals("nested")) {
 							Object nested = eObject.eGet(feature).toString();
-							// Convert "[Device, Resources]" to "Device", "Resources"
 							String nestedStr = (String) nested;
 							String processed = nestedStr
 									.replaceAll("[\\[\\]]", "") // Remove square brackets
@@ -106,17 +106,17 @@ public class Main {
 								}
 							}
 							result += ")";
-							System.out.println(result);
-						} else System.out.println("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+							output.append(result);
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
 					}
 					break;
 				case "LoadXMLImpl":
-					System.out.println(".loadXML()");
+					output.append(".loadXML()");
 					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
 						if (feature.getName().equals("file")) {
-							System.out.println(".from(\"" + eObject.eGet(feature) + "\")");
+							output.append(".from(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("table")) {
-							System.out.println(".into(\"" + eObject.eGet(feature) + "\")");
+							output.append(".into(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("nested")) {
 							Object nested = eObject.eGet(feature).toString();
 							// Convert "[Device, Resources]" to "Device", "Resources"
@@ -135,17 +135,17 @@ public class Main {
 								}
 							}
 							result += ")";
-							System.out.println(result);
-						} else System.out.println("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+							output.append(result);
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
 					}
 					break;
 				case "LoadYAMLImpl":
-					System.out.println(".loadYAML()");
+					output.append(".loadYAML()");
 					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
 						if (feature.getName().equals("file")) {
-							System.out.println(".from(\"" + eObject.eGet(feature) + "\")");
+							output.append(".from(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("table")) {
-							System.out.println(".into(\"" + eObject.eGet(feature) + "\")");
+							output.append(".into(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("nested")){
 							Object nested = eObject.eGet(feature).toString();
 							// Convert "[Device, Resources]" to "Device", "Resources"
@@ -164,15 +164,15 @@ public class Main {
 								}
 							}
 							result += ")";
-							System.out.println(result);
-						} else System.out.println("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+							output.append(result);
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
 					}
 					break;
 				case "ConcatOperationImpl":
-					System.out.println(".concatHorizontal()");
+					output.append(".concatHorizontal()");
 					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
 						if (feature.getName().equals("target")) {
-							System.out.println(".toTable(\"" + eObject.eGet(feature) + "\")");
+							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("tables")) {
 							Object nested = eObject.eGet(feature).toString();
 							// Convert "[Device, Resources]" to "Device", "Resources"
@@ -191,20 +191,31 @@ public class Main {
 								}
 							}
 							result += ")";
-							System.out.println(result);
-						} else System.out.println("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+							output.append(result);
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
 					}
 					break;
 				case "FilterOperationImpl":
-					System.out.println("Filter");
+					output.append("Filter");
+					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
+						if (feature.getName().equals("column")) {
+							output.append(".onColumn(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("table")) {
+							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("target")) {
+							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("condition")) {
+							output.append(".where(\"" + eObject.eGet(feature) + "\", ");
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+					}
 					break;
 				case "SaveOperationImpl":
-					System.out.println(".save()");
+					output.append(".save()");
 					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
 						if (feature.getName().equals("file")) {
-							System.out.println(".to(\"" + eObject.eGet(feature) + "\")");
+							output.append(".to(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("format")) {
-							System.out.println(".as(\"" + eObject.eGet(feature) + "\")");
+							output.append(".as(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("tables")){
 							Object nested = eObject.eGet(feature).toString();
 							String nestedStr = (String) nested;
@@ -222,57 +233,88 @@ public class Main {
 								}
 							}
 							result += ")";
-							System.out.println(result);
-						}else System.out.println("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+							output.append(result);
+						}else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
 					}
 					break;
 				case "PrintOperationImpl":
-					System.out.println("Print");
+					//output.append("Print");
 					break;
-				case "PrintAllOperationImpl":
-					System.out.println("PrintAll");
+				case "PrintAllImpl":
+					output.append(".printAll()");
 					break;
-				case "PrintTableOperationImpl":
-					System.out.println("PrintTable");
+				case "PrintTableImpl":
+					output.append(".printTable()");
 					break;
 				case "RenameOperationImpl":
-					System.out.println("Rename");
+					output.append(".renameColumn()");
+					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
+						if (feature.getName().equals("original")){
+							output.append(".from(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("renamed")) {
+							output.append(".to(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("table")) {
+							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+					}
 					break;
 				case "LimitOperationImpl":
-					System.out.println("Limit");
+					output.append(".limit()");
+					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
+						if (feature.getName().equals("start")){
+							output.append(".from(" + eObject.eGet(feature) + ")");
+						} else if (feature.getName().equals("end")) {
+							output.append(".to(" + eObject.eGet(feature) + ")");
+						} else if (feature.getName().equals("onTable")) {
+							output.append(".table(\"" + eObject.eGet(feature) + "\")");
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+					}
 					break;
 				case "ArgMaxOperationImpl":
-					System.out.println(".selectMax()");
+					output.append(".selectMax()");
 					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
 						if (feature.getName().equals("column")){
-							System.out.println(".onColumn(\"" + eObject.eGet(feature) + "\")");
+							output.append(".onColumn(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("table")) {
-							System.out.println(".onTable(\"" + eObject.eGet(feature) + "\")");
+							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
 						} else if (feature.getName().equals("target")) {
-							System.out.println(".toTable(\"" + eObject.eGet(feature) + "\")");
-						} else System.out.println("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
 					}
 					break;
 				case "ArgMinOperationImpl":
-					System.out.println("ArgMin");
+					output.append(".selectMin()");
+					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
+						if (feature.getName().equals("column")){
+							output.append(".onColumn(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("table")) {
+							output.append(".onTable(\"" + eObject.eGet(feature) + "\")");
+						} else if (feature.getName().equals("target")) {
+							output.append(".toTable(\"" + eObject.eGet(feature) + "\")");
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+					}
 					break;
 				case "SelectOperationImpl":
-					System.out.println("Select");
-					break;
+					output.append(".select()");
 				case "DropOperationImpl":
-					System.out.println("Drop");
+					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
+						if (feature.getName().equals("table")){
+							output.append(".dropTable(\"" + eObject.eGet(feature) + "\")");
+						} else output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+					}
 					break;
 				case "ProcessFoldersOperationImpl":
-					System.out.println("ProcessFolders");
+					output.append("ProcessFolders");
 					break;
 				case "EndOperationImpl":
-					//System.out.println(".end()");
+					output.append(".end()");
 					break;
 				default:
-					System.out.println("Unknown Operation");
+					output.append("Unknown Operation");
 			}
-			System.out.println("");
+			output.append("");
 		}
+		System.out.println(output);
 	}
 
 	public static void main(String[] args) {
