@@ -26,6 +26,7 @@ Index:
 3. [CP3](#Checkpoint-3)
 ---
 # Checkpoint 1
+## [Presentation Here](/doc/ELS%20-%20Checkpoint%201.pdf)
 
 ## Running the program
 To run the program, use the following command:
@@ -122,6 +123,7 @@ The decision to use a YAML configuration file was made for the following reasons
 
 ---
 # Checkpoint 2
+## [Presentation Here](/doc/ELS%20-%20Checkpoint%202.pdf)
 
 ## Running the program
 To run the program, use the following command:
@@ -353,7 +355,7 @@ is an abstract class that represents a builder for various operations. It provid
 
 ---
 # Checkpoint 3
-
+## [Presentation Here](/doc/ELS%20-%20Checkpoint%203.pdf)
 ## Compile and Run
 
 ### Compile the Project
@@ -517,6 +519,9 @@ ProcessFoldersOperation:
     '.processFolders(' folders+=STRING (',' folders+=STRING)* ')'
     '.with' '{' folderOperations+=TopLevelOperation+ '}';
 ```
+
+Note: `ProcessFoldersOperation` is in the grammar but we had some issues and is not implemented in CP3. The objective was to allow a loop that would iterate all the folders that were given.
+
 ### Backend
 The backend executes parsed DSL scripts using the ```DataBaseBuilder``` API. Each DSL operation maps directly to Java methods.[Main.java](src/pt/up/fe/els2024/Main.java) as handlers for all the operations defined in the grammar.
 
