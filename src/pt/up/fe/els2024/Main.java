@@ -304,7 +304,37 @@ public class Main {
 					}
 					break;
 				case "ProcessFoldersOperationImpl":
-					output.append("ProcessFolders");
+					output.append(".processFolders()");
+					for (var feature : eObject.eClass().getEAllStructuralFeatures()) {
+						if (feature.getName().equals("folders")) {
+							Object nested = eObject.eGet(feature).toString();
+							String nestedStr = ((String) nested).replaceAll("[\\[\\]]", ""); // Remove brackets
+							String[] folders = nestedStr.split(",");
+							output.append(".folders(");
+							for (int i = 0; i < folders.length; i++) {
+								output.append("\"").append(folders[i].trim()).append("\"");
+								if (i < folders.length - 1) {
+									output.append(", ");
+								}
+							}
+							output.append(")");
+						} else if (feature.getName().equals("with")) {
+							output.append(".with(() -> {");
+
+							Object withContent = eObject.eGet(feature);
+							if (withContent instanceof EObject) {
+								var subTreeIterator = ((EObject) withContent).eAllContents();
+								while (subTreeIterator.hasNext()) {
+									var subElement = subTreeIterator.next();
+									EObject subEObject = (EObject) subElement;
+									output.append("\n    // Processando subElemento do with\n");
+								}
+							}
+							output.append("})");
+						} else {
+							output.append("." + feature.getName() + "(\"" + eObject.eGet(feature) + "\")");
+						}
+					}
 					break;
 				case "EndOperationImpl":
 					output.append(".end()");
