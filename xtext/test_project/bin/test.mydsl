@@ -21,7 +21,7 @@
 .selectMax()
 .onColumn("time%")
 .onTable("time")
-.toTable("time")
+.toTable("timeNew")
 
 .concatHorizontal()
 .toTable("final")
@@ -32,7 +32,4 @@
 .to("assignment2Files/output.html")
 .as("html")
 
-.dropTable("time")
-
-.processFolders("assignment2Files/run1")
-.with { .dropTable("time")}
+.end();

@@ -224,20 +224,22 @@ dataBaseBuilder.filter()
 	}
 
 	private void handleDropOperation(EObject eObject) {
-		StringBuilder output = new StringBuilder(".dropTable()");
-		appendCommonFeatures(eObject, output, "table");
+		StringBuilder output = new StringBuilder(".dropTable(\"" + ((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table"))) + "\")");
 		System.out.println(output);
-		/* TODO: Implement this
-		dataBaseBuilder.dropTable()
-			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.end();
-		 */
+		/*dataBaseBuilder
+				.dropTable(((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table"))))
+				.end();*/
 	}
 
 	private void handleProcessFoldersOperation(EObject eObject) {
-		StringBuilder output = new StringBuilder(".processFolders()");
-		appendCommonFeatures(eObject, output, "folders", "with");
+		StringBuilder output = new StringBuilder(".processFolders(");
+		appendCommonFeatures(eObject, output, "folders");
+		output.append(").with{ ");
+		appendCommonFeatures(eObject, output, "with");
+		output.append(" }");
+		System.out.println("PROCESS FOLDERS_____________");
 		System.out.println(output);
+		System.out.println("_____________________________");
 		/* TODO: Implement this
 		dataBaseBuilder.processFolders()
 			.fromFolders((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("folders"))).toArray(new String[0]))
