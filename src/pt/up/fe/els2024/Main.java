@@ -173,13 +173,11 @@ public class Main {
 		StringBuilder output = new StringBuilder(".save()");
 		appendCommonFeatures(eObject, output, "tables", "file", "format");
 		System.out.println(output);
-		/* TODO: Implement this
 		dataBaseBuilder.save()
-			.fromTables((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("tables"))).toArray(new String[0]))
-			.toFile((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
-			.withFormat((String) eObject.eGet(eObject.eClass().getEStructuralFeature("format")))
+			.tables((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("tables"))).toArray(new String[0]))
+			.to((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
+			.as((String) eObject.eGet(eObject.eClass().getEStructuralFeature("format")))
 			.end();
-			*/
 	}
 
 	private void handleRenameOperation(EObject eObject) {

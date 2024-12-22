@@ -1,19 +1,24 @@
 .loadJSON()
-.from("profiling.json")
+.from("assignment2Files/run1/profiling.json")
 .into("time")
 .withAttributes("time%", "seconds", "name")
 .nestedIn("functions")
 
 .loadXML()
-.from("vitis-report.xml")
+.from("assignment2Files/run1/vitis-report.xml")
 .into("vitis")
 .nestedIn("Device", "Resources")
 
 .loadYAML()
-.from("decision_tree.yaml")
+.from("assignment2Files/run1/decision_tree.yaml")
 .into("decision_tree")
 
 .loadYAML()
-.from("decision_tree.yaml")
+.from("assignment2Files/run1/decision_tree.yaml")
 .into("decision_tree2")
 .nestedIn("params")
+
+.save()
+.tables("vitis", "decision_tree", "decision_tree2", "time")
+.to("assignment2Files/newfile.csv")
+.as("csv")
