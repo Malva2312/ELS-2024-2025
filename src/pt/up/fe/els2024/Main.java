@@ -99,9 +99,10 @@ public class Main {
 			var element = treeIterator.next();
 
 			System.out.println("Element: " + element.eClass().getName());
-			var handler = operationHandlers.get(element);
+			var handler = operationHandlers.get(element.eClass().getName());
 			if (handler != null) {
 				handler.accept(element);
+				System.out.println("Handled operation: " + element.eClass().getName());
 			} else {
 				System.out.println("Unknown operation: " + element.eClass().getName());
 			}
@@ -117,7 +118,7 @@ public class Main {
 			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
 			.into((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
 			.withAttributes((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("attributes"))).toArray(new String[0]))
-			.nestedIn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("nested")))
+			.nestedIn((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("nested"))).toArray(new String[0]))
 			.end();
 	}
 
@@ -128,7 +129,7 @@ public class Main {
 		dataBaseBuilder.loadXML()
 			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
 			.into((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.nestedIn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("nested")))
+			.nestedIn((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("nested"))).toArray(new String[0]))
 			.end();
 	}
 
@@ -139,7 +140,7 @@ public class Main {
 		dataBaseBuilder.loadYAML()
 			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
 			.into((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.nestedIn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("nested")))
+			.nestedIn((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("nested"))).toArray(new String[0]))
 			.end();
 	}
 
@@ -147,12 +148,10 @@ public class Main {
 		StringBuilder output = new StringBuilder(".concatHorizontal()");
 		appendCommonFeatures(eObject, output, "target", "tables");
 		System.out.println(output);
-		/* TODO: Implement this
 		dataBaseBuilder.concatHorizontal()
 			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
 			.onTables((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("tables"))).toArray(new String[0]))
 			.end();
-	*/
 	}
 
 	private void handleFilterOperation(EObject eObject) {

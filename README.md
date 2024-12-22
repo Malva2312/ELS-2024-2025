@@ -158,7 +158,7 @@ db
     .onColumn("time%")
     .onTable("time")
 
-    .concactHorizontal()
+    .concatHorizontal()
     .toTable("final")
     .onTables("decision_tree", "decision_tree2", "time", "vitis")
 
@@ -203,7 +203,7 @@ db
                 .onColumn("time%")
                 .onTable("time")
 
-                .concactHorizontal()
+                .concatHorizontal()
                 .toTable("final")
                 .onTables("decision_tree", "decision_tree2", "time", "vitis")
 
@@ -235,7 +235,7 @@ is an abstract class that represents a builder for various operations. It provid
 1. **ConcatHorizontalOperation**
    Usage Explanation: This class is used to concatenate multiple tables horizontally, meaning it combines the columns of the specified tables into a single table.  Example:
 ```java
-    .concactHorizontal()
+    .concatHorizontal()
     .toTable("final")
     .onTables("decision_tree", "decision_tree2", "time", "vitis")
 ```

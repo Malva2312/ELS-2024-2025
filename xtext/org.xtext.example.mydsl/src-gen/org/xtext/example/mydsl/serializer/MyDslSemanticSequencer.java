@@ -31,7 +31,6 @@ import org.xtext.example.mydsl.myDsl.ProcessFoldersOperation;
 import org.xtext.example.mydsl.myDsl.RenameOperation;
 import org.xtext.example.mydsl.myDsl.SaveOperation;
 import org.xtext.example.mydsl.myDsl.SelectOperation;
-import org.xtext.example.mydsl.myDsl.TopLevelOperation;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -95,9 +94,6 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case MyDslPackage.SELECT_OPERATION:
 				sequence_SelectOperation(context, (SelectOperation) semanticObject); 
-				return; 
-			case MyDslPackage.TOP_LEVEL_OPERATION:
-				sequence_TopLevelOperation(context, (TopLevelOperation) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -403,20 +399,6 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 * </pre>
 	 */
 	protected void sequence_SelectOperation(ISerializationContext context, SelectOperation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     TopLevelOperation returns TopLevelOperation
-	 *
-	 * Constraint:
-	 *     {TopLevelOperation}
-	 * </pre>
-	 */
-	protected void sequence_TopLevelOperation(ISerializationContext context, TopLevelOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

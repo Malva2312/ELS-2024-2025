@@ -4,11 +4,11 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 Model:
     operations+=TopLevelOperation+;
-    
+
 TopLevelOperation:
     LoadOperation | SelectOperation | ConcatOperation | SaveOperation |
     PrintOperation | RenameOperation | LimitOperation |
-    ArgMaxOperation | ArgMinOperation | DropOperation | FilterOperation | ProcessFoldersOperation | {TopLevelOperation} EndOperation;
+    ArgMaxOperation | ArgMinOperation | DropOperation | FilterOperation | ProcessFoldersOperation;
 
 LoadOperation:
     LoadJSON | LoadXML | LoadYAML;
@@ -17,26 +17,26 @@ LoadJSON:
     '.loadJSON()'
     '.from(' file=STRING ')'
     '.into(' table=STRING ')'
-    ('.withAttributes' '(' attributes+=STRING (',' attributes+=STRING)* ')')?
-    ('.nestedIn' '(' nested+=STRING (',' nested+=STRING)* ')')?;
+    ('.withAttributes(' attributes+=STRING (',' attributes+=STRING)* ')')?
+    ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
 
 LoadXML:
     '.loadXML()'
     '.from(' file=STRING ')'
     '.into(' table=STRING ')'
-    ('.nestedIn' '(' nested+=STRING (',' nested+=STRING)* ')')?;
+    ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
 
 LoadYAML:
     '.loadYAML()'
     '.from(' file=STRING ')'
     '.into(' table=STRING ')'
-    ('.nestedIn' '(' nested+=STRING (',' nested+=STRING)* ')')?;
+    ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
 
 ConcatOperation:
     '.concatHorizontal()'
     '.toTable(' target=STRING ')'
     '.onTables(' tables+=STRING (',' tables+=STRING)* ')';
-   
+
 FilterOperation:
     '.filter()'
     '.onColumn(' column=STRING ')'
@@ -54,7 +54,7 @@ PrintOperation:
 
 PrintAll:
     '.printAll()';
-    
+
 PrintTable:
     '.printTable(' table=STRING ')';
 
@@ -84,13 +84,13 @@ ArgMinOperation:
 
 SelectOperation:
     '.select()'
-    '.columns(' columns+=STRING (',' columns+=STRING)* ')' 'fromTable' table=STRING 'toTable' target=STRING;
+    '.columns(' columns+=STRING (',' columns+=STRING)* ')'
+    'fromTable(' table=STRING ')'
+    'toTable(' target=STRING ')';
 
 DropOperation:
     '.dropTable(' table=STRING ')';
 
 ProcessFoldersOperation:
-    '.processFolders(' folders+=STRING (',' folders+=STRING)* ')' 'with' '{' folderOperations+=TopLevelOperation+ '}';
-
-EndOperation:
-    '.end();';
+    '.processFolders(' folders+=STRING (',' folders+=STRING)* ')'
+    'with' '{' folderOperations+=TopLevelOperation+ '}';

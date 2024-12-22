@@ -127,7 +127,7 @@ public abstract class OperationBuilder {
      *
      * @return a new ConcatHorizontalOperation instance
      */
-    public ConcatHorizontalOperation concactHorizontal() {
+    public ConcatHorizontalOperation concatHorizontal() {
         executeOperation();
         return new ConcatHorizontalOperation(getBuilder());
     }

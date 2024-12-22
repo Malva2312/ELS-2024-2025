@@ -219,23 +219,6 @@ ruleTopLevelOperation returns [EObject current=null]
 			$current = $this_ProcessFoldersOperation_11.current;
 			afterParserOrEnumRuleCall();
 		}
-		    |
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getTopLevelOperationAccess().getTopLevelOperationAction_12_0(),
-						$current);
-				}
-			)
-			{
-				newCompositeNode(grammarAccess.getTopLevelOperationAccess().getEndOperationParserRuleCall_12_1());
-			}
-			ruleEndOperation
-			{
-				afterParserOrEnumRuleCall();
-			}
-		)
 	)
 ;
 
@@ -357,19 +340,15 @@ ruleLoadJSON returns [EObject current=null]
 			newLeafNode(otherlv_6, grammarAccess.getLoadJSONAccess().getRightParenthesisKeyword_6());
 		}
 		(
-			otherlv_7='.withAttributes'
+			otherlv_7='.withAttributes('
 			{
 				newLeafNode(otherlv_7, grammarAccess.getLoadJSONAccess().getWithAttributesKeyword_7_0());
 			}
-			otherlv_8='('
-			{
-				newLeafNode(otherlv_8, grammarAccess.getLoadJSONAccess().getLeftParenthesisKeyword_7_1());
-			}
 			(
 				(
-					lv_attributes_9_0=RULE_STRING
+					lv_attributes_8_0=RULE_STRING
 					{
-						newLeafNode(lv_attributes_9_0, grammarAccess.getLoadJSONAccess().getAttributesSTRINGTerminalRuleCall_7_2_0());
+						newLeafNode(lv_attributes_8_0, grammarAccess.getLoadJSONAccess().getAttributesSTRINGTerminalRuleCall_7_1_0());
 					}
 					{
 						if ($current==null) {
@@ -378,21 +357,21 @@ ruleLoadJSON returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"attributes",
-							lv_attributes_9_0,
+							lv_attributes_8_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 			(
-				otherlv_10=','
+				otherlv_9=','
 				{
-					newLeafNode(otherlv_10, grammarAccess.getLoadJSONAccess().getCommaKeyword_7_3_0());
+					newLeafNode(otherlv_9, grammarAccess.getLoadJSONAccess().getCommaKeyword_7_2_0());
 				}
 				(
 					(
-						lv_attributes_11_0=RULE_STRING
+						lv_attributes_10_0=RULE_STRING
 						{
-							newLeafNode(lv_attributes_11_0, grammarAccess.getLoadJSONAccess().getAttributesSTRINGTerminalRuleCall_7_3_1_0());
+							newLeafNode(lv_attributes_10_0, grammarAccess.getLoadJSONAccess().getAttributesSTRINGTerminalRuleCall_7_2_1_0());
 						}
 						{
 							if ($current==null) {
@@ -401,31 +380,27 @@ ruleLoadJSON returns [EObject current=null]
 							addWithLastConsumed(
 								$current,
 								"attributes",
-								lv_attributes_11_0,
+								lv_attributes_10_0,
 								"org.eclipse.xtext.common.Terminals.STRING");
 						}
 					)
 				)
 			)*
-			otherlv_12=')'
+			otherlv_11=')'
 			{
-				newLeafNode(otherlv_12, grammarAccess.getLoadJSONAccess().getRightParenthesisKeyword_7_4());
+				newLeafNode(otherlv_11, grammarAccess.getLoadJSONAccess().getRightParenthesisKeyword_7_3());
 			}
 		)?
 		(
-			otherlv_13='.nestedIn'
+			otherlv_12='.nestedIn('
 			{
-				newLeafNode(otherlv_13, grammarAccess.getLoadJSONAccess().getNestedInKeyword_8_0());
-			}
-			otherlv_14='('
-			{
-				newLeafNode(otherlv_14, grammarAccess.getLoadJSONAccess().getLeftParenthesisKeyword_8_1());
+				newLeafNode(otherlv_12, grammarAccess.getLoadJSONAccess().getNestedInKeyword_8_0());
 			}
 			(
 				(
-					lv_nested_15_0=RULE_STRING
+					lv_nested_13_0=RULE_STRING
 					{
-						newLeafNode(lv_nested_15_0, grammarAccess.getLoadJSONAccess().getNestedSTRINGTerminalRuleCall_8_2_0());
+						newLeafNode(lv_nested_13_0, grammarAccess.getLoadJSONAccess().getNestedSTRINGTerminalRuleCall_8_1_0());
 					}
 					{
 						if ($current==null) {
@@ -434,21 +409,21 @@ ruleLoadJSON returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"nested",
-							lv_nested_15_0,
+							lv_nested_13_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 			(
-				otherlv_16=','
+				otherlv_14=','
 				{
-					newLeafNode(otherlv_16, grammarAccess.getLoadJSONAccess().getCommaKeyword_8_3_0());
+					newLeafNode(otherlv_14, grammarAccess.getLoadJSONAccess().getCommaKeyword_8_2_0());
 				}
 				(
 					(
-						lv_nested_17_0=RULE_STRING
+						lv_nested_15_0=RULE_STRING
 						{
-							newLeafNode(lv_nested_17_0, grammarAccess.getLoadJSONAccess().getNestedSTRINGTerminalRuleCall_8_3_1_0());
+							newLeafNode(lv_nested_15_0, grammarAccess.getLoadJSONAccess().getNestedSTRINGTerminalRuleCall_8_2_1_0());
 						}
 						{
 							if ($current==null) {
@@ -457,15 +432,15 @@ ruleLoadJSON returns [EObject current=null]
 							addWithLastConsumed(
 								$current,
 								"nested",
-								lv_nested_17_0,
+								lv_nested_15_0,
 								"org.eclipse.xtext.common.Terminals.STRING");
 						}
 					)
 				)
 			)*
-			otherlv_18=')'
+			otherlv_16=')'
 			{
-				newLeafNode(otherlv_18, grammarAccess.getLoadJSONAccess().getRightParenthesisKeyword_8_4());
+				newLeafNode(otherlv_16, grammarAccess.getLoadJSONAccess().getRightParenthesisKeyword_8_3());
 			}
 		)?
 	)
@@ -544,19 +519,15 @@ ruleLoadXML returns [EObject current=null]
 			newLeafNode(otherlv_6, grammarAccess.getLoadXMLAccess().getRightParenthesisKeyword_6());
 		}
 		(
-			otherlv_7='.nestedIn'
+			otherlv_7='.nestedIn('
 			{
 				newLeafNode(otherlv_7, grammarAccess.getLoadXMLAccess().getNestedInKeyword_7_0());
 			}
-			otherlv_8='('
-			{
-				newLeafNode(otherlv_8, grammarAccess.getLoadXMLAccess().getLeftParenthesisKeyword_7_1());
-			}
 			(
 				(
-					lv_nested_9_0=RULE_STRING
+					lv_nested_8_0=RULE_STRING
 					{
-						newLeafNode(lv_nested_9_0, grammarAccess.getLoadXMLAccess().getNestedSTRINGTerminalRuleCall_7_2_0());
+						newLeafNode(lv_nested_8_0, grammarAccess.getLoadXMLAccess().getNestedSTRINGTerminalRuleCall_7_1_0());
 					}
 					{
 						if ($current==null) {
@@ -565,21 +536,21 @@ ruleLoadXML returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"nested",
-							lv_nested_9_0,
+							lv_nested_8_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 			(
-				otherlv_10=','
+				otherlv_9=','
 				{
-					newLeafNode(otherlv_10, grammarAccess.getLoadXMLAccess().getCommaKeyword_7_3_0());
+					newLeafNode(otherlv_9, grammarAccess.getLoadXMLAccess().getCommaKeyword_7_2_0());
 				}
 				(
 					(
-						lv_nested_11_0=RULE_STRING
+						lv_nested_10_0=RULE_STRING
 						{
-							newLeafNode(lv_nested_11_0, grammarAccess.getLoadXMLAccess().getNestedSTRINGTerminalRuleCall_7_3_1_0());
+							newLeafNode(lv_nested_10_0, grammarAccess.getLoadXMLAccess().getNestedSTRINGTerminalRuleCall_7_2_1_0());
 						}
 						{
 							if ($current==null) {
@@ -588,15 +559,15 @@ ruleLoadXML returns [EObject current=null]
 							addWithLastConsumed(
 								$current,
 								"nested",
-								lv_nested_11_0,
+								lv_nested_10_0,
 								"org.eclipse.xtext.common.Terminals.STRING");
 						}
 					)
 				)
 			)*
-			otherlv_12=')'
+			otherlv_11=')'
 			{
-				newLeafNode(otherlv_12, grammarAccess.getLoadXMLAccess().getRightParenthesisKeyword_7_4());
+				newLeafNode(otherlv_11, grammarAccess.getLoadXMLAccess().getRightParenthesisKeyword_7_3());
 			}
 		)?
 	)
@@ -675,19 +646,15 @@ ruleLoadYAML returns [EObject current=null]
 			newLeafNode(otherlv_6, grammarAccess.getLoadYAMLAccess().getRightParenthesisKeyword_6());
 		}
 		(
-			otherlv_7='.nestedIn'
+			otherlv_7='.nestedIn('
 			{
 				newLeafNode(otherlv_7, grammarAccess.getLoadYAMLAccess().getNestedInKeyword_7_0());
 			}
-			otherlv_8='('
-			{
-				newLeafNode(otherlv_8, grammarAccess.getLoadYAMLAccess().getLeftParenthesisKeyword_7_1());
-			}
 			(
 				(
-					lv_nested_9_0=RULE_STRING
+					lv_nested_8_0=RULE_STRING
 					{
-						newLeafNode(lv_nested_9_0, grammarAccess.getLoadYAMLAccess().getNestedSTRINGTerminalRuleCall_7_2_0());
+						newLeafNode(lv_nested_8_0, grammarAccess.getLoadYAMLAccess().getNestedSTRINGTerminalRuleCall_7_1_0());
 					}
 					{
 						if ($current==null) {
@@ -696,21 +663,21 @@ ruleLoadYAML returns [EObject current=null]
 						addWithLastConsumed(
 							$current,
 							"nested",
-							lv_nested_9_0,
+							lv_nested_8_0,
 							"org.eclipse.xtext.common.Terminals.STRING");
 					}
 				)
 			)
 			(
-				otherlv_10=','
+				otherlv_9=','
 				{
-					newLeafNode(otherlv_10, grammarAccess.getLoadYAMLAccess().getCommaKeyword_7_3_0());
+					newLeafNode(otherlv_9, grammarAccess.getLoadYAMLAccess().getCommaKeyword_7_2_0());
 				}
 				(
 					(
-						lv_nested_11_0=RULE_STRING
+						lv_nested_10_0=RULE_STRING
 						{
-							newLeafNode(lv_nested_11_0, grammarAccess.getLoadYAMLAccess().getNestedSTRINGTerminalRuleCall_7_3_1_0());
+							newLeafNode(lv_nested_10_0, grammarAccess.getLoadYAMLAccess().getNestedSTRINGTerminalRuleCall_7_2_1_0());
 						}
 						{
 							if ($current==null) {
@@ -719,15 +686,15 @@ ruleLoadYAML returns [EObject current=null]
 							addWithLastConsumed(
 								$current,
 								"nested",
-								lv_nested_11_0,
+								lv_nested_10_0,
 								"org.eclipse.xtext.common.Terminals.STRING");
 						}
 					)
 				)
 			)*
-			otherlv_12=')'
+			otherlv_11=')'
 			{
-				newLeafNode(otherlv_12, grammarAccess.getLoadYAMLAccess().getRightParenthesisKeyword_7_4());
+				newLeafNode(otherlv_11, grammarAccess.getLoadYAMLAccess().getRightParenthesisKeyword_7_3());
 			}
 		)?
 	)
@@ -1689,7 +1656,7 @@ ruleSelectOperation returns [EObject current=null]
 		{
 			newLeafNode(otherlv_5, grammarAccess.getSelectOperationAccess().getRightParenthesisKeyword_4());
 		}
-		otherlv_6='fromTable'
+		otherlv_6='fromTable('
 		{
 			newLeafNode(otherlv_6, grammarAccess.getSelectOperationAccess().getFromTableKeyword_5());
 		}
@@ -1711,15 +1678,19 @@ ruleSelectOperation returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_8='toTable'
+		otherlv_8=')'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getSelectOperationAccess().getToTableKeyword_7());
+			newLeafNode(otherlv_8, grammarAccess.getSelectOperationAccess().getRightParenthesisKeyword_7());
+		}
+		otherlv_9='toTable('
+		{
+			newLeafNode(otherlv_9, grammarAccess.getSelectOperationAccess().getToTableKeyword_8());
 		}
 		(
 			(
-				lv_target_9_0=RULE_STRING
+				lv_target_10_0=RULE_STRING
 				{
-					newLeafNode(lv_target_9_0, grammarAccess.getSelectOperationAccess().getTargetSTRINGTerminalRuleCall_8_0());
+					newLeafNode(lv_target_10_0, grammarAccess.getSelectOperationAccess().getTargetSTRINGTerminalRuleCall_9_0());
 				}
 				{
 					if ($current==null) {
@@ -1728,11 +1699,15 @@ ruleSelectOperation returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"target",
-						lv_target_9_0,
+						lv_target_10_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
 		)
+		otherlv_11=')'
+		{
+			newLeafNode(otherlv_11, grammarAccess.getSelectOperationAccess().getRightParenthesisKeyword_10());
+		}
 	)
 ;
 
@@ -1879,28 +1854,6 @@ ruleProcessFoldersOperation returns [EObject current=null]
 			newLeafNode(otherlv_8, grammarAccess.getProcessFoldersOperationAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
-;
-
-// Entry rule entryRuleEndOperation
-entryRuleEndOperation returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getEndOperationRule()); }
-	iv_ruleEndOperation=ruleEndOperation
-	{ $current=$iv_ruleEndOperation.current.getText(); }
-	EOF;
-
-// Rule EndOperation
-ruleEndOperation returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='.end();'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getEndOperationAccess().getEndKeyword());
-	}
 ;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

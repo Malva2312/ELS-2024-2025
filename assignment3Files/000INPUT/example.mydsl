@@ -1,63 +1,19 @@
 .loadJSON()
-.from("assignment2Files/run1/profiling.json")
+.from("profiling.json")
 .into("time")
 .withAttributes("time%", "seconds", "name")
 .nestedIn("functions")
 
 .loadXML()
-.from("assignment2Files/run1/vitis-report.xml")
+.from("vitis-report.xml")
 .into("vitis")
 .nestedIn("Device", "Resources")
 
-.filter()
-.onColumn("time%")
-.onTable("time")
-.where("time%" value ">5")
-
-.printAll()
-
-.printTable("time")
-
-.renameColumn()
-.from("time%")
-.to("time")
-.onTable("time")
-
-.limit()
-.table("time")
-.from(0)
-.to(10)
-
-.selectMin()
-.onColumn("time")
-.onTable("time")
-.toTable("time")
-
-.dropTable("time")
-
-.processFolders("assignment2Files/run1") with {.printAll()}
-
 .loadYAML()
-.from("assignment2Files/run1/decision_tree.yaml")
+.from("decision_tree.yaml")
 .into("decision_tree")
 
 .loadYAML()
-.from("assignment2Files/run1/decision_tree.yaml")
+.from("decision_tree.yaml")
 .into("decision_tree2")
 .nestedIn("params")
-
-.selectMax()
-.onColumn("time%")
-.onTable("time")
-.toTable("timeNew")
-
-.concatHorizontal()
-.toTable("final")
-.onTables("decision_tree", "decision_tree2", "time", "vitis")
-
-.save()
-.tables("final")
-.to("assignment2Files/output.html")
-.as("html")
-
-.end();

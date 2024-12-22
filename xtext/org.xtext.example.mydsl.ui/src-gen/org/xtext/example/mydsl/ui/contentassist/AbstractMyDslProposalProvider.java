@@ -195,7 +195,4 @@ public abstract class AbstractMyDslProposalProvider extends TerminalsProposalPro
 	public void complete_ProcessFoldersOperation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
-	public void complete_EndOperation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		// subclasses may override
-	}
 }
