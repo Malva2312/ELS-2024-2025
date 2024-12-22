@@ -26,6 +26,27 @@ public class Main {
 	private final Map<String, Consumer<EObject>> operationHandlers = new HashMap<>();
 	private final DataBaseBuilder dataBaseBuilder = new DataBaseBuilder();
 
+	/**
+	 * Constructor for the Main class.
+	 * Initializes the injector and registers operation handlers for various operations.
+	 * 
+	 * The following operations are supported:
+	 * - LoadJSON: Handles loading JSON data.
+	 * - LoadXML: Handles loading XML data.
+	 * - LoadYAML: Handles loading YAML data.
+	 * - ConcatOperation: Handles concatenation operations.
+	 * - FilterOperation: Handles filtering operations.
+	 * - SaveOperation: Handles saving operations.
+	 * - PrintOperation: Prints all data in the database.
+	 * - RenameOperation: Handles renaming operations.
+	 * - ArgMaxOperation: Handles operations to find the argument with the maximum value.
+	 * - ArgMinOperation: Handles operations to find the argument with the minimum value.
+	 * - SelectOperation: Handles selection operations.
+	 * - DropOperation: Handles dropping operations.
+	 * - ProcessFoldersOperation: Handles processing of folders.
+	 * 
+	 * Note: The LimitOperation handler is currently commented out.
+	 */
 	public Main() {
 		var injector = new MyDslStandaloneSetup().createInjectorAndDoEMFRegistration();
 		injector.injectMembers(this);
@@ -77,6 +98,12 @@ public class Main {
 		});
 	}
 
+	/**
+	 * Parses the given file and processes its contents.
+	 *
+	 * @param filePath the path to the file to be parsed
+	 * @throws RuntimeException if there are errors during parsing or if an I/O error occurs
+	 */
 	public void parse(String filePath) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createFileURI(filePath));
@@ -111,6 +138,20 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Handles the loading of JSON data into the database.
+	 * 
+	 * This method constructs a JSON loading command using the provided EObject,
+	 * appends common features to the command, and then executes the command to
+	 * load the JSON data into the specified database table.
+	 * 
+	 * @param eObject the EObject containing the necessary information for loading JSON data.
+	 *                It should have the following structural features:
+	 *                - "file": the path to the JSON file to be loaded.
+	 *                - "table": the name of the database table to load the data into.
+	 *                - "attributes": a list of attributes to be loaded from the JSON file.
+	 *                - "nested": a list of nested attributes to be loaded from the JSON file.
+	 */
 	private void handleLoadJSON(EObject eObject) {
 		StringBuilder output = new StringBuilder(".loadJSON()");
 		appendCommonFeatures(eObject, output, "file", "table", "attributes", "nested");
@@ -123,6 +164,19 @@ public class Main {
 			.end();
 	}
 
+	/**
+	 * Handles the loading of an XML file into the database.
+	 * 
+	 * This method constructs a string representation of the loadXML operation
+	 * and prints it to the console. It then uses the dataBaseBuilder to load
+	 * the XML file specified in the given EObject into the specified table,
+	 * with the specified nested elements.
+	 * 
+	 * @param eObject the EObject containing the necessary attributes for the loadXML operation:
+	 *                - "file": the path to the XML file to be loaded
+	 *                - "table": the name of the table into which the XML data will be loaded
+	 *                - "nested": a list of nested elements to be considered during the load
+	 */
 	private void handleLoadXML(EObject eObject) {
 		StringBuilder output = new StringBuilder(".loadXML()");
 		appendCommonFeatures(eObject, output, "file", "table", "nested");
@@ -134,6 +188,20 @@ public class Main {
 			.end();
 	}
 
+	/**
+	 * Handles the loading of a YAML file into the database.
+	 * 
+	 * This method constructs a YAML loading command using the provided EObject's
+	 * attributes and prints the command to the console. It then uses the 
+	 * dataBaseBuilder to load the YAML file into the specified table, with 
+	 * optional nested attributes.
+	 * 
+	 * @param eObject the EObject containing the attributes for the YAML loading 
+	 *                command. It should have the following attributes:
+	 *                - "file": the path to the YAML file (String)
+	 *                - "table": the name of the table to load the data into (String)
+	 *                - "nested": a list of nested attributes (List<String>)
+	 */
 	private void handleLoadYAML(EObject eObject) {
 		StringBuilder output = new StringBuilder(".loadYAML()");
 		appendCommonFeatures(eObject, output, "file", "table", "nested");
@@ -145,6 +213,15 @@ public class Main {
 			.end();
 	}
 
+	/**
+	 * Handles the concatenation operation for the given EObject.
+	 * This method constructs a StringBuilder with the initial value ".concatHorizontal()",
+	 * appends common features from the EObject to the StringBuilder, and prints the result.
+	 * It then performs a horizontal concatenation operation on the dataBaseBuilder,
+	 * specifying the target table and the tables to concatenate.
+	 *
+	 * @param eObject the EObject containing the necessary features for the concatenation operation
+	 */
 	private void handleConcatOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".concatHorizontal()");
 		appendCommonFeatures(eObject, output, "target", "tables");
@@ -155,18 +232,36 @@ public class Main {
 			.end();
 	}
 
+	/**
+	 * Handles the filter operation for the given EObject.
+	 * Constructs a filter operation string and prints it to the console.
+	 * Then, configures the dataBaseBuilder with the filter parameters extracted from the EObject.
+	 *
+	 * @param eObject the EObject containing the filter parameters
+	 */
 	private void handleFilterOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".filter()");
 		appendCommonFeatures(eObject, output, "column", "table", "condition", "value", "target");
 		System.out.println(output);
-dataBaseBuilder.filter()
-    .onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
-    .onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-    .where((String) eObject.eGet(eObject.eClass().getEStructuralFeature("condition")),
-           (String) eObject.eGet(eObject.eClass().getEStructuralFeature("value")))
-    .end();
+		dataBaseBuilder.filter()
+			.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
+			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.where((String) eObject.eGet(eObject.eClass().getEStructuralFeature("condition")),
+				(String) eObject.eGet(eObject.eClass().getEStructuralFeature("value")))
+			.end();
 	}
 
+	/**
+	 * Handles the save operation for the given EObject.
+	 * 
+	 * This method constructs a save operation string and prints it to the console.
+	 * It then uses the dataBaseBuilder to save the EObject's data to a file with a specified format.
+	 * 
+	 * @param eObject the EObject to be saved. It should have the following features:
+	 *                - "tables": a list of table names (String)
+	 *                - "file": the file path where the data should be saved (String)
+	 *                - "format": the format in which the data should be saved (String)
+	 */
 	private void handleSaveOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".save()");
 		appendCommonFeatures(eObject, output, "tables", "file", "format");
@@ -178,28 +273,19 @@ dataBaseBuilder.filter()
 			.end();
 	}
 
-	private void handleRenameOperation(EObject eObject) {
-		StringBuilder output = new StringBuilder(".renameColumn()");
-		appendCommonFeatures(eObject, output, "original", "renamed", "table");
-		System.out.println(output);
-		dataBaseBuilder.rename()
-		.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("original")))
-		.to((String) eObject.eGet(eObject.eClass().getEStructuralFeature("renamed")))
-		.table((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-		.end();
-	}
-
-	private void handleArgMaxOperation(EObject eObject) {
-		StringBuilder output = new StringBuilder(".selectMax()");
-		appendCommonFeatures(eObject, output, "column", "table", "target");
-		System.out.println(output);
-		dataBaseBuilder.selectMax()
-			.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
-			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
-			.end();
-	}
-
+	/**
+	 * Handles the rename operation for a given EObject.
+	 * 
+	 * This method constructs a rename column operation using the provided EObject's
+	 * attributes and appends common features to the output. It then prints the 
+	 * constructed operation and performs the rename operation on the database.
+	 * 
+	 * @param eObject the EObject containing the attributes for the rename operation.
+	 *                It should have the following attributes:
+	 *                - "original": the original name of the column.
+	 *                - "renamed": the new name of the column.
+	 *                - "table": the name of the table containing the column.
+	 */
 	private void handleArgMinOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".selectMin()");
 		appendCommonFeatures(eObject, output, "column", "table", "target");
@@ -211,6 +297,13 @@ dataBaseBuilder.filter()
 			.end();
 	}
 
+	/**
+	 * Handles the select operation for the given EObject.
+	 * Constructs a select query using the features of the EObject and prints the query.
+	 * Then, it configures the dataBaseBuilder with the columns, table, and target obtained from the EObject.
+	 *
+	 * @param eObject the EObject containing the features for the select operation
+	 */
 	private void handleSelectOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".select()");
 		appendCommonFeatures(eObject, output, "columns", "table", "target");
@@ -223,6 +316,13 @@ dataBaseBuilder.filter()
 
 	}
 
+	/**
+	 * Handles the drop operation for the given EObject.
+	 * This method constructs a drop table operation string and appends common features
+	 * related to the table from the provided EObject. The constructed string is then printed.
+	 * 
+	 * @param eObject the EObject representing the table to be dropped
+	 */
 	private void handleDropOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".dropTable()");
 		appendCommonFeatures(eObject, output, "table");
@@ -234,6 +334,14 @@ dataBaseBuilder.filter()
 		 */
 	}
 
+	/**
+	 * Handles the process folders operation for the given EObject.
+	 * This method constructs a string representation of the operation
+	 * and prints it to the console. The actual implementation of the
+	 * process folders operation is yet to be completed.
+	 *
+	 * @param eObject the EObject containing the data for the operation
+	 */
 	private void handleProcessFoldersOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".processFolders()");
 		appendCommonFeatures(eObject, output, "folders", "with");
@@ -246,6 +354,13 @@ dataBaseBuilder.filter()
 		 */
 	}
 
+	/**
+	 * Appends the common features of the given EObject to the provided StringBuilder.
+	 * 
+	 * @param eObject the EObject whose features are to be appended
+	 * @param output the StringBuilder to which the features will be appended
+	 * @param featureNames the names of the features to be appended
+	 */
 	private void appendCommonFeatures(EObject eObject, StringBuilder output, String... featureNames) {
 		for (String featureName : featureNames) {
 			var feature = eObject.eClass().getEStructuralFeature(featureName);
