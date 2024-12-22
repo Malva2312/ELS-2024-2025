@@ -372,11 +372,7 @@ public class Main {
 		StringBuilder output = new StringBuilder(".dropTable()");
 		appendCommonFeatures(eObject, output, "table");
 		System.out.println(output);
-		/* TODO: Implement this
-		dataBaseBuilder.dropTable()
-			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
-			.end();
-		 */
+		dataBaseBuilder.dropTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")));
 	}
 
 	/**
@@ -391,12 +387,12 @@ public class Main {
 		StringBuilder output = new StringBuilder(".processFolders()");
 		appendCommonFeatures(eObject, output, "folders", "with");
 		System.out.println(output);
-		/* TODO: Implement this
 		dataBaseBuilder.processFolders()
-			.fromFolders((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("folders"))).toArray(new String[0]))
-			.with((String) eObject.eGet(eObject.eClass().getEStructuralFeature("with")))
+			.folders((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("folders"))).toArray(new String[0]))
+			.operations(() -> {
+				System.out.println("Processing folders... Not implemented yet: difficult to implement");
+			})
 			.end();
-		 */
 	}
 
 	/**
