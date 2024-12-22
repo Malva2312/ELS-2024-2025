@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.xtext.example.mydsl.myDsl.*;
+import pt.up.fe.els2024.Builder.OperationBuilder;
 
 public class Main {
 	@Inject
@@ -48,10 +49,10 @@ public class Main {
 			if (e instanceof SaveOperation) handleSaveOperation(e);
 		});
 		operationHandlers.put(PrintOperation.class.getSimpleName(), e -> {
-			if (e instanceof PrintOperation) System.out.println(".printAll()");
-		});
-		operationHandlers.put(PrintTable.class.getSimpleName(), e -> {
-			if (e instanceof PrintTable) System.out.println(".printTable()");
+			if (e instanceof PrintOperation) {
+				System.out.println(".printAll()");
+				dataBaseBuilder.printAll().end();
+			}
 		});
 		operationHandlers.put(RenameOperation.class.getSimpleName(), e -> {
 			if (e instanceof RenameOperation) handleRenameOperation(e);
@@ -112,79 +113,158 @@ public class Main {
 		StringBuilder output = new StringBuilder(".loadJSON()");
 		appendCommonFeatures(eObject, output, "file", "table", "attributes", "nested");
 		System.out.println(output);
-		// Use dataBaseBuilder here if needed
+		dataBaseBuilder.loadJSON()
+			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
+			.into((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.withAttributes((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("attributes"))).toArray(new String[0]))
+			.nestedIn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("nested")))
+			.end();
 	}
 
 	private void handleLoadXML(EObject eObject) {
 		StringBuilder output = new StringBuilder(".loadXML()");
 		appendCommonFeatures(eObject, output, "file", "table", "nested");
 		System.out.println(output);
+		dataBaseBuilder.loadXML()
+			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
+			.into((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.nestedIn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("nested")))
+			.end();
 	}
 
 	private void handleLoadYAML(EObject eObject) {
 		StringBuilder output = new StringBuilder(".loadYAML()");
 		appendCommonFeatures(eObject, output, "file", "table", "nested");
 		System.out.println(output);
+		dataBaseBuilder.loadYAML()
+			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
+			.into((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.nestedIn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("nested")))
+			.end();
 	}
 
 	private void handleConcatOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".concatHorizontal()");
 		appendCommonFeatures(eObject, output, "target", "tables");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.concatHorizontal()
+			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
+			.onTables((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("tables"))).toArray(new String[0]))
+			.end();
+	*/
 	}
 
 	private void handleFilterOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".filter()");
 		appendCommonFeatures(eObject, output, "column", "table", "condition", "value", "target");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.filter()
+			.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
+			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.withCondition((String) eObject.eGet(eObject.eClass().getEStructuralFeature("condition")))
+			.withValue((String) eObject.eGet(eObject.eClass().getEStructuralFeature("value")))
+			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
+			.end();
+		*/
 	}
 
 	private void handleSaveOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".save()");
 		appendCommonFeatures(eObject, output, "tables", "file", "format");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.save()
+			.fromTables((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("tables"))).toArray(new String[0]))
+			.toFile((String) eObject.eGet(eObject.eClass().getEStructuralFeature("file")))
+			.withFormat((String) eObject.eGet(eObject.eClass().getEStructuralFeature("format")))
+			.end();
+			*/
 	}
 
 	private void handleRenameOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".renameColumn()");
 		appendCommonFeatures(eObject, output, "original", "renamed", "table");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.renameColumn()
+			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("original")))
+			.to((String) eObject.eGet(eObject.eClass().getEStructuralFeature("renamed")))
+			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.end();
+		*/
 	}
 
 	private void handleLimitOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".limit()");
 		appendCommonFeatures(eObject, output, "start", "end", "table");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.limit()
+			.from((Integer) eObject.eGet(eObject.eClass().getEStructuralFeature("start")))
+			.to((Integer) eObject.eGet(eObject.eClass().getEStructuralFeature("end")))
+			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.end();
+		 */
 	}
 
 	private void handleArgMaxOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".selectMax()");
 		appendCommonFeatures(eObject, output, "column", "table", "target");
 		System.out.println(output);
+		dataBaseBuilder.selectMax()
+			.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
+			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
+			.end();
 	}
 
 	private void handleArgMinOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".selectMin()");
 		appendCommonFeatures(eObject, output, "column", "table", "target");
 		System.out.println(output);
+		dataBaseBuilder.selectMin()
+			.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
+			.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
+			.end();
 	}
 
 	private void handleSelectOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".select()");
 		appendCommonFeatures(eObject, output, "columns", "table", "target");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.select()
+			.columns((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("columns"))).toArray(new String[0]))
+			.fromTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
+			.end();
+		*/
 	}
 
 	private void handleDropOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".dropTable()");
 		appendCommonFeatures(eObject, output, "table");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.dropTable()
+			.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+			.end();
+		 */
 	}
 
 	private void handleProcessFoldersOperation(EObject eObject) {
 		StringBuilder output = new StringBuilder(".processFolders()");
 		appendCommonFeatures(eObject, output, "folders", "with");
 		System.out.println(output);
+		/* TODO: Implement this
+		dataBaseBuilder.processFolders()
+			.fromFolders((String[]) ((List<?>) eObject.eGet(eObject.eClass().getEStructuralFeature("folders"))).toArray(new String[0]))
+			.with((String) eObject.eGet(eObject.eClass().getEStructuralFeature("with")))
+			.end();
+		 */
 	}
 
 	private void appendCommonFeatures(EObject eObject, StringBuilder output, String... featureNames) {
