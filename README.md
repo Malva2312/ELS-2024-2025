@@ -20,6 +20,11 @@ To test the program, run ``gradle test``. This will execute the build, and run t
 You can also see a test report by opening ``build/reports/tests/test/index.html``.
 
 ---
+Index:
+1. [CP1](#Checkpoint-1)
+2. [CP2](#Checkpoint-2)
+3. [CP3](#Checkpoint-3)
+---
 # Checkpoint 1
 
 ## Running the program
@@ -415,14 +420,144 @@ The DSL operates on a semantic model that supports:
 The grammar for the DSL is defined using Xtext, supporting operations like data loading, renaming, and saving:
 
 ```antlr
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model:
+    operations+=TopLevelOperation+;
+
+TopLevelOperation:
+    LoadOperation | SelectOperation | ConcatOperation | SaveOperation |
+    PrintOperation | RenameOperation | LimitOperation |
+    ArgMaxOperation | ArgMinOperation | DropOperation | FilterOperation | ProcessFoldersOperation;
+
+LoadOperation:
+    LoadJSON | LoadXML | LoadYAML;
+
 LoadJSON:
     '.loadJSON()'
     '.from(' file=STRING ')'
     '.into(' table=STRING ')'
+    ('.withAttributes(' attributes+=STRING (',' attributes+=STRING)* ')')?
     ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
+
+LoadXML:
+    '.loadXML()'
+    '.from(' file=STRING ')'
+    '.into(' table=STRING ')'
+    ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
+
+LoadYAML:
+    '.loadYAML()'
+    '.from(' file=STRING ')'
+    '.into(' table=STRING ')'
+    ('.nestedIn(' nested+=STRING (',' nested+=STRING)* ')')?;
+
+ConcatOperation:
+    '.concatHorizontal()'
+    '.toTable(' target=STRING ')'
+    '.onTables(' tables+=STRING (',' tables+=STRING)* ')';
+
+FilterOperation:
+    '.filter()'
+    '.onColumn(' column=STRING ')'
+    '.onTable(' table=STRING ')'
+    '.where(' condition=STRING 'value' value=STRING ('toTable' target=STRING)? ')';
+
+SaveOperation:
+    '.save()'
+    '.tables(' tables+=STRING (',' tables+=STRING)* ')'
+    '.to(' file=STRING ')'
+    '.as(' format=STRING ')';
+
+PrintOperation:
+    {PrintOperation} PrintAll | PrintTable;
+
+PrintAll:
+    '.printAll()';
+
+PrintTable:
+    '.printTable(' table=STRING ')';
+
+RenameOperation:
+    '.renameColumn()'
+    '.from(' original=STRING ')'
+    '.to(' renamed=STRING ')'
+    '.onTable(' table=STRING ')';
+
+LimitOperation:
+    '.limit()'
+    '.table(' table=STRING ')'
+    '.from(' start=INT ')'
+    '.to(' end=INT ')';
+
+ArgMaxOperation:
+    '.selectMax()'
+    '.onColumn(' column=STRING ')'
+    '.onTable(' table=STRING ')'
+    '.toTable(' target=STRING ')';
+
+ArgMinOperation:
+    '.selectMin()'
+    '.onColumn(' column=STRING ')'
+    '.onTable(' table=STRING ')'
+    '.toTable(' target=STRING ')';
+
+SelectOperation:
+    '.select()'
+    '.columns(' columns+=STRING (',' columns+=STRING)* ')'
+    '.fromTable(' table=STRING ')'
+    '.toTable(' target=STRING ')';
+
+DropOperation:
+    '.dropTable(' table=STRING ')';
+
+ProcessFoldersOperation:
+    '.processFolders(' folders+=STRING (',' folders+=STRING)* ')'
+    '.with' '{' folderOperations+=TopLevelOperation+ '}';
 ```
 ### Backend
-The backend executes parsed DSL scripts using the ```DataBaseBuilder``` API. Each DSL operation maps directly to Java methods.
+The backend executes parsed DSL scripts using the ```DataBaseBuilder``` API. Each DSL operation maps directly to Java methods.[Main.java](src/pt/up/fe/els2024/Main.java) as handlers for all the operations defined in the grammar.
+
+### CP2 use case
+Since we had some difficulties with this project we can only assure some of the features of [CP2](#Example-Usage-in-Main-Class). As in previous examples the external DSL support the following:
+```plaintext
+.loadJSON()
+.from("assignment2Files/run1/profiling.json")
+.into("time")
+.withAttributes("time%", "seconds", "name")
+.nestedIn("functions")
+
+.loadXML()
+.from("assignment2Files/run1/vitis-report.xml")
+.into("vitis")
+.nestedIn("Device", "Resources")
+
+.loadYAML()
+.from("assignment2Files/run1/decision_tree.yaml")
+.into("decision_tree")
+
+.loadYAML()
+.from("assignment2Files/run1/decision_tree.yaml")
+.into("decision_tree2")
+.nestedIn("params")
+
+.selectMax()
+.onColumn("time%")
+.onTable("time")
+.toTable("time")
+
+.concatHorizontal()
+.toTable("final")
+.onTables("decision_tree", "decision_tree2", "time", "vitis")
+
+.save()
+.tables("final")
+.to("assignment2Files/output.html")
+.as("html")
+
+```
 
 # Group
 
