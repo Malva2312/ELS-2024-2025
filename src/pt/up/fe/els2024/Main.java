@@ -317,6 +317,51 @@ public class Main {
 	}
 
 	/**
+	 * Handles the rename operation for the given EObject.
+	 *
+	 * This method constructs a rename operation string and prints it to the console.
+	 * It then uses the dataBaseBuilder to perform the rename operation on the specified table.
+	 *
+	 * @param eObject the EObject containing the necessary attributes for the rename operation:
+	 *                - "original": the original name of the column.
+	 *                - "renamed": the new name of the column.
+	 *                - "table": the name of the table containing the column.
+	 */
+	private void handleRenameOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".rename()");
+		appendCommonFeatures(eObject, output, "original", "renamed", "table");
+		System.out.println(output);
+		dataBaseBuilder.rename()
+				.from((String) eObject.eGet(eObject.eClass().getEStructuralFeature("original")))
+				.to((String) eObject.eGet(eObject.eClass().getEStructuralFeature("renamed")))
+				.table((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+				.end();
+	}
+
+	/**
+	 * Handles the ArgMax operation for the given EObject.
+	 * <p>
+	 * This method constructs a selectMax operation string and prints it to the console.
+	 * It then uses the dataBaseBuilder to perform the selectMax operation on the specified column and table,
+	 * and stores the result in the target table.
+	 *
+	 * @param eObject the EObject containing the necessary attributes for the ArgMax operation:
+	 *                - "column": the name of the column to find the maximum value.
+	 *                - "table": the name of the table to search for the maximum value.
+	 *                - "target": the name of the table to store the result.
+	 */
+	private void handleArgMaxOperation(EObject eObject) {
+		StringBuilder output = new StringBuilder(".selectMax()");
+		appendCommonFeatures(eObject, output, "column", "table", "target");
+		System.out.println(output);
+		dataBaseBuilder.selectMax()
+				.onColumn((String) eObject.eGet(eObject.eClass().getEStructuralFeature("column")))
+				.onTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("table")))
+				.toTable((String) eObject.eGet(eObject.eClass().getEStructuralFeature("target")))
+				.end();
+	}
+
+	/**
 	 * Handles the drop operation for the given EObject.
 	 * This method constructs a drop table operation string and appends common features
 	 * related to the table from the provided EObject. The constructed string is then printed.
